@@ -1,0 +1,52 @@
+{
+  "Bourgogne": [
+    {
+      "name": "Côte de Beaune Grand Classics",
+      "days": 2,
+      "basedIn": "Beaune",
+      "bestSeason": "May-Jun, Sep-Oct",
+      "summary": "The historic négociant cellars of Beaune paired with two château estates to the south, covering both legendary Pinot Noir and white Meursault terroirs.",
+      "driving": "~30 km total",
+      "stops": [
+        {"day": 1, "name": "Maison Patriarche Père & Fils", "town": "Beaune", "visit": "Daily self-guided cellar tour with tasting, no booking needed", "note": "5 km of candle-lit cellars, the largest in Burgundy, tasting a flight of Côte d'Or appellations"},
+        {"day": 1, "name": "Bouchard Père & Fils", "town": "Beaune", "visit": "By appointment", "note": "Cellars beneath the 15th-c. Château de Beaune; taste Beaune Premier Cru from one of Burgundy's largest domaines"},
+        {"day": 1, "name": "Maison Joseph Drouhin", "town": "Beaune", "visit": "Guided tours at set times, booking advised", "note": "Ancient cellars under old Beaune; tasting of emblematic cuvées including Chablis and Côte d'Or"},
+        {"day": 2, "name": "Château de Pommard", "town": "Pommard", "visit": "Guided tours and tastings, booking required", "note": "Monopole Clos Marey-Monge; structured Pommard reds with trained guides"},
+        {"day": 2, "name": "Château de Meursault", "town": "Meursault", "visit": "Open daily; tours and salon tastings, reservation advised", "note": "Grand 14th-c. cellars and a benchmark flight of white Meursault and Côte de Beaune crus"}
+      ]
+    },
+    {
+      "name": "Côte de Nuits Pinot Noir Trail",
+      "days": 2,
+      "basedIn": "Nuits-Saint-Georges",
+      "bestSeason": "May-Jun, Sep-Oct",
+      "summary": "A south-to-north drive through the great red-wine communes of the Côte de Nuits, from Nuits-Saint-Georges up to Marsannay at the gates of Dijon.",
+      "driving": "~50 km total",
+      "stops": [
+        {"day": 1, "name": "L'Imaginarium", "town": "Nuits-Saint-Georges", "visit": "Open daily; interactive museum plus tasting, booking advised", "note": "Boisset's sparkling and still-wine discovery centre, ideal intro to Burgundy method and terroir"},
+        {"day": 1, "name": "Domaine Manuel Olivier", "town": "Nuits-Saint-Georges", "visit": "Tasting cellar, by appointment", "note": "Family domaine pouring Côte de Nuits, Côte de Beaune and Hautes-Côtes side by side"},
+        {"day": 1, "name": "Château du Clos de Vougeot", "town": "Vougeot", "visit": "Open daily for guided/self-guided visits", "note": "Cistercian Grand Cru monument and historic wine presses, heart of the Côte de Nuits"},
+        {"day": 2, "name": "Château de Gevrey-Chambertin", "town": "Gevrey-Chambertin", "visit": "Guided tours with tasting, by appointment", "note": "Medieval cellar in the village of the Chambertin Grands Crus; powerful village and 1er Cru reds"},
+        {"day": 2, "name": "Château de Marsannay", "town": "Marsannay-la-Côte", "visit": "Open daily; tastings and tours, booking advised", "note": "Northern gateway estate known for rosé and approachable Marsannay reds"}
+      ]
+    }
+  ],
+  "Beaujolais": [
+    {
+      "name": "Crus du Beaujolais Loop",
+      "days": 2,
+      "basedIn": "Belleville-en-Beaujolais",
+      "bestSeason": "May-Jun, Sep-Oct",
+      "summary": "A two-day sweep of the ten Beaujolais crus, from the granite hills of Brouilly in the south up to Fleurie and Moulin-à-Vent in the north.",
+      "driving": "~60 km total",
+      "stops": [
+        {"day": 1, "name": "Château de la Chaize", "town": "Odenas", "visit": "Open for tours and tastings, booking advised", "note": "Grand 17th-c. estate with a vast vaulted cellar; flagship Brouilly from a single large vineyard"},
+        {"day": 1, "name": "Château Thivin", "town": "Odenas", "visit": "By appointment", "note": "Classic family domaine on the slopes of Mont Brouilly; reference Côte de Brouilly"},
+        {"day": 1, "name": "Château des Ravatys", "town": "Saint-Lager", "visit": "By appointment", "note": "Historic 19th-c. estate at the foot of Mont Brouilly, Brouilly and Côte de Brouilly"},
+        {"day": 2, "name": "Cave de Fleurie", "town": "Fleurie", "visit": "Shop and tasting open most days, no booking needed", "note": "Cooperative pouring the floral, silky 'queen of Beaujolais' cru Fleurie"},
+        {"day": 2, "name": "Le Hameau Duboeuf", "town": "Romanèche-Thorins", "visit": "Open daily; ticketed wine park with tasting", "note": "France's largest wine theme park, ending with a tasting flight across the Beaujolais crus"},
+        {"day": 2, "name": "Château du Moulin-à-Vent", "town": "Romanèche-Thorins", "visit": "Tours and tastings, by appointment", "note": "Iconic windmill estate; structured, age-worthy Moulin-à-Vent, the most powerful cru"}
+      ]
+    }
+  ]
+}

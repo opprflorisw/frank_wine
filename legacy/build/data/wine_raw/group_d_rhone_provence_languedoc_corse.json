@@ -1,0 +1,101 @@
+[
+  {
+    "region": "Vallée du Rhône",
+    "summary": "France's second-largest AOC wine region, split into a steep, granite-soiled North making single-variety Syrah reds and Viognier/Marsanne/Roussanne whites, and a broad, warm South built on Grenache-led GSM blends grown on galets roulés (rolled pebbles). Styles range from age-worthy, peppery Northern Syrah and rich Southern reds to dry rosés and rare sweet Muscats.",
+    "classification": "Three-tier hierarchy: regional Côtes du Rhône AOC at the base, then Côtes du Rhône Villages (with named villages), then the named Crus at the top. Northern Crus: Côte-Rôtie, Condrieu, Château-Grillet, Hermitage, Crozes-Hermitage, Saint-Joseph, Cornas, Saint-Péray. Southern Crus: Châteauneuf-du-Pape, Gigondas, Vacqueyras, Cairanne, Rasteau, Beaumes-de-Venise, Vinsobres, Lirac and the rosé-only Tavel.",
+    "subAppellations": ["Côte-Rôtie", "Condrieu", "Château-Grillet", "Hermitage", "Crozes-Hermitage", "Saint-Joseph", "Cornas", "Saint-Péray", "Châteauneuf-du-Pape", "Gigondas", "Vacqueyras", "Tavel", "Lirac", "Cairanne", "Rasteau", "Beaumes-de-Venise", "Vinsobres"],
+    "towns": ["Ampuis", "Condrieu", "Tain-l'Hermitage", "Tournon-sur-Rhône", "Mauves", "Cornas", "Saint-Péray", "Châteauneuf-du-Pape", "Gigondas", "Vacqueyras", "Tavel", "Lirac", "Cairanne", "Rasteau", "Beaumes-de-Venise", "Orange", "Avignon"],
+    "producers": [
+      {"name": "E. Guigal", "appellation": "Côte-Rôtie", "classification": "Cru", "note": "Single-vineyard 'La-La' wines (La Mouline, La Turque, La Landonne)"},
+      {"name": "Domaine Jamet", "appellation": "Côte-Rôtie", "classification": "Cru", "note": "Benchmark perfumed, terroir-driven Côte-Rôtie"},
+      {"name": "René Rostaing", "appellation": "Côte-Rôtie", "classification": "Cru", "note": "Elegant La Landonne and Côte Blonde cuvées"},
+      {"name": "Domaine Georges Vernay", "appellation": "Condrieu", "classification": "Cru", "note": "Historic savior of Condrieu Viognier"},
+      {"name": "M. Chapoutier", "appellation": "Hermitage", "classification": "Cru", "note": "Biodynamic négociant-domaine; Hermitage l'Ermite, Le Pavillon"},
+      {"name": "Domaine Jean-Louis Chave", "appellation": "Hermitage", "classification": "Cru", "note": "Reference Hermitage red and white from blended parcels"},
+      {"name": "Paul Jaboulet Aîné", "appellation": "Hermitage", "classification": "Cru", "note": "Famed for Hermitage La Chapelle"},
+      {"name": "Domaine Auguste Clape", "appellation": "Cornas", "classification": "Cru", "note": "Traditional, age-worthy reference of Cornas"},
+      {"name": "Thierry Allemand", "appellation": "Cornas", "classification": "Cru", "note": "Cult low-intervention Cornas (Reynard, Chaillot)"},
+      {"name": "Domaine du Vieux Télégraphe", "appellation": "Châteauneuf-du-Pape", "classification": "Cru", "note": "Brunier family; iconic La Crau plateau"},
+      {"name": "Château de Beaucastel", "appellation": "Châteauneuf-du-Pape", "classification": "Cru", "note": "Perrin family; uses all 13 varieties, biodynamic"},
+      {"name": "Château Rayas", "appellation": "Châteauneuf-du-Pape", "classification": "Cru", "note": "Legendary 100% Grenache from sandy soils"},
+      {"name": "Domaine du Pégaü", "appellation": "Châteauneuf-du-Pape", "classification": "Cru", "note": "Traditional, powerful whole-cluster Cuvée Réservée"},
+      {"name": "Clos des Papes", "appellation": "Châteauneuf-du-Pape", "classification": "Cru", "note": "Avril family; single estate blend benchmark"},
+      {"name": "Domaine de la Janasse", "appellation": "Châteauneuf-du-Pape", "classification": "Cru", "note": "Old-vine Cuvée Vieilles Vignes"},
+      {"name": "Henri Bonneau", "appellation": "Châteauneuf-du-Pape", "classification": "Cru", "note": "Cult traditionalist; Réserve des Célestins"},
+      {"name": "Château de Saint-Cosme", "appellation": "Gigondas", "classification": "Cru", "note": "Leading Gigondas estate, Louis Barruol"},
+      {"name": "Domaine Les Pallières", "appellation": "Gigondas", "classification": "Cru", "note": "Brunier-Haeger-owned historic Gigondas"},
+      {"name": "Delas Frères", "appellation": "Hermitage", "classification": "Cru", "note": "Northern Rhône house; Hermitage Les Bessards"},
+      {"name": "Domaine Alain Voge", "appellation": "Cornas", "classification": "Cru", "note": "Cornas and Saint-Péray specialist"}
+    ]
+  },
+  {
+    "region": "Provence",
+    "summary": "Mediterranean region world-famous for pale, dry, herb-scented rosé built on Grenache, Cinsault, Syrah and Mourvèdre, accounting for the bulk of production. Beyond rosé it makes serious Mourvèdre-driven reds (above all in Bandol) and distinctive whites from Clairette, Rolle (Vermentino) and Ugni Blanc.",
+    "classification": "Headed by the large Côtes de Provence AOC (with named sub-zones such as Sainte-Victoire, La Londe, Fréjus), plus Coteaux d'Aix-en-Provence and Coteaux Varois en Provence. The prestige reds come from small coastal crus: Bandol (Mourvèdre), Cassis (white-focused), Bellet (above Nice) and tiny Palette near Aix.",
+    "subAppellations": ["Bandol", "Côtes de Provence", "Cassis", "Bellet", "Palette", "Coteaux d'Aix-en-Provence", "Coteaux Varois en Provence"],
+    "towns": ["Bandol", "Le Castellet", "La Cadière-d'Azur", "Cassis", "Nice", "Aix-en-Provence", "Brignoles", "Taradeau", "La Londe-les-Maures"],
+    "producers": [
+      {"name": "Domaine Tempier", "appellation": "Bandol", "classification": "", "note": "Champion of Mourvèdre; single-vineyard La Tourtine, Cabassaou"},
+      {"name": "Château de Pibarnon", "appellation": "Bandol", "classification": "", "note": "Highest estate in Bandol; benchmark reds and rosés"},
+      {"name": "Château Pradeaux", "appellation": "Bandol", "classification": "", "note": "Traditional, long-aged, structured Bandol reds"},
+      {"name": "Domaine de la Bégude", "appellation": "Bandol", "classification": "", "note": "High-altitude organic Bandol estate"},
+      {"name": "La Tour du Bon", "appellation": "Bandol", "classification": "", "note": "Family domaine, finely perfumed Bandol"},
+      {"name": "Château Vannières", "appellation": "Bandol", "classification": "", "note": "Old-vine Bandol red and rosé"},
+      {"name": "Domaines Ott", "appellation": "Côtes de Provence", "classification": "", "note": "Iconic premium rosé (Château Romassan, Clos Mireille, Château de Selle)"},
+      {"name": "Château d'Esclans", "appellation": "Côtes de Provence", "classification": "", "note": "Luxury rosé pioneer (Whispering Angel, Garrus)"},
+      {"name": "Clos Sainte Magdeleine", "appellation": "Cassis", "classification": "", "note": "Iconic seaside Cassis white from Marsanne/Clairette"},
+      {"name": "Château Simone", "appellation": "Palette", "classification": "", "note": "Historic estate dominating the tiny Palette AOC"},
+      {"name": "Château de Bellet", "appellation": "Bellet", "classification": "", "note": "Leading estate of the Nice hillside cru"},
+      {"name": "Domaine de Trévallon", "appellation": "IGP Alpilles", "classification": "", "note": "Cult Cabernet-Syrah blend outside the AOC system"},
+      {"name": "Château Minuty", "appellation": "Côtes de Provence", "classification": "", "note": "Large-scale premium Provence rosé house"},
+      {"name": "Château Sainte Roseline", "appellation": "Côtes de Provence", "classification": "Cru Classé", "note": "One of the historic Provence Crus Classés"},
+      {"name": "Domaine Gros 'Noré", "appellation": "Bandol", "classification": "", "note": "Powerful, traditional Bandol reds"}
+    ]
+  },
+  {
+    "region": "Languedoc-Roussillon",
+    "summary": "France's largest vineyard expanse, sweeping the Mediterranean arc from the Rhône delta to the Spanish border, producing predominantly Grenache-, Syrah-, Mourvèdre- and Carignan-based reds and rosés plus aromatic whites. Roussillon, Catalan in culture, is the heartland of vins doux naturels (fortified sweet wines) such as Banyuls and Maury alongside concentrated dry reds.",
+    "classification": "A patchwork of AOCs under the umbrella Languedoc AOC, with rising terroir crus and named sub-zones: Pic Saint-Loup, Terrasses du Larzac, La Clape, Faugères, Saint-Chinian, Minervois (and cru Minervois-La Livinière), Corbières (and Corbières-Boutenac), Fitou, plus Limoux for sparkling. In Roussillon: Côtes du Roussillon (Villages), the dry red cru Collioure, and fortified VDN appellations Banyuls, Maury and Rivesaltes. Much top-quality wine is sold as IGP Pays d'Oc.",
+    "subAppellations": ["Pic Saint-Loup", "Terrasses du Larzac", "La Clape", "Faugères", "Saint-Chinian", "Minervois", "Minervois-La Livinière", "Corbières", "Corbières-Boutenac", "Fitou", "Limoux", "Côtes du Roussillon Villages", "Collioure", "Banyuls", "Maury", "Rivesaltes"],
+    "towns": ["Montpellier", "Saint-Mathieu-de-Tréviers", "Faugères", "Saint-Chinian", "Bize-Minervois", "La Livinière", "Lézignan-Corbières", "Fitou", "Narbonne", "Limoux", "Perpignan", "Banyuls-sur-Mer", "Collioure", "Maury", "Rivesaltes"],
+    "producers": [
+      {"name": "Mas de Daumas Gassac", "appellation": "IGP Saint-Guilhem-le-Désert", "classification": "", "note": "Languedoc's original 'grand cru'; Cabernet-based reds and whites"},
+      {"name": "Domaine Gauby", "appellation": "Côtes du Roussillon Villages", "classification": "", "note": "Pioneering biodynamic Roussillon estate (Calce)"},
+      {"name": "Domaine de la Grange des Pères", "appellation": "IGP Pays d'Hérault", "classification": "", "note": "Cult Hérault red, Syrah-Mourvèdre-Cabernet blend"},
+      {"name": "Mas Jullien", "appellation": "Terrasses du Larzac", "classification": "", "note": "Founding figure of the Larzac terroir movement"},
+      {"name": "Domaine de l'Hortus", "appellation": "Pic Saint-Loup", "classification": "", "note": "Leading Pic Saint-Loup estate (Orliac family)"},
+      {"name": "Domaine Léon Barral", "appellation": "Faugères", "classification": "", "note": "Biodynamic Faugères reference on schist"},
+      {"name": "Domaine d'Aupilhac", "appellation": "Terrasses du Larzac", "classification": "", "note": "Old-vine Carignan/Mourvèdre, Sylvain Fadat (Montpeyroux)"},
+      {"name": "Domaine Gardiés", "appellation": "Côtes du Roussillon Villages", "classification": "", "note": "Top Roussillon dry reds and VDN"},
+      {"name": "Domaine du Mas Blanc (Dr. Parcé)", "appellation": "Banyuls / Collioure", "classification": "", "note": "Historic benchmark for Banyuls and Collioure"},
+      {"name": "Domaine de la Rectorie", "appellation": "Banyuls / Collioure", "classification": "", "note": "Parcé brothers; reference Collioure and Banyuls"},
+      {"name": "Mas Amiel", "appellation": "Maury", "classification": "", "note": "Iconic estate for Maury vin doux naturel"},
+      {"name": "Gérard Bertrand", "appellation": "Languedoc (multi)", "classification": "", "note": "Leading biodynamic négociant; Clos d'Ora, La Clape, l'Hospitalet"},
+      {"name": "Clos Centeilles", "appellation": "Minervois-La Livinière", "classification": "Cru", "note": "Champion of indigenous varieties and Cinsault"},
+      {"name": "Domaine Maxime Magnon", "appellation": "Corbières", "classification": "", "note": "Cult low-intervention Corbières (Carignan)"},
+      {"name": "Château de Caraguilhes", "appellation": "Corbières-Boutenac", "classification": "", "note": "Large organic Corbières estate"}
+    ]
+  },
+  {
+    "region": "Corse",
+    "summary": "A mountainous Mediterranean island whose wines are defined by indigenous grapes: the Sangiovese-related Nielluccio and the peppery, aromatic Sciaccarello for reds and rosés, and Vermentino (Vermentinu) for crisp, saline whites. Styles span structured age-worthy reds, fresh rosés and the rare sweet Muscat du Cap Corse.",
+    "classification": "Nine AOCs: Patrimonio (the island's first, 1968) and Ajaccio as the two flagship standalone crus, the sweet Muscat du Cap Corse, plus the regional Vin de Corse AOC with five geographic village denominations: Calvi, Figari, Sartène, Porto-Vecchio and Coteaux du Cap Corse. Much expressive wine is bottled as IGP Île de Beauté.",
+    "subAppellations": ["Patrimonio", "Ajaccio", "Muscat du Cap Corse", "Vin de Corse Calvi", "Vin de Corse Figari", "Vin de Corse Sartène", "Vin de Corse Porto-Vecchio", "Coteaux du Cap Corse"],
+    "towns": ["Patrimonio", "Ajaccio", "Calvi", "Figari", "Sartène", "Porto-Vecchio", "Rogliano", "Saint-Florent", "Bastia"],
+    "producers": [
+      {"name": "Domaine Antoine Arena", "appellation": "Patrimonio", "classification": "", "note": "Iconic biodynamic Patrimonio; Carco, Grotte di Sole"},
+      {"name": "Clos Canarelli", "appellation": "Vin de Corse Figari", "classification": "", "note": "Leading southern estate reviving native varieties"},
+      {"name": "Domaine Comte Abbatucci", "appellation": "Ajaccio", "classification": "", "note": "Biodynamic; rescued rare indigenous grapes (Biancu Gentile)"},
+      {"name": "Domaine Leccia", "appellation": "Patrimonio", "classification": "", "note": "Benchmark Nielluccio reds and Vermentinu whites"},
+      {"name": "Yves Leccia (Domaine E Croce)", "appellation": "Patrimonio", "classification": "", "note": "Refined Patrimonio and Cap Corse cuvées"},
+      {"name": "Domaine Gentile", "appellation": "Patrimonio", "classification": "", "note": "Established Patrimonio estate, full range incl. Muscat"},
+      {"name": "Domaine Giudicelli", "appellation": "Patrimonio", "classification": "", "note": "Small biodynamic Patrimonio and Muscat du Cap Corse"},
+      {"name": "Clos d'Alzeto", "appellation": "Ajaccio", "classification": "", "note": "One of the highest estates; Sciaccarello specialist"},
+      {"name": "Domaine Vaccelli", "appellation": "Ajaccio", "classification": "", "note": "Reference Sciaccarello-based Ajaccio reds"},
+      {"name": "Domaine Maestracci (Clos Reginu)", "appellation": "Vin de Corse Calvi", "classification": "", "note": "Respected Calvi estate, organic"},
+      {"name": "Domaine de Marquiliani", "appellation": "IGP Île de Beauté", "classification": "", "note": "Acclaimed pale Sciaccarello-based rosé"},
+      {"name": "Domaine Saparale", "appellation": "Vin de Corse Sartène", "classification": "", "note": "Leading Sartène estate for structured reds"},
+      {"name": "Domaine Pieretti", "appellation": "Coteaux du Cap Corse", "classification": "", "note": "Cap Corse specialist; rare Aleatico and Muscat"}
+    ]
+  }
+]

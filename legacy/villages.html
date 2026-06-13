@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Villages — Frank's Wine Almanac</title>
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+<div id="nav"></div>
+<div class="page">
+  <div class="page-head">
+    <div class="kicker">The Almanac</div>
+    <h1>Wine Villages &amp; Towns</h1>
+    <p class="lede">The key communes of each region — the places the wine roads run through. Geolocated to their official commune centres. Click to open the village on the map.</p>
+  </div>
+  <div class="toolbar ui">
+    <div class="field grow"><span class="mag">&#x1F50D;</span><input class="search" id="q" placeholder="Search villages…" autocomplete="off"></div>
+    <label>Region</label><select class="sel" id="region"></select>
+  </div>
+  <div class="resultcount ui" id="rc"></div>
+  <div class="tablewrap">
+    <table class="data"><thead id="thead"></thead><tbody id="tbody"></tbody></table>
+  </div>
+</div>
+<script src="assets/almanac-data.js"></script>
+<script src="assets/almanac.js"></script>
+<script>
+AL.renderNav('villages.html');
+const all=AL.villages();
+const COLS=[
+  {k:'name', label:'Village', get:v=>v.name},
+  {k:'region', label:'Region', get:v=>v.region},
+  {k:'commune', label:'Official commune', get:v=>v.commune||v.name},
+];
+let sortK='name', sortDir=1, q='', region='all';
+const regionSel=document.getElementById('region');
+regionSel.innerHTML='<option value="all">All regions</option>'+AL.regionsArr().map(r=>`<option value="${r.id}">${AL.esc(r.name)}</option>`).join('');
+const go=v=>location.href=`index.html?region=${v.regionId}&village=${encodeURIComponent(v.name)}`;
+function thead(){
+  document.getElementById('thead').innerHTML='<tr>'+COLS.map(c=>
+    `<th data-k="${c.k}" class="${sortK===c.k?'sorted':''}">${c.label}<span class="ar">${sortK===c.k?(sortDir>0?'▲':'▼'):'⇅'}</span></th>`).join('')+'</tr>';
+  document.querySelectorAll('#thead th').forEach(th=>th.onclick=()=>{const k=th.dataset.k; if(sortK===k)sortDir*=-1; else{sortK=k;sortDir=1;} render();});
+}
+function filtered(){
+  let r=all.slice();
+  if(region!=='all') r=r.filter(v=>v.regionId===region);
+  if(q){const n=AL.norm(q); r=r.filter(v=>AL.norm(v.name+' '+v.region+' '+(v.commune||'')).includes(n));}
+  const col=COLS.find(c=>c.k===sortK);
+  r.sort((a,b)=>String(col.get(a)).localeCompare(String(col.get(b)))*sortDir);
+  return r;
+}
+function render(){
+  thead();
+  const r=filtered();
+  document.getElementById('rc').textContent=`${r.length} village${r.length!==1?'s':''}`;
+  document.getElementById('tbody').innerHTML=r.map(v=>`
+    <tr onclick='go(${JSON.stringify({regionId:v.regionId,name:v.name})})'>
+      <td><span class="cellname">${AL.esc(v.name)}</span></td>
+      <td><span class="swatch" style="background:${AL.COLORS[v.regionId]}"></span>${AL.esc(v.region)}</td>
+      <td class="muted">${AL.esc(v.commune||v.name)}</td>
+    </tr>`).join('');
+}
+document.getElementById('q').oninput=e=>{q=e.target.value.trim();render();};
+regionSel.onchange=e=>{region=e.target.value;render();};
+const params=new URLSearchParams(location.search);
+if(params.get('region')&&AL.data.regions[params.get('region')]){region=params.get('region');regionSel.value=region;}
+render();
+</script>
+</body>
+</html>

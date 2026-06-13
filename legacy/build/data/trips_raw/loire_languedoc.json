@@ -1,0 +1,59 @@
+{
+  "Vallée de la Loire": [
+    {
+      "name": "Touraine Troglodyte Route: Vouvray, Chinon & Bourgueil",
+      "days": 3,
+      "basedIn": "Tours",
+      "bestSeason": "May-Jun, Sep-Oct",
+      "summary": "A Chenin-and-Cabernet-Franc loop through the tufa hills west of Tours, tasting in 10th-century troglodyte cellars carved into the limestone. Sparkling and dry Vouvray, then the reds of Chinon and Bourgueil.",
+      "driving": "~120 km total",
+      "stops": [
+        {"day": 1, "name": "Maison Brédif (Marc Brédif)", "town": "Rochecorbon", "visit": "Guided tour of 10th-century troglodyte cellars ending with a tasting", "note": "Book ahead; tour + tasting"},
+        {"day": 1, "name": "Château Gaudrelle", "town": "Vouvray", "visit": "Cellar visit and tasting across the Vouvray range, dry to moelleux and sparkling", "note": "Friendly small-grower stop on the Vouvray plateau"},
+        {"day": 2, "name": "Domaine Couly-Dutheil", "town": "Chinon", "visit": "Walk-in tasting cellar at Clos de l'Écho beside the fortress", "note": "Historic estate at the foot of Chinon castle"},
+        {"day": 3, "name": "Domaine de la Chevalerie", "town": "Restigné", "visit": "Appointment visit of one of Touraine's largest cellars, free vertical tasting", "note": "Biodynamic Bourgueil since 1640, by appointment"}
+      ]
+    },
+    {
+      "name": "Centre-Loire Sancerre & Chavignol Route",
+      "days": 2,
+      "basedIn": "Sancerre",
+      "bestSeason": "May-Jun, Sep-Oct",
+      "summary": "A compact hilltop circuit around Sancerre and the goat-cheese village of Chavignol, pairing crisp Sauvignon Blanc and Pinot Noir with panoramic vineyard views.",
+      "driving": "~30 km total",
+      "stops": [
+        {"day": 1, "name": "Maison des Sancerre", "town": "Sancerre", "visit": "Interpretive centre with 4D and 360° vineyard experiences, guided tasting", "note": "Great orientation stop; open Apr-Nov"},
+        {"day": 1, "name": "Domaine Vacheron", "town": "Sancerre", "visit": "Cellar visit and tasting of biodynamic Sancerre Blanc and Rouge", "note": "Benchmark organic/biodynamic grower in town"},
+        {"day": 2, "name": "Domaine Henri Bourgeois", "town": "Sancerre", "visit": "Large visitor centre in Chavignol with complimentary walk-in tastings", "note": "Open 7 days year-round; cellar tours Apr-Oct"}
+      ]
+    }
+  ],
+  "Languedoc-Roussillon": [
+    {
+      "name": "Pic Saint-Loup & Terrasses du Larzac Garrigue Route",
+      "days": 2,
+      "basedIn": "Montpellier",
+      "bestSeason": "May-Jun, Sep-Oct",
+      "summary": "Inland from Montpellier into the wild garrigue beneath the Pic Saint-Loup, tasting structured Syrah-Grenache reds at historic estates framed by Mediterranean scrubland.",
+      "driving": "~150 km total",
+      "stops": [
+        {"day": 1, "name": "Château de Lascaux", "town": "Vacquières", "visit": "Estate and 12th-century priory cellar visit, tasting of five Pic Saint-Loup wines", "note": "Organic and biodynamic, garrigue setting"},
+        {"day": 2, "name": "Mas de Daumas Gassac", "town": "Aniane", "visit": "Tour of the wild valley and underground cellars, tasting of the Grands Vins", "note": "The cult 'Lafite of the Languedoc'; visits in EN/FR"}
+      ]
+    },
+    {
+      "name": "Côte Vermeille: Banyuls, Collioure & La Clape",
+      "days": 3,
+      "basedIn": "Banyuls-sur-Mer",
+      "bestSeason": "May-Jun, Sep-Oct",
+      "summary": "The seaside fortified-wine coast where terraced vines tumble to the Mediterranean. Taste sweet Banyuls and Collioure reds in cliffside cellars, then a La Clape estate on the road back toward Narbonne.",
+      "driving": "~140 km total",
+      "stops": [
+        {"day": 1, "name": "Terres des Templiers (Cellier des Templiers)", "town": "Banyuls-sur-Mer", "visit": "Free film, guided tour of the ageing cellars, commented tasting of the three AOPs", "note": "Flagship Banyuls co-operative"},
+        {"day": 1, "name": "Cave l'Étoile", "town": "Banyuls-sur-Mer", "visit": "Tasting and cellar visit at the historic 1921 growers' co-operative", "note": "Old-school oxidative Banyuls in outdoor solera jars"},
+        {"day": 2, "name": "Domaine du Mas Blanc (Dr Parcé)", "town": "Banyuls-sur-Mer", "visit": "Tasting at the sea-view cellar with single-vineyard Collioure and traditional Banyuls", "note": "Patriarch estate behind the Collioure appellation"},
+        {"day": 3, "name": "Château l'Hospitalet (Gérard Bertrand)", "town": "Narbonne", "visit": "Tasting boutique open daily showcasing La Clape and Languedoc cuvées", "note": "Wine-resort estate in the La Clape massif"}
+      ]
+    }
+  ]
+}

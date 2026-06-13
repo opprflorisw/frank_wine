@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Best Regions — Frank's Wine Almanac</title>
+<link rel="stylesheet" href="assets/app.css">
+<style>
+  .scorebar{display:inline-flex;align-items:center;gap:8px;min-width:120px}
+  .scorebar .track{display:block;flex:1;height:8px;background:#e7dcc8;border-radius:5px;overflow:hidden;min-width:60px}
+  .scorebar .fill{display:block;height:100%;border-radius:5px;min-width:3px}
+  .scorebar .v{font-family:var(--sans);font-size:12.5px;font-weight:700;width:26px;text-align:right}
+  .rank{font-family:var(--serif);font-size:20px;color:var(--gold);font-weight:600;width:26px;display:inline-block}
+  tr.exp{background:#fff}
+  .detail-row td{background:#fbf7ee;padding:0!important}
+  .detailbox{padding:14px 18px 18px;display:grid;grid-template-columns:1.3fr 1fr;gap:18px}
+  .detailbox p{margin:0 0 10px;font-size:13.5px;color:var(--ink-soft);line-height:1.55}
+  .facts{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12.5px}
+  .facts dt{font-family:var(--sans);font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--gold);font-weight:700;align-self:center}
+  .facts dd{margin:0;color:var(--ink)}
+  .detailbox h4{font-family:var(--sans);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft);margin:0 0 8px}
+  .infonote{font-family:var(--sans);font-size:12px;color:var(--ink-soft);background:#f3ebda;border:1px solid var(--line);border-radius:9px;padding:9px 13px;margin-bottom:14px;display:flex;gap:9px;align-items:flex-start}
+  @media(max-width:640px){.detailbox{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="nav"></div>
+<div class="page">
+  <div class="page-head">
+    <div class="kicker">The Almanac</div>
+    <h1>Best Regions — a Scorecard</h1>
+    <p class="lede">France's wine regions rated on two axes: <b>Terroir &amp; climate</b> (how the geography and weather favour great wine) and <b>Visit experience</b> (how rewarding it is to tour). Sort by any column; expand a row for the full climate profile.</p>
+  </div>
+  <div class="infonote ui" id="note"></div>
+  <div class="toolbar ui">
+    <label>Sort by</label>
+    <select class="sel" id="sort">
+      <option value="overall">Overall</option>
+      <option value="terroir">Terroir &amp; climate</option>
+      <option value="visit">Visit experience</option>
+    </select>
+    <span class="muted ui" style="font-size:12px">Tap a row to expand</span>
+  </div>
+  <div class="tablewrap">
+    <table class="data"><thead id="thead"></thead><tbody id="tbody"></tbody></table>
+  </div>
+</div>
+<script src="assets/almanac-data.js"></script>
+<script src="assets/almanac.js"></script>
+<script>
+AL.renderNav('best-regions.html');
+document.getElementById('note').innerHTML=AL.icon('star',15)+'<div>Scores are an informed editorial model, not absolute truth — terroir reflects soils, latitude, aspect, growing-season warmth, rainfall and vintage consistency; visit reflects scenery, density of welcoming estates, accessibility and season. Use them as a guide, not gospel.</div>';
+const rows=AL.regionsArr().filter(r=>r.terroirScore).map(r=>({
+  id:r.id,name:r.name,terroir:r.terroirScore,visit:r.visitScore,overall:r.overallScore,
+  profile:r.profile,climate:r.climate,visitInfo:r.visit
+}));
+let sortK='overall';
+function bar(v,col){const pct=v/10*100;return `<span class="scorebar"><span class="track"><span class="fill" style="width:${pct}%;background:${col}"></span></span><span class="v">${v.toFixed(1)}</span></span>`;}
+function sorted(){return rows.slice().sort((a,b)=>b[sortK]-a[sortK]);}
+let expanded=null;
+function render(){
+  document.getElementById('thead').innerHTML=`<tr><th style="width:30px">#</th><th>Region</th><th data-k="terroir" class="${sortK==='terroir'?'sorted':''}">Terroir &amp; climate</th><th data-k="visit" class="${sortK==='visit'?'sorted':''}">Visit experience</th><th data-k="overall" class="${sortK==='overall'?'sorted':''}">Overall</th></tr>`;
+  document.querySelectorAll('#thead th[data-k]').forEach(th=>th.onclick=()=>{sortK=th.dataset.k;document.getElementById('sort').value=sortK;render();});
+  const r=sorted();
+  document.getElementById('tbody').innerHTML=r.map((x,i)=>{
+    const open=expanded===x.id;
+    const ci=x.climate, vi=x.visitInfo;
+    return `<tr class="${open?'exp':''}" onclick="toggle('${x.id}')">
+      <td><span class="rank">${i+1}</span></td>
+      <td><span class="swatch" style="background:${AL.COLORS[x.id]}"></span><span class="cellname">${AL.esc(x.name)}</span></td>
+      <td>${bar(x.terroir,'#8a3324')}</td>
+      <td>${bar(x.visit,'#3f7d8c')}</td>
+      <td>${bar(x.overall,AL.COLORS[x.id])}</td>
+    </tr>`+(open?`<tr class="detail-row"><td colspan="5"><div class="detailbox">
+      <div><p>${AL.esc(x.profile)}</p>
+        <h4>Climate &amp; terroir</h4>
+        <dl class="facts">
+          <dt>Climate</dt><dd>${AL.esc(ci.climateType)} · ${AL.esc(ci.latitude)}</dd>
+          <dt>Soils</dt><dd>${AL.esc(ci.soils)}</dd>
+          <dt>Season</dt><dd>${AL.esc(ci.growingSeason)}</dd>
+          <dt>Rainfall</dt><dd>${AL.esc(ci.rainfall)}</dd>
+          <dt>Vintages</dt><dd>${AL.esc(ci.vintageConsistency)}</dd>
+        </dl></div>
+      <div><h4>Visiting</h4>
+        <dl class="facts">
+          <dt>Best months</dt><dd>${AL.esc(vi.bestMonths)}</dd>
+          <dt>Scenery</dt><dd>${AL.esc(vi.scenery)}</dd>
+          <dt>Getting there</dt><dd>${AL.esc(vi.accessibility)}</dd>
+          <dt>Estates</dt><dd>${AL.esc(vi.visitableDensity)} density of welcoming estates</dd>
+          <dt>Base town</dt><dd>${AL.esc(vi.baseTown)}</dd>
+        </dl>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <a class="btn" href="index.html?region=${x.id}">${AL.icon('map',14)} On the map</a>
+          ${(AL.data.regions[x.id].trips||[]).length?`<a class="btn primary" href="trips.html?region=${x.id}">${AL.icon('route',14)} Plan a trip</a>`:''}
+        </div>
+      </div></div></td></tr>`:'');
+  }).join('');
+}
+window.toggle=id=>{expanded=expanded===id?null:id;render();};
+document.getElementById('sort').onchange=e=>{sortK=e.target.value;render();};
+render();
+</script>
+</body>
+</html>

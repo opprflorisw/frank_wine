@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Map — Frank's Wine Almanac</title>
+<link rel="stylesheet" href="assets/app.css">
+<style>
+  .maplayout{display:grid; grid-template-columns:300px 1fr 384px; height:calc(100vh - 58px);
+    transition:grid-template-columns .28s ease}
+  .maplayout.lcol{grid-template-columns:0 1fr 384px}
+  .maplayout.rcol{grid-template-columns:300px 1fr 0}
+  .maplayout.lcol.rcol{grid-template-columns:0 1fr 0}
+
+  /* sidebar */
+  .side{background:var(--paper-2); border-right:1px solid var(--line); display:flex; flex-direction:column; min-width:0; overflow:hidden; position:relative}
+  .side .inner{display:flex; flex-direction:column; min-height:0; flex:1; width:300px}
+  .side .pad{padding:12px 14px}
+  .side .controls{display:flex; gap:7px; align-items:center; flex-wrap:wrap; border-bottom:1px solid var(--line)}
+  .side .list{overflow-y:auto; flex:1; padding:7px 9px; min-height:0}
+  .rrow{display:flex; align-items:center; gap:10px; padding:9px 10px; border-radius:9px; cursor:pointer; border:1px solid transparent; margin-bottom:2px; transition:.13s}
+  .rrow:hover{background:#fff; border-color:var(--line)}
+  .rrow.active{background:#fff; border-color:var(--gold); box-shadow:0 1px 8px var(--shadow)}
+  .rrow.dim{opacity:.4}
+  .rrow .sw{width:15px;height:15px;border-radius:5px;flex:none;box-shadow:0 0 0 1px rgba(0,0,0,.15) inset}
+  .rrow .nm{font-size:15px;font-weight:600}
+  .rrow .mt{font-family:var(--sans);font-size:11px;color:var(--ink-soft);margin-top:1px;display:flex;gap:4px;align-items:center}
+  .rrow .ct{margin-left:auto;font-family:var(--sans);font-size:11px;color:#fff;background:var(--wine);border-radius:11px;padding:2px 8px;font-weight:600}
+  .rrow .sc{font-family:var(--sans);font-size:10px;color:var(--gold);font-weight:700;margin-left:6px}
+
+  /* sidebar collapse handles */
+  .handle{position:absolute; top:50%; transform:translateY(-50%); width:22px; height:54px; background:var(--card);
+    border:1px solid var(--line); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:8; color:var(--wine)}
+  .handle:hover{background:#fff;border-color:var(--gold)}
+  .h-left{right:-1px; border-radius:8px 0 0 8px; border-right:none}
+  .h-right{left:-1px; border-radius:0 8px 8px 0; border-left:none}
+  .reopen{position:absolute; top:14px; z-index:9; width:30px;height:38px; background:var(--card); border:1px solid var(--line);
+    display:none; align-items:center; justify-content:center; cursor:pointer; color:var(--wine)}
+  .reopen.l{left:0; border-radius:0 9px 9px 0; border-left:none}
+  .reopen.r{right:0; border-radius:9px 0 0 9px; border-left:none}
+  .maplayout.lcol .reopen.l{display:flex} .maplayout.rcol .reopen.r{display:flex}
+
+  /* stage */
+  .stage{position:relative; background:radial-gradient(120% 120% at 50% -10%, #eef3f6 0%, #dfe7ea 55%, #d3dee2 100%); overflow:hidden}
+  svg#map{width:100%;height:100%;display:block;cursor:grab;touch-action:none}
+  svg#map.grabbing{cursor:grabbing}
+  .sea{fill:#dbe6ea}
+  .nb{fill:#e3ddd0; stroke:#cfc6b4; stroke-width:.6}
+  .nblabel{font-family:var(--sans); font-size:11px; fill:#a99f8c; letter-spacing:2px; text-transform:uppercase; pointer-events:none; text-anchor:middle}
+  .base{fill:#ecd9b9; stroke:#caa86f; stroke-width:.7}
+  .reg{stroke:#fbf5ea; stroke-width:.8; transition:fill .25s,opacity .2s; cursor:pointer}
+  .reg:hover{filter:brightness(1.08) saturate(1.1)}
+  .reg.dim{opacity:.22} .reg.sel{stroke:#3a2417; stroke-width:1.3}
+  .rlabel{fill:#3a2417;font-weight:600;text-anchor:middle;pointer-events:none}
+  .aroute{fill:none; stroke:#9aa0a6; stroke-width:1.1; stroke-dasharray:none; opacity:.7}
+  .alabel{font-family:var(--sans); font-size:7px; fill:#5b5550; pointer-events:none; font-weight:700; letter-spacing:.3px}
+  .wroute{fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; opacity:.85}
+  .city{fill:#2b211c} .city.cap{fill:var(--wine)}
+  .clabel{font-family:var(--sans); fill:#2b211c; pointer-events:none; font-weight:600}
+  .town{fill:#fff; stroke-width:1.4} .town.big{stroke-width:1.6}
+  .tlabel{font-family:var(--sans); fill:#2b211c; pointer-events:none}
+  /* rounded background pills behind labels (replaces the old jagged text-stroke halos) */
+  .pill{pointer-events:none; vector-effect:non-scaling-stroke}
+  .pill.region{fill:#fcf8ef; stroke:#cdbfa6; stroke-width:1.1; opacity:.94; filter:drop-shadow(0 1px 1.5px rgba(60,40,25,.18))}
+  .pill.city{fill:#fcf8ef; stroke:#d3c7af; stroke-width:1; opacity:.92}
+  .pill.town{fill:#fdfbf5; stroke:#e3d8c1; stroke-width:1; opacity:.94}
+  .pill.aroute{fill:#eef3f6; stroke:#ccd4d9; stroke-width:1; opacity:.9}
+
+  .breadcrumb{position:absolute; top:13px; left:13px; display:flex; gap:7px; z-index:6}
+  .crumb{font-family:var(--sans); background:rgba(255,255,255,.92); border:1px solid var(--line); border-radius:17px; padding:7px 13px; font-size:13px; box-shadow:0 1px 6px var(--shadow); display:flex; align-items:center; gap:6px}
+  .crumb.btn{cursor:pointer} .crumb.btn:hover{background:#fff; border-color:var(--gold)}
+  .layers{position:absolute; top:13px; right:13px; background:rgba(255,255,255,.94); border:1px solid var(--line); border-radius:11px; padding:9px 12px; z-index:6; box-shadow:0 1px 8px var(--shadow); font-family:var(--sans); font-size:12.5px}
+  .layers .lh{font-size:10px; text-transform:uppercase; letter-spacing:1px; color:var(--ink-soft); margin-bottom:6px; display:flex; align-items:center; gap:6px}
+  .layers .lh.div{margin-top:9px; border-top:1px solid var(--line); padding-top:8px}
+  .layers label{display:flex; align-items:center; gap:8px; padding:3px 0; cursor:pointer}
+  .layers input{accent-color:var(--wine)}
+  .zoomctl{position:absolute; right:13px; bottom:13px; display:flex; flex-direction:column; gap:6px; z-index:6}
+  .zoomctl button{width:37px;height:37px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.94);font-size:18px;color:var(--wine);box-shadow:0 1px 6px var(--shadow);line-height:1}
+  .zoomctl button:hover{background:#fff;border-color:var(--gold)}
+  .legend{position:absolute; left:13px; bottom:13px; background:rgba(255,255,255,.9); border:1px solid var(--line); border-radius:10px; padding:9px 12px; font-family:var(--sans); font-size:11px; color:var(--ink-soft); z-index:6; max-width:240px}
+  .legend b{color:var(--ink)}
+  /* geology filter legend */
+  #geoLegend{position:absolute; left:13px; top:54px; background:rgba(255,255,255,.95); border:1px solid var(--line); border-radius:10px; padding:9px 12px; font-family:var(--sans); font-size:11px; color:var(--ink-soft); z-index:6; box-shadow:0 1px 8px var(--shadow); display:none}
+  #geoLegend b{display:block; color:var(--ink); font-size:10px; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px}
+  #geoLegend .bar{width:150px; height:9px; border-radius:5px; box-shadow:0 0 0 1px rgba(0,0,0,.12) inset}
+  #geoLegend .ends{display:flex; justify-content:space-between; margin-top:3px; font-weight:700; color:var(--ink-soft)}
+  .maplayout:not(.lcol) #geoLegend{left:13px}
+
+  /* detail */
+  .detail{background:var(--card); border-left:1px solid var(--line); display:flex; flex-direction:column; min-width:0; overflow:hidden; position:relative}
+  .detail .dinner{width:384px; display:flex; flex-direction:column; min-height:0; flex:1}
+  .detail .empty{margin:auto; text-align:center; color:var(--ink-soft); padding:36px; max-width:280px}
+  .detail .empty .big{color:var(--gold); margin-bottom:10px}
+  .dhead{padding:16px 20px 14px; border-bottom:1px solid var(--line); position:relative}
+  .dhead .bar{position:absolute; left:0; top:0; bottom:0; width:6px}
+  .dhead .k{font-family:var(--sans); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--ink-soft)}
+  .dhead h2{margin:3px 0 7px; font-size:25px}
+  .dhead p{margin:0; font-size:13px; line-height:1.5; color:var(--ink-soft)}
+  .dhead .types{margin-top:9px; display:flex; gap:5px; flex-wrap:wrap}
+  .dscore{display:flex; gap:8px; margin-top:11px}
+  .dscore .sb{flex:1; background:#f3ebda; border:1px solid var(--line); border-radius:9px; padding:7px 10px}
+  .dscore .sb .l{font-family:var(--sans); font-size:9.5px; letter-spacing:.6px; text-transform:uppercase; color:var(--ink-soft)}
+  .dscore .sb .v{font-size:19px; font-weight:700; color:var(--wine)} .dscore .sb .v small{font-size:11px; color:var(--ink-faint); font-weight:400}
+  .dbody{overflow-y:auto; padding:4px 20px 24px; flex:1; min-height:0}
+  .block{margin-top:16px}
+  .block h3{font-family:var(--sans); font-size:11px; letter-spacing:1.4px; text-transform:uppercase; color:var(--gold); margin:0 0 8px; border-bottom:1px solid var(--line); padding-bottom:5px; display:flex; align-items:center; gap:7px}
+  .classbox{font-size:12.5px; line-height:1.5; color:var(--ink-soft); background:#f3ebda; border-radius:8px; padding:10px 12px}
+  .apps{display:flex; flex-wrap:wrap; gap:6px}
+  .app{font-family:var(--sans); font-size:11.5px; background:#efe6d3; border:1px solid var(--line); border-radius:13px; padding:4px 10px}
+  /* clickable appellation chips */
+  .app.btn{cursor:pointer; display:inline-flex; align-items:center; gap:5px; transition:.13s; user-select:none}
+  .app.btn .ic{color:var(--gold); opacity:.85; flex:none}
+  .app.btn:hover{background:#fff; border-color:var(--gold); box-shadow:0 1px 6px var(--shadow)}
+  .app.btn.on{color:#fff; border-color:transparent}
+  .app.btn.on .ic{color:#fff; opacity:1}
+  .apphint{font-family:var(--sans); font-size:10.5px; color:var(--ink-faint); margin:-2px 0 8px; display:flex; align-items:center; gap:5px}
+  /* icon-led info rows (climate / visiting) */
+  .inforow{display:flex; gap:9px; align-items:flex-start; padding:6px 0; border-bottom:1px solid #ece2cf; font-size:13px}
+  .inforow:last-child{border-bottom:none}
+  .inforow .ico{flex:none; width:26px; height:26px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:#f3ebda; color:var(--wine)}
+  .inforow .lab{font-family:var(--sans); font-size:10px; letter-spacing:.6px; text-transform:uppercase; color:var(--ink-faint)}
+  .inforow .val{color:var(--ink); line-height:1.4}
+  .profilebox{font-size:13px; line-height:1.55; color:var(--ink-soft); font-style:italic; background:#f7f1e4; border-left:3px solid var(--gold); border-radius:0 8px 8px 0; padding:9px 12px; margin-bottom:10px}
+  .dscore .sb.ov .v{color:var(--gold)}
+  /* appellation area drawn on the map */
+  .appArea{stroke-width:1.1; stroke-linejoin:round; pointer-events:none; opacity:0; transition:opacity .3s}
+  .appLabel{font-family:var(--sans); font-weight:700; fill:#fff; paint-order:stroke; stroke-width:3px; text-anchor:middle; pointer-events:none}
+  .pfilter{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px}
+  .prod{padding:10px 0; border-bottom:1px solid #ece2cf}
+  .prod:last-child{border-bottom:none}
+  .prod .pn{font-size:14.5px; font-weight:600; display:flex; align-items:center; gap:7px; flex-wrap:wrap}
+  .prod .pa{font-family:var(--sans); font-size:11.5px; color:var(--wine-2); font-style:italic; margin-top:1px}
+  .prod .pg{font-family:var(--sans); font-size:11px; color:var(--ink-faint); margin-top:2px}
+  .prod .pnote{font-size:12.5px; color:var(--ink-soft); margin-top:3px; line-height:1.45}
+  .dactions{padding:12px 20px; border-top:1px solid var(--line); display:flex; gap:8px; flex-wrap:wrap}
+  .results{padding:6px 10px; overflow-y:auto; flex:1; min-height:0}
+  .rgroup{font-family:var(--sans); font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--gold); margin:12px 8px 4px; display:flex; gap:6px; align-items:center}
+  .ritem{padding:8px 10px; border-radius:8px; cursor:pointer; font-size:13.5px}
+  .ritem:hover{background:#fff}
+  .ritem .sm{font-family:var(--sans); font-size:11.5px; color:var(--ink-soft)}
+  mark{background:#f6dca0; border-radius:3px; padding:0 1px}
+
+  /* clickable villages on the map */
+  .towng{cursor:pointer}
+  .towng .tlabel{pointer-events:auto}
+  .towng .thit{fill:transparent}
+  .towng:hover .town{stroke-width:2.8px; fill:var(--gold-2); filter:drop-shadow(0 0 2px rgba(0,0,0,.45))}
+  .towng:hover .tlabel{display:inline !important; font-weight:700; fill:var(--wine)}
+  /* clickable houses in the panel */
+  .prod{cursor:pointer; border-radius:8px; transition:background .1s}
+  .prod:hover{background:#fff}
+  .prod .go{margin-left:auto; color:var(--gold); opacity:0; transition:.1s}
+  .prod:hover .go{opacity:1}
+  /* "back" kicker + detail type tag */
+  .dhead .k.back{cursor:pointer; color:var(--wine-2); display:inline-flex; align-items:center; gap:3px}
+  .dhead .k.back:hover{color:var(--wine)}
+  .dtag{display:inline-block; font-family:var(--sans); font-size:9.5px; font-weight:700; letter-spacing:.6px; text-transform:uppercase;
+    padding:2px 8px; border-radius:11px; color:#fff; margin-bottom:6px}
+
+  @media(max-width:1080px){ .maplayout{grid-template-columns:0 1fr 0} .maplayout .side,.maplayout .detail{position:absolute;top:0;bottom:0;z-index:30}
+    .maplayout .side{left:0} .maplayout .detail{right:0} }
+</style>
+</head>
+<body>
+<div id="nav"></div>
+<div class="maplayout" id="layout">
+  <!-- LEFT SIDEBAR -->
+  <aside class="side" id="side">
+    <div class="inner">
+      <div class="pad controls ui">
+        <div class="field grow"><span class="mag">&#x1F50D;</span><input class="search" id="search" placeholder="Search everything…" autocomplete="off"></div>
+        <label>Sort</label>
+        <select class="sel" id="sort">
+          <option value="north">North → South</option>
+          <option value="az">A–Z</option>
+          <option value="houses">Most houses</option>
+          <option value="terroir">Terroir score</option>
+        </select>
+        <label>Grape</label>
+        <select class="sel" id="grapeF"></select>
+      </div>
+      <div class="pad" style="padding-top:10px;padding-bottom:10px;border-bottom:1px solid var(--line)">
+        <div class="chips" id="typeF"></div>
+      </div>
+      <div class="list" id="list"></div>
+    </div>
+    <div class="handle h-left" id="hideL" title="Collapse">&#x2039;</div>
+  </aside>
+  <div class="reopen l" id="showL" title="Show regions">&#x203A;</div>
+
+  <!-- STAGE -->
+  <main class="stage">
+    <div class="breadcrumb">
+      <div class="crumb btn" id="crumbHome">&#x1F3E0; France</div>
+      <div class="crumb" id="crumbRegion" style="display:none"></div>
+    </div>
+    <div class="layers ui" id="layersBox"></div>
+    <div class="ui" id="geoLegend"></div>
+    <svg id="map" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <rect class="sea" id="sea" x="-2000" y="-2000" width="6000" height="6000"></rect>
+      <g id="gNb"></g><g id="gNbLab"></g>
+      <g id="gBase"></g>
+      <g id="gReg"></g>
+      <g id="gAppArea"></g>
+      <g id="gAroute"></g><g id="gAlabel"></g>
+      <g id="gWroute"></g>
+      <g id="gRlab"></g>
+      <g id="gCity"></g>
+      <g id="gTown"></g>
+    </svg>
+    <div class="legend ui" id="legend"><b>Click a region</b> to zoom in and reveal its villages, wine route &amp; houses. Scroll to zoom · drag to pan.</div>
+    <div class="zoomctl ui">
+      <button id="zin">+</button><button id="zout">&minus;</button><button id="zreset" title="Reset">&#x2302;</button>
+    </div>
+  </main>
+
+  <!-- DETAIL -->
+  <section class="detail" id="detail">
+    <div class="handle h-right" id="hideR" title="Collapse">&#x203A;</div>
+    <div class="dinner">
+      <div class="empty" id="dEmpty"><div class="big" id="dEmptyIc"></div><p>Select a wine region to explore its appellations, classification and most celebrated houses — then export a shareable snapshot.</p></div>
+      <div id="dContent" style="display:none;flex-direction:column;min-height:0;flex:1">
+        <div class="dhead"><div class="bar" id="dBar"></div>
+          <div class="k" id="dKick">Wine region · France</div>
+          <h2 id="dName"></h2><p id="dSummary"></p>
+          <div class="types" id="dTypes"></div>
+          <div class="dscore" id="dScore"></div>
+        </div>
+        <div class="dbody" id="dbodyRegion">
+          <div class="block"><h3 id="hClass">Classification</h3><div class="classbox" id="dClass"></div></div>
+          <div class="block" id="bClimate"><h3 id="hClimate">Climate &amp; terroir</h3><div class="profilebox" id="dProfile"></div><div id="dClimate"></div></div>
+          <div class="block"><h3 id="hGrapes">Principal grapes</h3><div class="apps" id="dGrapes"></div></div>
+          <div class="block"><h3 id="hApps">Key appellations &amp; crus</h3><div class="apphint" id="dAppsHint"></div><div class="apps" id="dApps"></div></div>
+          <div class="block" id="bVisit"><h3 id="hVisit">Visiting</h3><div id="dVisit"></div></div>
+          <div class="block"><h3 id="hProds">Major wine houses</h3><div class="pfilter ui" id="dPfilter"></div><div id="dProds"></div></div>
+        </div>
+        <div class="dbody" id="dbodyAlt" style="display:none"></div>
+        <div class="dactions ui">
+          <button class="btn" id="dBack" style="display:none">&#x2039; Back</button>
+          <button class="btn primary" id="snap">Export snapshot</button>
+          <button class="btn" id="openTrips" style="display:none">Wine trips</button>
+          <button class="btn" id="openHouses">All houses</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="reopen r" id="showR" title="Show detail">&#x2039;</div>
+</div>
+<script src="assets/almanac-data.js"></script>
+<script src="assets/almanac.js"></script>
+<script src="assets/map.js"></script>
+</body>
+</html>

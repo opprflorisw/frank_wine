@@ -1,0 +1,2047 @@
+{
+"Bordeaux|33": {
+"x": 328.2,
+"y": 638.0,
+"commune": "Bordeaux",
+"dep": "33",
+"lon": -0.5848,
+"lat": 44.8624
+},
+"Pauillac|33": {
+"x": 316.6,
+"y": 604.6,
+"commune": "Pauillac",
+"dep": "33",
+"lon": -0.755,
+"lat": 45.1983
+},
+"Margaux-Cantenac|33": {
+"x": 321.8,
+"y": 620.7,
+"commune": "Margaux-Cantenac",
+"dep": "33",
+"lon": -0.6788,
+"lat": 45.0363
+},
+"Saint-Julien-Beychevelle|33": {
+"x": 317.7,
+"y": 608.4,
+"commune": "Saint-Julien-Beychevelle",
+"dep": "33",
+"lon": -0.739,
+"lat": 45.1606
+},
+"Saint-Estèphe|33": {
+"x": 315.1,
+"y": 599.1,
+"commune": "Saint-Estèphe",
+"dep": "33",
+"lon": -0.7759,
+"lat": 45.2544
+},
+"Pessac|33": {
+"x": 321.6,
+"y": 645.5,
+"commune": "Pessac",
+"dep": "33",
+"lon": -0.681,
+"lat": 44.786
+},
+"Léognan|33": {
+"x": 326.0,
+"y": 651.7,
+"commune": "Léognan",
+"dep": "33",
+"lon": -0.6172,
+"lat": 44.7236
+},
+"Saint-Émilion|33": {
+"x": 356.4,
+"y": 634.8,
+"commune": "Saint-Émilion",
+"dep": "33",
+"lon": -0.1715,
+"lat": 44.8947
+},
+"Libourne|33": {
+"x": 352.2,
+"y": 633.0,
+"commune": "Libourne",
+"dep": "33",
+"lon": -0.2328,
+"lat": 44.9125
+},
+"Pomerol|33": {
+"x": 354.3,
+"y": 631.2,
+"commune": "Pomerol",
+"dep": "33",
+"lon": -0.2019,
+"lat": 44.9306
+},
+"Sauternes|33": {
+"x": 344.6,
+"y": 670.6,
+"commune": "Sauternes",
+"dep": "33",
+"lon": -0.3439,
+"lat": 44.5336
+},
+"Barsac|33": {
+"x": 345.8,
+"y": 663.7,
+"commune": "Barsac",
+"dep": "33",
+"lon": -0.3259,
+"lat": 44.6036
+},
+"Cahors|24,46,47,82,32,81,12,64,65,40,09": {
+"x": 466.2,
+"y": 678.3,
+"commune": "Cahors",
+"dep": "46",
+"lon": 1.439,
+"lat": 44.4565
+},
+"Bergerac|24,46,47,82,32,81,12,64,65,40,09": {
+"x": 401.4,
+"y": 639.0,
+"commune": "Bergerac",
+"dep": "24",
+"lon": 0.4883,
+"lat": 44.8519
+},
+"Monbazillac|24,46,47,82,32,81,12,64,65,40,09": {
+"x": 400.7,
+"y": 644.7,
+"commune": "Monbazillac",
+"dep": "24",
+"lon": 0.4791,
+"lat": 44.7946
+},
+"Gaillac|24,46,47,82,32,81,12,64,65,40,09": {
+"x": 496.9,
+"y": 732.3,
+"commune": "Gaillac",
+"dep": "81",
+"lon": 1.8898,
+"lat": 43.9119
+},
+"Madiran|24,46,47,82,32,81,12,64,65,40,09": {
+"x": 364.0,
+"y": 768.2,
+"commune": "Madiran",
+"dep": "65",
+"lon": -0.0587,
+"lat": 43.5503
+},
+"Jurançon|24,46,47,82,32,81,12,64,65,40,09": {
+"x": 340.0,
+"y": 795.9,
+"commune": "Jurançon",
+"dep": "64",
+"lon": -0.4117,
+"lat": 43.2716
+},
+"Fronton|24,46,47,82,32,81,12,64,65,40,09": {
+"x": 461.6,
+"y": 738.2,
+"commune": "Fronton",
+"dep": "31",
+"lon": 1.3714,
+"lat": 43.8529
+},
+"Marcillac-Vallon|24,46,47,82,32,81,12,64,65,40,09": {
+"x": 535.9,
+"y": 676.2,
+"commune": "Marcillac-Vallon",
+"dep": "12",
+"lon": 2.4612,
+"lat": 44.4776
+},
+"Saint-Mont|24,46,47,82,32,81,12,64,65,40,09": {
+"x": 358.2,
+"y": 759.3,
+"commune": "Saint-Mont",
+"dep": "32",
+"lon": -0.1442,
+"lat": 43.6399
+},
+"Irouléguy|24,46,47,82,32,81,12,64,65,40,09": {
+"x": 280.2,
+"y": 804.8,
+"commune": "Irouléguy",
+"dep": "64",
+"lon": -1.2882,
+"lat": 43.1813
+},
+"Aydie|24,46,47,82,32,81,12,64,65,40,09": {
+"x": 360.1,
+"y": 766.1,
+"commune": "Aydie",
+"dep": "64",
+"lon": -0.117,
+"lat": 43.5712
+},
+"Buzet-sur-Baïse|24,46,47,82,32,81,12,64,65,40,09": {
+"x": 388.8,
+"y": 698.6,
+"commune": "Buzet-sur-Baïse",
+"dep": "47",
+"lon": 0.304,
+"lat": 44.2515
+},
+"Chablis|21,71,89": {
+"x": 626.7,
+"y": 345.8,
+"commune": "Chablis",
+"dep": "89",
+"lon": 3.7932,
+"lat": 47.806
+},
+"Marsannay-la-Côte|21,71,89": {
+"x": 708.2,
+"y": 398.0,
+"commune": "Marsannay-la-Côte",
+"dep": "21",
+"lon": 4.9875,
+"lat": 47.2803
+},
+"Gevrey-Chambertin|21,71,89": {
+"x": 708.1,
+"y": 404.1,
+"commune": "Gevrey-Chambertin",
+"dep": "21",
+"lon": 4.9865,
+"lat": 47.2188
+},
+"Morey-Saint-Denis|21,71,89": {
+"x": 706.6,
+"y": 405.9,
+"commune": "Morey-Saint-Denis",
+"dep": "21",
+"lon": 4.9649,
+"lat": 47.2001
+},
+"Chambolle-Musigny|21,71,89": {
+"x": 705.7,
+"y": 407.2,
+"commune": "Chambolle-Musigny",
+"dep": "21",
+"lon": 4.9505,
+"lat": 47.1871
+},
+"Vougeot|21,71,89": {
+"x": 706.4,
+"y": 408.6,
+"commune": "Vougeot",
+"dep": "21",
+"lon": 4.9607,
+"lat": 47.1734
+},
+"Vosne-Romanée|21,71,89": {
+"x": 706.1,
+"y": 410.0,
+"commune": "Vosne-Romanée",
+"dep": "21",
+"lon": 4.9563,
+"lat": 47.1592
+},
+"Nuits-Saint-Georges|21,71,89": {
+"x": 705.0,
+"y": 410.7,
+"commune": "Nuits-Saint-Georges",
+"dep": "21",
+"lon": 4.9414,
+"lat": 47.1518
+},
+"Aloxe-Corton|21,71,89": {
+"x": 699.7,
+"y": 419.0,
+"commune": "Aloxe-Corton",
+"dep": "21",
+"lon": 4.8628,
+"lat": 47.068
+},
+"Pernand-Vergelesses|21,71,89": {
+"x": 698.9,
+"y": 418.1,
+"commune": "Pernand-Vergelesses",
+"dep": "21",
+"lon": 4.8513,
+"lat": 47.0778
+},
+"Savigny-lès-Beaune|21,71,89": {
+"x": 695.7,
+"y": 417.9,
+"commune": "Savigny-lès-Beaune",
+"dep": "21",
+"lon": 4.8042,
+"lat": 47.0795
+},
+"Beaune|21,71,89": {
+"x": 698.3,
+"y": 423.1,
+"commune": "Beaune",
+"dep": "21",
+"lon": 4.8421,
+"lat": 47.0272
+},
+"Pommard|21,71,89": {
+"x": 695.0,
+"y": 424.4,
+"commune": "Pommard",
+"dep": "21",
+"lon": 4.7938,
+"lat": 47.0144
+},
+"Volnay|21,71,89": {
+"x": 693.9,
+"y": 425.9,
+"commune": "Volnay",
+"dep": "21",
+"lon": 4.7783,
+"lat": 46.9987
+},
+"Meursault|21,71,89": {
+"x": 693.7,
+"y": 428.6,
+"commune": "Meursault",
+"dep": "21",
+"lon": 4.7749,
+"lat": 46.9717
+},
+"Puligny-Montrachet|21,71,89": {
+"x": 692.7,
+"y": 431.0,
+"commune": "Puligny-Montrachet",
+"dep": "21",
+"lon": 4.7603,
+"lat": 46.9478
+},
+"Chassagne-Montrachet|21,71,89": {
+"x": 690.5,
+"y": 432.5,
+"commune": "Chassagne-Montrachet",
+"dep": "21",
+"lon": 4.7282,
+"lat": 46.9326
+},
+"Santenay|21,71,89": {
+"x": 688.1,
+"y": 433.9,
+"commune": "Santenay",
+"dep": "21",
+"lon": 4.6929,
+"lat": 46.9184
+},
+"Mercurey|21,71,89": {
+"x": 690.5,
+"y": 441.8,
+"commune": "Mercurey",
+"dep": "71",
+"lon": 4.7279,
+"lat": 46.8383
+},
+"Rully|21,71,89": {
+"x": 692.7,
+"y": 438.6,
+"commune": "Rully",
+"dep": "71",
+"lon": 4.7601,
+"lat": 46.871
+},
+"Givry|21,71,89": {
+"x": 692.0,
+"y": 448.7,
+"commune": "Givry",
+"dep": "71",
+"lon": 4.7505,
+"lat": 46.7689
+},
+"Bouzeron|21,71,89": {
+"x": 690.5,
+"y": 436.6,
+"commune": "Bouzeron",
+"dep": "71",
+"lon": 4.7277,
+"lat": 46.8908
+},
+"Montagny-lès-Buxy|21,71,89": {
+"x": 686.6,
+"y": 455.0,
+"commune": "Montagny-lès-Buxy",
+"dep": "71",
+"lon": 4.6706,
+"lat": 46.706
+},
+"Mâcon|21,71,89": {
+"x": 696.0,
+"y": 492.6,
+"commune": "Mâcon",
+"dep": "71",
+"lon": 4.8083,
+"lat": 46.3265
+},
+"Fuissé|21,71,89": {
+"x": 691.6,
+"y": 497.4,
+"commune": "Fuissé",
+"dep": "71",
+"lon": 4.7445,
+"lat": 46.2783
+},
+"Solutré-Pouilly|21,71,89": {
+"x": 690.4,
+"y": 495.8,
+"commune": "Solutré-Pouilly",
+"dep": "71",
+"lon": 4.7272,
+"lat": 46.2948
+},
+"Vergisson|21,71,89": {
+"x": 689.4,
+"y": 494.3,
+"commune": "Vergisson",
+"dep": "71",
+"lon": 4.7117,
+"lat": 46.3094
+},
+"Villefranche-sur-Saône|69,71": {
+"x": 690.4,
+"y": 526.7,
+"commune": "Villefranche-sur-Saône",
+"dep": "69",
+"lon": 4.726,
+"lat": 45.9837
+},
+"Odenas|69,71": {
+"x": 684.6,
+"y": 515.8,
+"commune": "Odenas",
+"dep": "69",
+"lon": 4.6417,
+"lat": 46.0935
+},
+"Quincié-en-Beaujolais|69,71": {
+"x": 682.7,
+"y": 514.0,
+"commune": "Quincié-en-Beaujolais",
+"dep": "69",
+"lon": 4.614,
+"lat": 46.1118
+},
+"Régnié-Durette|69,71": {
+"x": 684.8,
+"y": 509.9,
+"commune": "Régnié-Durette",
+"dep": "69",
+"lon": 4.6449,
+"lat": 46.1531
+},
+"Villié-Morgon|69,71": {
+"x": 686.0,
+"y": 509.1,
+"commune": "Villié-Morgon",
+"dep": "69",
+"lon": 4.6621,
+"lat": 46.1612
+},
+"Chiroubles|69,71": {
+"x": 685.1,
+"y": 506.7,
+"commune": "Chiroubles",
+"dep": "69",
+"lon": 4.6495,
+"lat": 46.1853
+},
+"Fleurie|69,71": {
+"x": 688.2,
+"y": 505.7,
+"commune": "Fleurie",
+"dep": "69",
+"lon": 4.6942,
+"lat": 46.1953
+},
+"Romanèche-Thorins|69,71": {
+"x": 691.8,
+"y": 506.0,
+"commune": "Romanèche-Thorins",
+"dep": "71",
+"lon": 4.7478,
+"lat": 46.192
+},
+"Chénas|69,71": {
+"x": 689.1,
+"y": 503.8,
+"commune": "Chénas",
+"dep": "69",
+"lon": 4.7069,
+"lat": 46.2142
+},
+"Juliénas|69,71": {
+"x": 688.9,
+"y": 500.5,
+"commune": "Juliénas",
+"dep": "69",
+"lon": 4.7052,
+"lat": 46.2473
+},
+"Saint-Amour-Bellevue|69,71": {
+"x": 691.0,
+"y": 501.3,
+"commune": "Saint-Amour-Bellevue",
+"dep": "71",
+"lon": 4.735,
+"lat": 46.2392
+},
+"Arbois|39": {
+"x": 761.8,
+"y": 437.0,
+"commune": "Arbois",
+"dep": "39",
+"lon": 5.773,
+"lat": 46.8876
+},
+"Pupillin|39": {
+"x": 760.2,
+"y": 438.2,
+"commune": "Pupillin",
+"dep": "39",
+"lon": 5.7508,
+"lat": 46.8749
+},
+"Montigny-lès-Arsures|39": {
+"x": 762.0,
+"y": 432.0,
+"commune": "Montigny-lès-Arsures",
+"dep": "39",
+"lon": 5.776,
+"lat": 46.938
+},
+"Château-Chalon|39": {
+"x": 753.2,
+"y": 449.7,
+"commune": "Château-Chalon",
+"dep": "39",
+"lon": 5.6473,
+"lat": 46.7594
+},
+"Voiteur|39": {
+"x": 750.1,
+"y": 451.3,
+"commune": "Voiteur",
+"dep": "39",
+"lon": 5.6014,
+"lat": 46.7431
+},
+"L'Étoile|39": {
+"x": 745.4,
+"y": 453.9,
+"commune": "L'Étoile",
+"dep": "39",
+"lon": 5.5332,
+"lat": 46.7171
+},
+"Lons-le-Saunier|39": {
+"x": 747.1,
+"y": 458.0,
+"commune": "Lons-le-Saunier",
+"dep": "39",
+"lon": 5.5574,
+"lat": 46.6758
+},
+"Poligny|39": {
+"x": 758.4,
+"y": 443.6,
+"commune": "Poligny",
+"dep": "39",
+"lon": 5.7245,
+"lat": 46.8204
+},
+"Chambéry|73,74": {
+"x": 770.9,
+"y": 566.5,
+"commune": "Chambéry",
+"dep": "73",
+"lon": 5.9064,
+"lat": 45.5822
+},
+"Apremont|73,74": {
+"x": 773.0,
+"y": 574.7,
+"commune": "Apremont",
+"dep": "73",
+"lon": 5.9375,
+"lat": 45.4998
+},
+"Les Marches|73,74": {
+"x": 287.8,
+"y": 337.9,
+"commune": "Brains-sur-les-Marches",
+"dep": "53",
+"lon": -1.1769,
+"lat": 47.8853
+},
+"Chignin|73,74": {
+"x": 778.1,
+"y": 572.3,
+"commune": "Chignin",
+"dep": "73",
+"lon": 6.0122,
+"lat": 45.5237
+},
+"Cruet|73,74": {
+"x": 783.6,
+"y": 571.5,
+"commune": "Cruet",
+"dep": "73",
+"lon": 6.093,
+"lat": 45.5324
+},
+"Montmélian|73,74": {
+"x": 781.1,
+"y": 574.0,
+"commune": "Montmélian",
+"dep": "73",
+"lon": 6.0564,
+"lat": 45.5071
+},
+"Arbin|73,74": {
+"x": 782.2,
+"y": 573.5,
+"commune": "Arbin",
+"dep": "73",
+"lon": 6.0735,
+"lat": 45.5114
+},
+"Saint-Jean-de-la-Porte|73,74": {
+"x": 785.5,
+"y": 568.3,
+"commune": "Saint-Jean-de-la-Porte",
+"dep": "73",
+"lon": 6.1214,
+"lat": 45.5641
+},
+"Jongieux|73,74": {
+"x": 763.7,
+"y": 551.3,
+"commune": "Jongieux",
+"dep": "73",
+"lon": 5.8017,
+"lat": 45.7358
+},
+"Frangy|73,74": {
+"x": 771.9,
+"y": 522.8,
+"commune": "Frangy",
+"dep": "74",
+"lon": 5.9224,
+"lat": 46.0231
+},
+"Ayze|73,74": null,
+"Seyssel|73,74": {
+"x": 767.2,
+"y": 528.8,
+"commune": "Seyssel",
+"dep": "74",
+"lon": 5.8531,
+"lat": 45.9621
+},
+"Reims|51,10,52,02": {
+"x": 644.6,
+"y": 202.1,
+"commune": "Reims",
+"dep": "51",
+"lon": 4.0551,
+"lat": 49.2535
+},
+"Épernay|51,10,52,02": {
+"x": 635.9,
+"y": 223.4,
+"commune": "Épernay",
+"dep": "51",
+"lon": 3.9282,
+"lat": 49.0391
+},
+"Aÿ-Champagne|51,10,52,02": {
+"x": 643.7,
+"y": 221.7,
+"commune": "Aÿ-Champagne",
+"dep": "51",
+"lon": 4.0414,
+"lat": 49.0561
+},
+"Avize|51,10,52,02": {
+"x": 641.2,
+"y": 230.0,
+"commune": "Avize",
+"dep": "51",
+"lon": 4.0056,
+"lat": 48.9724
+},
+"Cramant|51,10,52,02": {
+"x": 640.9,
+"y": 228.5,
+"commune": "Cramant",
+"dep": "51",
+"lon": 4.0004,
+"lat": 48.9879
+},
+"Le Mesnil-sur-Oger|51,10,52,02": {
+"x": 642.1,
+"y": 233.2,
+"commune": "Le Mesnil-sur-Oger",
+"dep": "51",
+"lon": 4.0183,
+"lat": 48.9404
+},
+"Oger|51,10,52,02": {
+"x": 642.1,
+"y": 233.2,
+"commune": "Le Mesnil-sur-Oger",
+"dep": "51",
+"lon": 4.0183,
+"lat": 48.9404
+},
+"Ambonnay|51,10,52,02": {
+"x": 653.0,
+"y": 218.1,
+"commune": "Ambonnay",
+"dep": "51",
+"lon": 4.1778,
+"lat": 49.0926
+},
+"Bouzy|51,10,52,02": {
+"x": 649.7,
+"y": 218.7,
+"commune": "Bouzy",
+"dep": "51",
+"lon": 4.1297,
+"lat": 49.0861
+},
+"Verzenay|51,10,52,02": {
+"x": 650.9,
+"y": 211.5,
+"commune": "Verzenay",
+"dep": "51",
+"lon": 4.1482,
+"lat": 49.1588
+},
+"Verzy|51,10,52,02": {
+"x": 651.9,
+"y": 212.9,
+"commune": "Verzy",
+"dep": "51",
+"lon": 4.1619,
+"lat": 49.1451
+},
+"Mailly-Champagne|51,10,52,02": {
+"x": 648.5,
+"y": 212.1,
+"commune": "Mailly-Champagne",
+"dep": "51",
+"lon": 4.1123,
+"lat": 49.1528
+},
+"Mareuil-sur-Aÿ|51,10,52,02": null,
+"Cumières|51,10,52,02": {
+"x": 635.5,
+"y": 220.2,
+"commune": "Cumières",
+"dep": "51",
+"lon": 3.9214,
+"lat": 49.0715
+},
+"Hautvillers|51,10,52,02": {
+"x": 636.9,
+"y": 219.0,
+"commune": "Hautvillers",
+"dep": "51",
+"lon": 3.942,
+"lat": 49.0839
+},
+"Vertus|51,10,52,02": {
+"x": 641.6,
+"y": 239.7,
+"commune": "Bergères-lès-Vertus",
+"dep": "51",
+"lon": 4.0108,
+"lat": 48.8747
+},
+"Tours-sur-Marne|51,10,52,02": {
+"x": 649.4,
+"y": 222.2,
+"commune": "Tours-sur-Marne",
+"dep": "51",
+"lon": 4.1258,
+"lat": 49.0517
+},
+"Bar-sur-Aube|51,10,52,02": {
+"x": 689.7,
+"y": 303.4,
+"commune": "Bar-sur-Aube",
+"dep": "10",
+"lon": 4.7166,
+"lat": 48.233
+},
+"Les Riceys|51,10,52,02": {
+"x": 666.7,
+"y": 327.5,
+"commune": "Les Riceys",
+"dep": "10",
+"lon": 4.3793,
+"lat": 47.9907
+},
+"Colmar|67,68": {
+"x": 872.2,
+"y": 315.5,
+"commune": "Colmar",
+"dep": "68",
+"lon": 7.3924,
+"lat": 48.1115
+},
+"Riquewihr|67,68": {
+"x": 863.8,
+"y": 308.7,
+"commune": "Riquewihr",
+"dep": "68",
+"lon": 7.2689,
+"lat": 48.1793
+},
+"Ribeauvillé|67,68": {
+"x": 865.5,
+"y": 306.1,
+"commune": "Ribeauvillé",
+"dep": "68",
+"lon": 7.2942,
+"lat": 48.2056
+},
+"Kaysersberg Vignoble|67,68": {
+"x": 864.3,
+"y": 311.2,
+"commune": "Kaysersberg Vignoble",
+"dep": "68",
+"lon": 7.276,
+"lat": 48.1547
+},
+"Eguisheim|67,68": {
+"x": 865.7,
+"y": 322.8,
+"commune": "Eguisheim",
+"dep": "68",
+"lon": 7.2966,
+"lat": 48.0377
+},
+"Turckheim|67,68": {
+"x": 862.5,
+"y": 318.0,
+"commune": "Turckheim",
+"dep": "68",
+"lon": 7.2501,
+"lat": 48.0865
+},
+"Hunawihr|67,68": {
+"x": 865.9,
+"y": 308.4,
+"commune": "Hunawihr",
+"dep": "68",
+"lon": 7.2996,
+"lat": 48.1827
+},
+"Thann|67,68": {
+"x": 851.3,
+"y": 344.8,
+"commune": "Thann",
+"dep": "68",
+"lon": 7.0867,
+"lat": 47.8163
+},
+"Guebwiller|67,68": {
+"x": 859.7,
+"y": 335.3,
+"commune": "Guebwiller",
+"dep": "68",
+"lon": 7.2097,
+"lat": 47.9118
+},
+"Barr|67,68": {
+"x": 872.6,
+"y": 285.5,
+"commune": "Barr",
+"dep": "67",
+"lon": 7.3988,
+"lat": 48.4136
+},
+"Bergheim|67,68": {
+"x": 870.5,
+"y": 305.4,
+"commune": "Bergheim",
+"dep": "68",
+"lon": 7.3672,
+"lat": 48.2135
+},
+"Obernai|67,68": {
+"x": 878.3,
+"y": 281.4,
+"commune": "Obernai",
+"dep": "67",
+"lon": 7.4817,
+"lat": 48.4546
+},
+"Mittelbergheim|67,68": {
+"x": 875.7,
+"y": 287.4,
+"commune": "Mittelbergheim",
+"dep": "67",
+"lon": 7.4432,
+"lat": 48.3944
+},
+"Rouffach|67,68": {
+"x": 864.3,
+"y": 329.6,
+"commune": "Rouffach",
+"dep": "68",
+"lon": 7.2773,
+"lat": 47.9688
+},
+"Niedermorschwihr|67,68": {
+"x": 863.0,
+"y": 316.5,
+"commune": "Niedermorschwihr",
+"dep": "68",
+"lon": 7.2582,
+"lat": 48.1015
+},
+"Wettolsheim|67,68": {
+"x": 866.2,
+"y": 321.4,
+"commune": "Wettolsheim",
+"dep": "68",
+"lon": 7.3046,
+"lat": 48.0518
+},
+"Epfig|67,68": {
+"x": 877.3,
+"y": 292.0,
+"commune": "Epfig",
+"dep": "67",
+"lon": 7.4675,
+"lat": 48.3485
+},
+"Nantes|44,49,37,41,18,58,72,86,45": {
+"x": 261.6,
+"y": 402.2,
+"commune": "Nantes",
+"dep": "44",
+"lon": -1.5603,
+"lat": 47.2382
+},
+"Angers|44,49,37,41,18,58,72,86,45": {
+"x": 329.7,
+"y": 378.0,
+"commune": "Angers",
+"dep": "49",
+"lon": -0.5629,
+"lat": 47.4819
+},
+"Saumur|44,49,37,41,18,58,72,86,45": {
+"x": 362.3,
+"y": 399.5,
+"commune": "Saumur",
+"dep": "49",
+"lon": -0.0837,
+"lat": 47.2645
+},
+"Tours|44,49,37,41,18,58,72,86,45": {
+"x": 415.4,
+"y": 386.7,
+"commune": "Tours",
+"dep": "37",
+"lon": 0.6949,
+"lat": 47.3943
+},
+"Sancerre|44,49,37,41,18,58,72,86,45": {
+"x": 560.5,
+"y": 393.6,
+"commune": "Sancerre",
+"dep": "18",
+"lon": 2.822,
+"lat": 47.3248
+},
+"Pouilly-sur-Loire|44,49,37,41,18,58,72,86,45": {
+"x": 571.3,
+"y": 397.9,
+"commune": "Pouilly-sur-Loire",
+"dep": "58",
+"lon": 2.9799,
+"lat": 47.2815
+},
+"Vouvray|44,49,37,41,18,58,72,86,45": {
+"x": 422.9,
+"y": 383.0,
+"commune": "Vouvray",
+"dep": "37",
+"lon": 0.8044,
+"lat": 47.4311
+},
+"Montlouis-sur-Loire|44,49,37,41,18,58,72,86,45": {
+"x": 425.6,
+"y": 387.8,
+"commune": "Montlouis-sur-Loire",
+"dep": "37",
+"lon": 0.8432,
+"lat": 47.383
+},
+"Chinon|44,49,37,41,18,58,72,86,45": {
+"x": 384.6,
+"y": 409.0,
+"commune": "Chinon",
+"dep": "37",
+"lon": 0.2433,
+"lat": 47.1692
+},
+"Bourgueil|44,49,37,41,18,58,72,86,45": {
+"x": 379.7,
+"y": 395.0,
+"commune": "Bourgueil",
+"dep": "37",
+"lon": 0.1712,
+"lat": 47.31
+},
+"Saint-Nicolas-de-Bourgueil|44,49,37,41,18,58,72,86,45": {
+"x": 376.3,
+"y": 396.0,
+"commune": "Saint-Nicolas-de-Bourgueil",
+"dep": "37",
+"lon": 0.1216,
+"lat": 47.3002
+},
+"Savennières|44,49,37,41,18,58,72,86,45": {
+"x": 322.8,
+"y": 385.5,
+"commune": "Savennières",
+"dep": "49",
+"lon": -0.664,
+"lat": 47.4064
+},
+"Quincy|44,49,37,41,18,58,72,86,45": {
+"x": 515.2,
+"y": 413.0,
+"commune": "Quincy",
+"dep": "18",
+"lon": 2.1581,
+"lat": 47.1289
+},
+"Reuilly|44,49,37,41,18,58,72,86,45": {
+"x": 504.5,
+"y": 417.3,
+"commune": "Reuilly",
+"dep": "36",
+"lon": 2.0012,
+"lat": 47.0859
+},
+"Menetou-Salon|44,49,37,41,18,58,72,86,45": {
+"x": 537.7,
+"y": 401.6,
+"commune": "Menetou-Salon",
+"dep": "18",
+"lon": 2.4874,
+"lat": 47.2436
+},
+"Bonnezeaux|44,49,37,41,18,58,72,86,45": null,
+"Le Pallet|44,49,37,41,18,58,72,86,45": {
+"x": 276.2,
+"y": 411.7,
+"commune": "Le Pallet",
+"dep": "44",
+"lon": -1.3464,
+"lat": 47.1424
+},
+"Ampuis|26,84,07,30,69": {
+"x": 695.9,
+"y": 574.3,
+"commune": "Ampuis",
+"dep": "69",
+"lon": 4.8079,
+"lat": 45.5034
+},
+"Condrieu|26,84,07,30,69": {
+"x": 692.1,
+"y": 577.2,
+"commune": "Condrieu",
+"dep": "69",
+"lon": 4.7516,
+"lat": 45.4748
+},
+"Tain-l'Hermitage|26,84,07,30,69": {
+"x": 698.7,
+"y": 617.6,
+"commune": "Tain-l'Hermitage",
+"dep": "26",
+"lon": 4.8488,
+"lat": 45.068
+},
+"Tournon-sur-Rhône|26,84,07,30,69": {
+"x": 696.5,
+"y": 619.0,
+"commune": "Tournon-sur-Rhône",
+"dep": "07",
+"lon": 4.8156,
+"lat": 45.0534
+},
+"Mauves|26,84,07,30,69": {
+"x": 696.6,
+"y": 621.4,
+"commune": "Mauves",
+"dep": "07",
+"lon": 4.8182,
+"lat": 45.0294
+},
+"Cornas|26,84,07,30,69": {
+"x": 698.4,
+"y": 627.6,
+"commune": "Cornas",
+"dep": "07",
+"lon": 4.8441,
+"lat": 44.9668
+},
+"Saint-Péray|26,84,07,30,69": {
+"x": 697.5,
+"y": 630.3,
+"commune": "Saint-Péray",
+"dep": "07",
+"lon": 4.8314,
+"lat": 44.9394
+},
+"Châteauneuf-du-Pape|26,84,07,30,69": {
+"x": 697.2,
+"y": 717.6,
+"commune": "Châteauneuf-du-Pape",
+"dep": "84",
+"lon": 4.8263,
+"lat": 44.0602
+},
+"Gigondas|26,84,07,30,69": {
+"x": 710.1,
+"y": 707.3,
+"commune": "Gigondas",
+"dep": "84",
+"lon": 5.0153,
+"lat": 44.164
+},
+"Vacqueyras|26,84,07,30,69": {
+"x": 707.4,
+"y": 709.2,
+"commune": "Vacqueyras",
+"dep": "84",
+"lon": 4.9764,
+"lat": 44.1444
+},
+"Tavel|26,84,07,30,69": {
+"x": 687.7,
+"y": 722.7,
+"commune": "Tavel",
+"dep": "30",
+"lon": 4.6872,
+"lat": 44.0086
+},
+"Lirac|26,84,07,30,69": {
+"x": 687.2,
+"y": 720.4,
+"commune": "Lirac",
+"dep": "30",
+"lon": 4.6796,
+"lat": 44.0321
+},
+"Cairanne|26,84,07,30,69": {
+"x": 704.5,
+"y": 701.0,
+"commune": "Cairanne",
+"dep": "84",
+"lon": 4.9339,
+"lat": 44.2277
+},
+"Rasteau|26,84,07,30,69": {
+"x": 707.6,
+"y": 700.4,
+"commune": "Rasteau",
+"dep": "84",
+"lon": 4.9794,
+"lat": 44.2336
+},
+"Beaumes-de-Venise|26,84,07,30,69": {
+"x": 710.9,
+"y": 711.4,
+"commune": "Beaumes-de-Venise",
+"dep": "84",
+"lon": 5.0279,
+"lat": 44.1224
+},
+"Orange|26,84,07,30,69": {
+"x": 695.6,
+"y": 711.0,
+"commune": "Orange",
+"dep": "84",
+"lon": 4.8031,
+"lat": 44.1264
+},
+"Avignon|26,84,07,30,69": {
+"x": 697.7,
+"y": 729.4,
+"commune": "Avignon",
+"dep": "84",
+"lon": 4.8333,
+"lat": 43.9416
+},
+"Bandol|83,13,06,84": {
+"x": 760.1,
+"y": 808.2,
+"commune": "Bandol",
+"dep": "83",
+"lon": 5.7488,
+"lat": 43.147
+},
+"Le Castellet|83,13,06,84": {
+"x": 760.6,
+"y": 801.5,
+"commune": "Le Castellet",
+"dep": "83",
+"lon": 5.7561,
+"lat": 43.2148
+},
+"La Cadière-d'Azur|83,13,06,84": {
+"x": 758.4,
+"y": 802.7,
+"commune": "La Cadière-d'Azur",
+"dep": "83",
+"lon": 5.7231,
+"lat": 43.2026
+},
+"Cassis|83,13,06,84": {
+"x": 746.6,
+"y": 801.1,
+"commune": "Cassis",
+"dep": "13",
+"lon": 5.5503,
+"lat": 43.2185
+},
+"Nice|83,13,06,84": {
+"x": 862.7,
+"y": 753.0,
+"commune": "Nice",
+"dep": "06",
+"lon": 7.2528,
+"lat": 43.7032
+},
+"Aix-en-Provence|83,13,06,84": {
+"x": 735.5,
+"y": 769.6,
+"commune": "Aix-en-Provence",
+"dep": "13",
+"lon": 5.3879,
+"lat": 43.536
+},
+"Brignoles|83,13,06,84": {
+"x": 782.4,
+"y": 784.3,
+"commune": "Brignoles",
+"dep": "83",
+"lon": 6.0759,
+"lat": 43.3878
+},
+"Taradeau|83,13,06,84": {
+"x": 806.4,
+"y": 776.6,
+"commune": "Taradeau",
+"dep": "83",
+"lon": 6.4283,
+"lat": 43.4657
+},
+"La Londe-les-Maures|83,13,06,84": {
+"x": 793.7,
+"y": 806.5,
+"commune": "La Londe-les-Maures",
+"dep": "83",
+"lon": 6.2417,
+"lat": 43.1641
+},
+"Montpellier|34,11,66,30": {
+"x": 632.3,
+"y": 762.3,
+"commune": "Montpellier",
+"dep": "34",
+"lon": 3.8742,
+"lat": 43.61
+},
+"Saint-Mathieu-de-Tréviers|34,11,66,30": {
+"x": 631.5,
+"y": 746.6,
+"commune": "Saint-Mathieu-de-Tréviers",
+"dep": "34",
+"lon": 3.8628,
+"lat": 43.7679
+},
+"Faugères|34,11,66,30": {
+"x": 584.5,
+"y": 766.6,
+"commune": "Faugères",
+"dep": "34",
+"lon": 3.174,
+"lat": 43.5665
+},
+"Saint-Chinian|34,11,66,30": {
+"x": 567.7,
+"y": 780.4,
+"commune": "Saint-Chinian",
+"dep": "34",
+"lon": 2.9276,
+"lat": 43.4274
+},
+"Bize-Minervois|34,11,66,30": {
+"x": 563.9,
+"y": 789.4,
+"commune": "Bize-Minervois",
+"dep": "11",
+"lon": 2.8719,
+"lat": 43.3364
+},
+"La Livinière|34,11,66,30": {
+"x": 547.9,
+"y": 789.3,
+"commune": "La Livinière",
+"dep": "34",
+"lon": 2.637,
+"lat": 43.3377
+},
+"Lézignan-Corbières|34,11,66,30": {
+"x": 556.6,
+"y": 803.1,
+"commune": "Lézignan-Corbières",
+"dep": "11",
+"lon": 2.7649,
+"lat": 43.1983
+},
+"Fitou|34,11,66,30": {
+"x": 569.7,
+"y": 832.8,
+"commune": "Fitou",
+"dep": "11",
+"lon": 2.9572,
+"lat": 42.8992
+},
+"Narbonne|34,11,66,30": {
+"x": 574.9,
+"y": 808.0,
+"commune": "Narbonne",
+"dep": "11",
+"lon": 3.0337,
+"lat": 43.1493
+},
+"Limoux|34,11,66,30": {
+"x": 521.2,
+"y": 818.2,
+"commune": "Limoux",
+"dep": "11",
+"lon": 2.2452,
+"lat": 43.0464
+},
+"Perpignan|34,11,66,30": {
+"x": 566.1,
+"y": 852.7,
+"commune": "Perpignan",
+"dep": "66",
+"lon": 2.9045,
+"lat": 42.699
+},
+"Banyuls-sur-Mer|34,11,66,30": {
+"x": 579.6,
+"y": 876.4,
+"commune": "Banyuls-sur-Mer",
+"dep": "66",
+"lon": 3.1014,
+"lat": 42.4602
+},
+"Collioure|34,11,66,30": {
+"x": 577.7,
+"y": 871.6,
+"commune": "Collioure",
+"dep": "66",
+"lon": 3.0744,
+"lat": 42.5087
+},
+"Maury|34,11,66,30": {
+"x": 546.7,
+"y": 841.1,
+"commune": "Maury",
+"dep": "66",
+"lon": 2.6194,
+"lat": 42.816
+},
+"Rivesaltes|34,11,66,30": {
+"x": 564.2,
+"y": 845.0,
+"commune": "Rivesaltes",
+"dep": "66",
+"lon": 2.8769,
+"lat": 42.7761
+},
+"Patrimonio|2A,2B": {
+"x": 1006.7,
+"y": 851.7,
+"commune": "Patrimonio",
+"dep": "2B",
+"lon": 9.3647,
+"lat": 42.7092
+},
+"Ajaccio|2A,2B": {
+"x": 961.8,
+"y": 929.7,
+"commune": "Ajaccio",
+"dep": "2A",
+"lon": 8.7058,
+"lat": 41.9228
+},
+"Calvi|2A,2B": {
+"x": 965.5,
+"y": 867.5,
+"commune": "Calvi",
+"dep": "2B",
+"lon": 8.7611,
+"lat": 42.5498
+},
+"Figari|2A,2B": {
+"x": 990.4,
+"y": 969.8,
+"commune": "Figari",
+"dep": "2A",
+"lon": 9.126,
+"lat": 41.5188
+},
+"Sartène|2A,2B": {
+"x": 977.2,
+"y": 964.2,
+"commune": "Sartène",
+"dep": "2A",
+"lon": 8.9326,
+"lat": 41.5752
+},
+"Porto-Vecchio|2A,2B": {
+"x": 1000.5,
+"y": 963.3,
+"commune": "Porto-Vecchio",
+"dep": "2A",
+"lon": 9.2732,
+"lat": 41.5849
+},
+"Rogliano|2A,2B": {
+"x": 1011.3,
+"y": 825.4,
+"commune": "Rogliano",
+"dep": "2B",
+"lon": 9.4323,
+"lat": 42.974
+},
+"Saint-Florent|2A,2B": {
+"x": 1000.9,
+"y": 853.7,
+"commune": "Saint-Florent",
+"dep": "2B",
+"lon": 9.2797,
+"lat": 42.689
+},
+"Bastia|2A,2B": {
+"x": 1010.7,
+"y": 854.0,
+"commune": "Bastia",
+"dep": "2B",
+"lon": 9.424,
+"lat": 42.6861
+},
+"CITY|Paris": {
+"x": 528.1,
+"y": 241.3,
+"pop": 2103778,
+"lon": 2.347,
+"lat": 48.8589
+},
+"CITY|Lyon": {
+"x": 697.8,
+"y": 549.1,
+"pop": 519127,
+"lon": 4.8351,
+"lat": 45.758
+},
+"CITY|Marseille": {
+"x": 735.0,
+"y": 795.0,
+"pop": 886040,
+"lon": 5.3806,
+"lat": 43.2803
+},
+"CITY|Bordeaux": {
+"x": 328.2,
+"y": 638.0,
+"pop": 267991,
+"lon": -0.5848,
+"lat": 44.8624
+},
+"CITY|Toulouse": {
+"x": 465.8,
+"y": 763.2,
+"pop": 514819,
+"lon": 1.4328,
+"lat": 43.6007
+},
+"CITY|Nantes": {
+"x": 261.6,
+"y": 402.2,
+"pop": 327734,
+"lon": -1.5603,
+"lat": 47.2382
+},
+"CITY|Strasbourg": {
+"x": 897.4,
+"y": 270.1,
+"pop": 293771,
+"lon": 7.7621,
+"lat": 48.5691
+},
+"CITY|Lille": {
+"x": 575.8,
+"y": 65.4,
+"pop": 238246,
+"lon": 3.0468,
+"lat": 50.6311
+},
+"CITY|Nice": {
+"x": 862.7,
+"y": 753.0,
+"pop": 357737,
+"lon": 7.2528,
+"lat": 43.7032
+},
+"CITY|Montpellier": {
+"x": 632.3,
+"y": 762.3,
+"pop": 310240,
+"lon": 3.8742,
+"lat": 43.61
+},
+"CITY|Dijon": {
+"x": 711.2,
+"y": 392.9,
+"pop": 161830,
+"lon": 5.0322,
+"lat": 47.3319
+},
+"CITY|Reims": {
+"x": 644.6,
+"y": 202.1,
+"pop": 177674,
+"lon": 4.0551,
+"lat": 49.2535
+},
+"CITY|Tours": {
+"x": 415.4,
+"y": 386.7,
+"pop": 139259,
+"lon": 0.6949,
+"lat": 47.3943
+},
+"CITY|Clermont-Ferrand": {
+"x": 580.3,
+"y": 546.2,
+"pop": 146351,
+"lon": 3.1127,
+"lat": 45.787
+},
+"CITY|Avignon": {
+"x": 697.7,
+"y": 729.4,
+"pop": 92188,
+"lon": 4.8333,
+"lat": 43.9416
+},
+"CITY|Perpignan": {
+"x": 566.1,
+"y": 852.7,
+"pop": 121616,
+"lon": 2.9045,
+"lat": 42.699
+},
+"CITY|Besançon": {
+"x": 778.1,
+"y": 400.0,
+"pop": 118489,
+"lon": 6.0123,
+"lat": 47.2602
+},
+"CITY|Chambéry": {
+"x": 770.9,
+"y": 566.5,
+"pop": 59964,
+"lon": 5.9064,
+"lat": 45.5822
+},
+"CITY|Grenoble": {
+"x": 757.8,
+"y": 606.0,
+"pop": 156140,
+"lon": 5.7155,
+"lat": 45.1842
+},
+"CITY|Valence": {
+"x": 703.3,
+"y": 631.9,
+"pop": 64458,
+"lon": 4.9164,
+"lat": 44.9234
+},
+"CITY|Orange": {
+"x": 695.6,
+"y": 711.0,
+"pop": 29706,
+"lon": 4.8031,
+"lat": 44.1264
+},
+"CITY|Nîmes": {
+"x": 664.2,
+"y": 740.2,
+"pop": 151839,
+"lon": 4.3429,
+"lat": 43.8322
+},
+"CITY|Narbonne": {
+"x": 574.9,
+"y": 808.0,
+"pop": 57587,
+"lon": 3.0337,
+"lat": 43.1493
+},
+"CITY|Béziers": {
+"x": 588.6,
+"y": 788.3,
+"pop": 81545,
+"lon": 3.2342,
+"lat": 43.3481
+},
+"CITY|Mulhouse": {
+"x": 867.6,
+"y": 351.1,
+"pop": 104978,
+"lon": 7.3255,
+"lat": 47.7526
+},
+"CITY|Colmar": {
+"x": 872.2,
+"y": 315.5,
+"pop": 66970,
+"lon": 7.3924,
+"lat": 48.1115
+},
+"CITY|Metz": {
+"x": 790.6,
+"y": 216.9,
+"pop": 122572,
+"lon": 6.1962,
+"lat": 49.1048
+},
+"CITY|Nancy": {
+"x": 789.1,
+"y": 258.2,
+"pop": 103671,
+"lon": 6.1734,
+"lat": 48.6881
+},
+"CITY|Angers": {
+"x": 329.7,
+"y": 378.0,
+"pop": 159022,
+"lon": -0.5629,
+"lat": 47.4819
+},
+"CITY|Le Mans": {
+"x": 381.4,
+"y": 328.3,
+"pop": 146249,
+"lon": 0.1957,
+"lat": 47.9819
+},
+"CITY|Orléans": {
+"x": 498.5,
+"y": 339.1,
+"pop": 116357,
+"lon": 1.9122,
+"lat": 47.8734
+},
+"CITY|Beaune": {
+"x": 698.3,
+"y": 423.1,
+"pop": 20352,
+"lon": 4.8421,
+"lat": 47.0272
+},
+"CITY|Mâcon": {
+"x": 696.0,
+"y": 492.6,
+"pop": 35177,
+"lon": 4.8083,
+"lat": 46.3265
+},
+"CITY|Pau": {
+"x": 344.6,
+"y": 790.9,
+"pop": 80441,
+"lon": -0.3435,
+"lat": 43.3219
+},
+"CITY|Bayonne": {
+"x": 268.4,
+"y": 774.7,
+"pop": 54306,
+"lon": -1.4611,
+"lat": 43.4844
+},
+"CITY|Carcassonne": {
+"x": 528.3,
+"y": 802.2,
+"pop": 46080,
+"lon": 2.3491,
+"lat": 43.2078
+},
+"CITY|Annecy": {
+"x": 785.9,
+"y": 534.7,
+"pop": 132117,
+"lon": 6.1264,
+"lat": 45.9024
+},
+"CITY|Auxerre": {
+"x": 612.3,
+"y": 347.0,
+"pop": 35097,
+"lon": 3.5821,
+"lat": 47.7939
+},
+"CITY|Poitiers": {
+"x": 393.4,
+"y": 467.0,
+"pop": 89916,
+"lon": 0.3715,
+"lat": 46.5846
+},
+"CITY|Agen": {
+"x": 411.0,
+"y": 703.6,
+"pop": 32801,
+"lon": 0.6302,
+"lat": 44.201
+},
+"CITY|Millau": {
+"x": 580.7,
+"y": 713.8,
+"pop": 22044,
+"lon": 3.1176,
+"lat": 44.0982
+},
+"CITY|Bourg-en-Bresse": {
+"x": 725.9,
+"y": 504.9,
+"pop": 42372,
+"lon": 5.2469,
+"lat": 46.2027
+},
+"CITY|Albi": {
+"x": 513.5,
+"y": 730.6,
+"pop": 51290,
+"lon": 2.1323,
+"lat": 43.929
+},
+"CITY|Cahors": {
+"x": 466.2,
+"y": 678.3,
+"pop": 20050,
+"lon": 1.439,
+"lat": 44.4565
+},
+"CITY|Bergerac": {
+"x": 401.4,
+"y": 639.0,
+"pop": 27110,
+"lon": 0.4883,
+"lat": 44.8519
+},
+"CITY|Limoges": {
+"x": 451.7,
+"y": 539.3,
+"pop": 129937,
+"lon": 1.226,
+"lat": 45.8567
+},
+"CITY|Rouen": {
+"x": 442.5,
+"y": 183.5,
+"pop": 117662,
+"lon": 1.0912,
+"lat": 49.4412
+},
+"CITY|Troyes": {
+"x": 646.0,
+"y": 297.5,
+"pop": 62088,
+"lon": 4.0761,
+"lat": 48.2924
+},
+"TRIP|Margaux-Cantenac|33": {
+"x": 321.8,
+"y": 620.7,
+"commune": "Margaux-Cantenac"
+},
+"TRIP|Pauillac|33": {
+"x": 316.6,
+"y": 604.6,
+"commune": "Pauillac"
+},
+"TRIP|Saint-Estèphe|33": {
+"x": 315.1,
+"y": 599.1,
+"commune": "Saint-Estèphe"
+},
+"TRIP|Saint-Émilion|33": {
+"x": 356.4,
+"y": 634.8,
+"commune": "Saint-Émilion"
+},
+"TRIP|Pomerol|33": {
+"x": 354.3,
+"y": 631.2,
+"commune": "Pomerol"
+},
+"TRIP|Pessac|33": {
+"x": 321.6,
+"y": 645.5,
+"commune": "Pessac"
+},
+"TRIP|Léognan|33": {
+"x": 326.0,
+"y": 651.7,
+"commune": "Léognan"
+},
+"TRIP|Martillac|33": {
+"x": 330.0,
+"y": 652.3,
+"commune": "Martillac"
+},
+"TRIP|Sauternes|33": {
+"x": 344.6,
+"y": 670.6,
+"commune": "Sauternes"
+},
+"TRIP|Beaune|21,71,89": {
+"x": 698.3,
+"y": 423.1,
+"commune": "Beaune"
+},
+"TRIP|Pommard|21,71,89": {
+"x": 695.0,
+"y": 424.4,
+"commune": "Pommard"
+},
+"TRIP|Meursault|21,71,89": {
+"x": 693.7,
+"y": 428.6,
+"commune": "Meursault"
+},
+"TRIP|Nuits-Saint-Georges|21,71,89": {
+"x": 705.0,
+"y": 410.7,
+"commune": "Nuits-Saint-Georges"
+},
+"TRIP|Vougeot|21,71,89": {
+"x": 706.4,
+"y": 408.6,
+"commune": "Vougeot"
+},
+"TRIP|Gevrey-Chambertin|21,71,89": {
+"x": 708.1,
+"y": 404.1,
+"commune": "Gevrey-Chambertin"
+},
+"TRIP|Marsannay-la-Côte|21,71,89": {
+"x": 708.2,
+"y": 398.0,
+"commune": "Marsannay-la-Côte"
+},
+"TRIP|Odenas|69,71": {
+"x": 684.6,
+"y": 515.8,
+"commune": "Odenas"
+},
+"TRIP|Saint-Lager|69,71": {
+"x": 686.7,
+"y": 513.8,
+"commune": "Saint-Lager"
+},
+"TRIP|Fleurie|69,71": {
+"x": 688.2,
+"y": 505.7,
+"commune": "Fleurie"
+},
+"TRIP|Romanèche-Thorins|69,71": {
+"x": 691.8,
+"y": 506.0,
+"commune": "Romanèche-Thorins"
+},
+"TRIP|Reims|51,10,52,02": {
+"x": 644.6,
+"y": 202.1,
+"commune": "Reims"
+},
+"TRIP|Épernay|51,10,52,02": {
+"x": 635.9,
+"y": 223.4,
+"commune": "Épernay"
+},
+"TRIP|Le Mesnil-sur-Oger|51,10,52,02": {
+"x": 642.1,
+"y": 233.2,
+"commune": "Le Mesnil-sur-Oger"
+},
+"TRIP|Vertus|51,10,52,02": {
+"x": 641.6,
+"y": 239.7,
+"commune": "Bergères-lès-Vertus"
+},
+"TRIP|Eguisheim|67,68": {
+"x": 865.7,
+"y": 322.8,
+"commune": "Eguisheim"
+},
+"TRIP|Riquewihr|67,68": {
+"x": 863.8,
+"y": 308.7,
+"commune": "Riquewihr"
+},
+"TRIP|Beblenheim|67,68": {
+"x": 868.6,
+"y": 310.5,
+"commune": "Beblenheim"
+},
+"TRIP|Ribeauvillé|67,68": {
+"x": 865.5,
+"y": 306.1,
+"commune": "Ribeauvillé"
+},
+"TRIP|Rochecorbon|44,49,37,41,18,58,72,86,45": {
+"x": 419.9,
+"y": 382.7,
+"commune": "Rochecorbon"
+},
+"TRIP|Vouvray|44,49,37,41,18,58,72,86,45": {
+"x": 422.9,
+"y": 383.0,
+"commune": "Vouvray"
+},
+"TRIP|Chinon|44,49,37,41,18,58,72,86,45": {
+"x": 384.6,
+"y": 409.0,
+"commune": "Chinon"
+},
+"TRIP|Restigné|44,49,37,41,18,58,72,86,45": {
+"x": 384.3,
+"y": 396.5,
+"commune": "Restigné"
+},
+"TRIP|Sancerre|44,49,37,41,18,58,72,86,45": {
+"x": 560.5,
+"y": 393.6,
+"commune": "Sancerre"
+},
+"TRIP|Vacquières|34,11,66,30": {
+"x": 637.6,
+"y": 740.6,
+"commune": "Vacquières"
+},
+"TRIP|Aniane|34,11,66,30": {
+"x": 613.0,
+"y": 754.7,
+"commune": "Aniane"
+},
+"TRIP|Banyuls-sur-Mer|34,11,66,30": {
+"x": 579.6,
+"y": 876.4,
+"commune": "Banyuls-sur-Mer"
+},
+"TRIP|Narbonne|34,11,66,30": {
+"x": 574.9,
+"y": 808.0,
+"commune": "Narbonne"
+},
+"TRIP|Tain-l'Hermitage|26,84,07,30,69,38,42": {
+"x": 698.7,
+"y": 617.6,
+"commune": "Tain-l'Hermitage"
+},
+"TRIP|Ampuis|26,84,07,30,69,38,42": {
+"x": 695.9,
+"y": 574.3,
+"commune": "Ampuis"
+},
+"TRIP|Condrieu|26,84,07,30,69,38,42": {
+"x": 692.1,
+"y": 577.2,
+"commune": "Condrieu"
+},
+"TRIP|Châteauneuf-du-Pape|26,84,07,30,69,38,42": {
+"x": 697.2,
+"y": 717.6,
+"commune": "Châteauneuf-du-Pape"
+},
+"TRIP|Bédarrides|26,84,07,30,69,38,42": {
+"x": 702.4,
+"y": 718.8,
+"commune": "Bédarrides"
+},
+"TRIP|Courthézon|26,84,07,30,69,38,42": {
+"x": 701.3,
+"y": 714.9,
+"commune": "Courthézon"
+},
+"TRIP|Gigondas|26,84,07,30,69,38,42": {
+"x": 710.1,
+"y": 707.3,
+"commune": "Gigondas"
+},
+"TRIP|Le Castellet|83,13,06,84": {
+"x": 760.6,
+"y": 801.5,
+"commune": "Le Castellet"
+},
+"TRIP|La Cadière-d'Azur|83,13,06,84": {
+"x": 758.4,
+"y": 802.7,
+"commune": "La Cadière-d'Azur"
+},
+"TRIP|Cassis|83,13,06,84": {
+"x": 746.6,
+"y": 801.1,
+"commune": "Cassis"
+},
+"TRIP|Gassin|83,13,06,84": {
+"x": 817.3,
+"y": 799.1,
+"commune": "Gassin"
+},
+"TRIP|La Motte|83,13,06,84": {
+"x": 814.8,
+"y": 772.3,
+"commune": "La Motte"
+},
+"TRIP|Taradeau|83,13,06,84": {
+"x": 806.4,
+"y": 776.6,
+"commune": "Taradeau"
+}
+}

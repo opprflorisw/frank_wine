@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Regions — Frank's Wine Almanac</title>
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+<div id="nav"></div>
+<div class="page">
+  <div class="page-head">
+    <div class="kicker">The Almanac</div>
+    <h1>Wine Regions of France</h1>
+    <p class="lede">All thirteen major wine regions at a glance — wine styles, houses, villages and signature grapes. Click any row to open it on the interactive map.</p>
+  </div>
+  <div class="toolbar ui">
+    <div class="field grow"><span class="mag">&#x1F50D;</span><input class="search" id="q" placeholder="Search regions, grapes…" autocomplete="off"></div>
+    <label>View</label>
+    <button class="btn" id="toggle">Switch to cards</button>
+  </div>
+  <div class="resultcount ui" id="rc"></div>
+  <div class="tablewrap" id="tablewrap">
+    <table class="data"><thead id="thead"></thead><tbody id="tbody"></tbody></table>
+  </div>
+  <div class="grid hidden" id="cards"></div>
+</div>
+<script src="assets/almanac-data.js"></script>
+<script src="assets/almanac.js"></script>
+<script>
+AL.renderNav('regions.html');
+const rows = AL.regionsArr().map(r=>({
+  id:r.id, name:r.name, types:r.types, houses:r.producers.length, villages:r.towns.length,
+  apps:r.subAppellations.length, grapes:r.grapes.slice(0,5), summary:r.summary
+}));
+const COLS=[
+  {k:'name', label:'Region', get:r=>r.name},
+  {k:'types', label:'Wines', get:r=>r.types.length, sort:r=>r.types.length},
+  {k:'houses', label:'Houses', get:r=>r.houses, num:true},
+  {k:'villages', label:'Villages', get:r=>r.villages, num:true},
+  {k:'apps', label:'Appellations', get:r=>r.apps, num:true},
+  {k:'grapes', label:'Signature grapes', get:r=>r.grapes.join(', ')},
+];
+let sortK='houses', sortDir=-1, q='';
+const go=id=>location.href='index.html?region='+id;
+
+function thead(){
+  document.getElementById('thead').innerHTML='<tr>'+COLS.map(c=>
+    `<th data-k="${c.k}" class="${sortK===c.k?'sorted':''}">${c.label}<span class="ar">${sortK===c.k?(sortDir>0?'▲':'▼'):'⇅'}</span></th>`
+  ).join('')+'</tr>';
+  document.querySelectorAll('#thead th').forEach(th=>th.onclick=()=>{
+    const k=th.dataset.k; if(sortK===k) sortDir*=-1; else {sortK=k; sortDir= (k==='name'||k==='grapes')?1:-1;} render();
+  });
+}
+function filtered(){
+  let r=rows.slice();
+  if(q){const n=AL.norm(q); r=r.filter(x=>AL.norm(x.name+' '+x.grapes.join(' ')).includes(n));}
+  const col=COLS.find(c=>c.k===sortK);
+  r.sort((a,b)=>{const va=col.sort?col.sort(a):col.get(a), vb=col.sort?col.sort(b):col.get(b);
+    return (typeof va==='number'? va-vb : String(va).localeCompare(String(vb)))*sortDir;});
+  return r;
+}
+function render(){
+  thead();
+  const r=filtered();
+  document.getElementById('rc').textContent=`${r.length} region${r.length!==1?'s':''}`;
+  document.getElementById('tbody').innerHTML=r.map(x=>`
+    <tr onclick="go('${x.id}')">
+      <td><span class="swatch" style="background:${AL.COLORS[x.id]}"></span><span class="cellname">${AL.esc(x.name)}</span></td>
+      <td>${x.types.map(t=>AL.typeBadge(t)).join(' ')}</td>
+      <td><span class="count-pill">${x.houses}</span></td>
+      <td>${x.villages}</td>
+      <td>${x.apps}</td>
+      <td>${x.grapes.map(g=>`<span class="tag">${AL.esc(g)}</span>`).join('')}</td>
+    </tr>`).join('');
+  // cards
+  document.getElementById('cards').innerHTML=r.map(x=>`
+    <div class="rcardL" onclick="go('${x.id}')">
+      <div class="top" style="background:${AL.COLORS[x.id]}"></div>
+      <div class="body">
+        <h3 style="color:${AL.COLORS[x.id]}">${AL.esc(x.name)}</h3>
+        <div class="sm">${x.houses} houses · ${x.villages} villages · ${x.apps} appellations</div>
+        <p>${AL.esc(x.summary.slice(0,150))}…</p>
+        <div class="foot">${x.types.map(t=>AL.typeBadge(t)).join(' ')}</div>
+      </div>
+    </div>`).join('');
+}
+document.getElementById('q').oninput=e=>{q=e.target.value.trim();render();};
+let cards=false;
+document.getElementById('toggle').onclick=()=>{cards=!cards;
+  document.getElementById('tablewrap').classList.toggle('hidden',cards);
+  document.getElementById('cards').classList.toggle('hidden',!cards);
+  document.getElementById('toggle').textContent=cards?'Switch to table':'Switch to cards';
+};
+render();
+</script>
+</body>
+</html>

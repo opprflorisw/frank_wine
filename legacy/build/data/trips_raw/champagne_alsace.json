@@ -1,0 +1,51 @@
+{
+  "Champagne": [
+    {
+      "name": "Grandes Marques: Reims & Épernay Cellars",
+      "days": 2,
+      "basedIn": "Reims",
+      "bestSeason": "May-Jun, Sep",
+      "summary": "A two-day tour of Champagne's most famous houses, descending into UNESCO-listed chalk crayères in Reims before tracing the grand mansions of Épernay's Avenue de Champagne. Pre-book all visits online.",
+      "driving": "~60 km total",
+      "stops": [
+        {"day": 1, "name": "Taittinger", "town": "Reims", "visit": "Guided tour of Gallo-Roman chalk crayères + tasting", "note": "Cellars built into 4th-century chalk pits beneath Saint-Nicaise"},
+        {"day": 1, "name": "Veuve Clicquot", "town": "Reims", "visit": "Guided crayères tour with cuvée tasting (seasonal)", "note": "24 km of UNESCO chalk cellars; book well ahead"},
+        {"day": 1, "name": "Pommery", "town": "Reims", "visit": "Tour of monumental cellars + contemporary art", "note": "Carved 18 m down with a dramatic sculpted staircase"},
+        {"day": 1, "name": "G.H. Mumm", "town": "Reims", "visit": "Cellar tour and Cordon Rouge tasting", "note": "Central Reims, walkable from the cathedral"},
+        {"day": 2, "name": "Moët & Chandon", "town": "Épernay", "visit": "Tour of 28 km of cellars + tasting", "note": "The flagship house on the Avenue de Champagne"},
+        {"day": 2, "name": "Mercier", "town": "Épernay", "visit": "Laser-guided underground train through the cellars", "note": "Family-friendly; home of the giant 200,000-bottle foudre"},
+        {"day": 2, "name": "Pol Roger", "town": "Épernay", "visit": "Intimate visit and tasting, by appointment", "note": "Churchill's favourite; small-group, advance booking essential"}
+      ]
+    },
+    {
+      "name": "Côte des Blancs Blanc de Blancs Growers",
+      "days": 1,
+      "basedIn": "Épernay",
+      "bestSeason": "May-Jun, Sep",
+      "summary": "A relaxed grower stretch south of Épernay through the pure-Chardonnay chalk villages, with personal cellar visits at family domaines a fraction of the grandes marques' scale.",
+      "driving": "~40 km total",
+      "stops": [
+        {"day": 1, "name": "Champagne Pierre Moncuit", "town": "Le Mesnil-sur-Oger", "visit": "Family-run Grand Cru Blanc de Blancs tasting, by appointment", "note": "Same Grand Cru village as Salon and Clos du Mesnil"},
+        {"day": 1, "name": "Champagne Launois Père & Fils", "town": "Le Mesnil-sur-Oger", "visit": "Cellar visit with Champagne press museum + tasting", "note": "Remarkable collection of antique presses and tools"},
+        {"day": 1, "name": "Champagne Veuve Fourny & Fils", "town": "Vertus", "visit": "Vineyard, cellar and Premier Cru tasting, by appointment", "note": "Active family domaine since 1856 at the southern tip of the côte"}
+      ]
+    }
+  ],
+  "Alsace": [
+    {
+      "name": "Route des Vins: Colmar to Riquewihr",
+      "days": 2,
+      "basedIn": "Colmar",
+      "bestSeason": "May-Jun, Sep",
+      "summary": "Two days winding through the prettiest villages of the Alsace Wine Route, mixing welcoming walk-in tasting rooms with appointment-only biodynamic domaines among half-timbered houses and Grand Cru hillsides.",
+      "driving": "~50 km total",
+      "stops": [
+        {"day": 1, "name": "Domaine Emile Beyer", "town": "Eguisheim", "visit": "Tasting room in a 16th-century house on the central square", "note": "Family estate since 1580 in one of France's loveliest villages"},
+        {"day": 1, "name": "Maison Léon Beyer", "town": "Eguisheim", "visit": "Tasting room for the famously dry Rieslings and Gewurztraminers", "note": "Historic Eguisheim négociant-vigneron"},
+        {"day": 2, "name": "Maison Hugel (Hugel & Fils)", "town": "Riquewihr", "visit": "Walk-in tasting, no booking needed", "note": "Established 1639; centre of the walled village"},
+        {"day": 2, "name": "Domaine Bott-Geyl", "town": "Beblenheim", "visit": "Free tasting for private visitors; tours by reservation", "note": "Organic/biodynamic estate with six Grands Crus"},
+        {"day": 2, "name": "Maison Trimbach", "town": "Ribeauvillé", "visit": "Tasting room for the legendary Clos Ste-Hune Riesling", "note": "Benchmark Alsace house, trading since 1626"}
+      ]
+    }
+  ]
+}

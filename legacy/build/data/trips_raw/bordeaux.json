@@ -1,0 +1,50 @@
+{
+  "Bordeaux": [
+    {
+      "name": "Médoc Grand Cru Left-Bank Route",
+      "days": 2,
+      "basedIn": "Pauillac",
+      "bestSeason": "May-Jun, Sep-Oct",
+      "summary": "A classic Cabernet Sauvignon pilgrimage up the D2 'Route des Châteaux', from the elegant gravel terroirs of Margaux to the powerhouse First and Second Growths of Pauillac and Saint-Estèphe.",
+      "driving": "~70 km total",
+      "stops": [
+        {"day": 1, "name": "Château Prieuré-Lichine", "town": "Margaux-Cantenac", "visit": "Mon-Sat, guided tours & tastings", "note": "Welcoming 4th Growth, e-bike vineyard tours"},
+        {"day": 1, "name": "Château Marquis de Terme", "town": "Margaux-Cantenac", "visit": "Tours & tastings by booking", "note": "Intimate 4th Growth with food-pairing experiences"},
+        {"day": 2, "name": "Château Lynch-Bages", "town": "Pauillac", "visit": "Mon-Sat, shop, cellars & tastings", "note": "Visitor-friendly 5th Growth beside Bages village"},
+        {"day": 2, "name": "Château Pichon Baron", "town": "Pauillac", "visit": "Private tours year-round by reservation", "note": "Fairytale moated Second Growth château"},
+        {"day": 2, "name": "Château Mouton Rothschild", "town": "Pauillac", "visit": "By appointment (book well ahead), Mon-Fri", "note": "First Growth with the Museum of Wine in Art"},
+        {"day": 2, "name": "Château Cos d'Estournel", "town": "Saint-Estèphe", "visit": "Tours & tastings by appointment", "note": "Exotic pagoda-topped Second Growth on the Pauillac border"}
+      ]
+    },
+    {
+      "name": "Saint-Émilion & Pomerol Right-Bank Route",
+      "days": 2,
+      "basedIn": "Saint-Émilion",
+      "bestSeason": "Jun, Sep-Oct",
+      "summary": "A Merlot-led tour of the UNESCO-listed limestone plateau and its hidden Pomerol neighbour, mixing village cellars, hilltop estates and a Jean Nouvel rooftop terrace.",
+      "driving": "~40 km total",
+      "stops": [
+        {"day": 1, "name": "Château Guadet", "town": "Saint-Émilion", "visit": "Family-run tours & tastings by booking", "note": "Organic estate with cellars beneath the medieval village"},
+        {"day": 1, "name": "Château Franc Mayne", "town": "Saint-Émilion", "visit": "Daily tours, underground quarry galleries", "note": "Grand Cru Classé with dramatic limestone caves"},
+        {"day": 1, "name": "Château Troplong Mondot", "town": "Saint-Émilion", "visit": "Private tours by appointment", "note": "Premier Grand Cru Classé atop the plateau's highest point"},
+        {"day": 2, "name": "Château La Dominique", "town": "Saint-Émilion", "visit": "Tours, tastings & rooftop restaurant", "note": "Jean Nouvel red-glass cellar overlooking Pomerol"},
+        {"day": 2, "name": "Château Beauregard", "town": "Pomerol", "visit": "Private tours & tastings by appointment", "note": "Rare Pomerol estate that genuinely welcomes visitors"}
+      ]
+    },
+    {
+      "name": "Graves & Sauternes Southern Route",
+      "days": 2,
+      "basedIn": "Léognan",
+      "bestSeason": "May-Jun, Sep-Oct",
+      "summary": "Bordeaux's historic southern heartland: red-and-white Grand Crus of Pessac-Léognan one day, then the golden botrytised sweet wines of Sauternes the next.",
+      "driving": "~90 km total",
+      "stops": [
+        {"day": 1, "name": "Château Pape Clément", "town": "Pessac", "visit": "Tours & tastings daily by booking", "note": "Seven centuries of history in Bordeaux's suburbs"},
+        {"day": 1, "name": "Château Carbonnieux", "town": "Léognan", "visit": "Tours & tastings by appointment", "note": "Monastic estate renowned for crisp white Graves"},
+        {"day": 1, "name": "Château Smith Haut Lafitte", "town": "Martillac", "visit": "Tours, art forest, spa & restaurant", "note": "Organic Grand Cru Classé with the Caudalie vinothérapie spa"},
+        {"day": 2, "name": "Château Latour-Martillac", "town": "Martillac", "visit": "Tours & tastings by booking", "note": "Family-run Grand Cru Classé for reds and whites"},
+        {"day": 2, "name": "Château Guiraud", "town": "Sauternes", "visit": "Open daily 10-18h, with or without booking", "note": "Organic Premier Cru Classé with Michelin-starred restaurant"}
+      ]
+    }
+  ]
+}

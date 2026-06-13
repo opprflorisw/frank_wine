@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wine Trips — Frank's Wine Almanac</title>
+<link rel="stylesheet" href="assets/app.css">
+<style>
+  .tlayout{display:grid;grid-template-columns:360px 1fr;gap:22px;align-items:start}
+  .tlist{display:flex;flex-direction:column;gap:11px;position:sticky;top:76px;max-height:calc(100vh - 96px);overflow-y:auto;padding-right:4px}
+  .tcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px;cursor:pointer;transition:.14s;border-left-width:5px}
+  .tcard:hover{box-shadow:0 3px 14px var(--shadow);border-color:var(--gold)}
+  .tcard.active{box-shadow:0 3px 16px var(--shadow);background:#fff}
+  .tcard .rg{font-family:var(--sans);font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-soft)}
+  .tcard h3{margin:2px 0 5px;font-size:17px}
+  .tcard .meta{font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);display:flex;gap:10px;flex-wrap:wrap}
+  .tdetail{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 1px 12px var(--shadow)}
+  .tdhead{padding:20px 24px;border-bottom:1px solid var(--line);position:relative}
+  .tdhead .rg{font-family:var(--sans);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-soft)}
+  .tdhead h2{margin:4px 0 8px;font-size:26px}
+  .tdhead .meta{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);display:flex;gap:8px;flex-wrap:wrap}
+  .tdhead .meta b{color:var(--ink)}
+  .tdhead p{margin:11px 0 0;font-size:14px;color:var(--ink-soft);line-height:1.55;max-width:640px}
+  .tmap{background:linear-gradient(160deg,#f0eadc,#e9dfca);border-bottom:1px solid var(--line)}
+  .tmap svg{width:100%;height:300px;display:block}
+  .titin{padding:8px 24px 22px}
+  .dayh{font-family:var(--sans);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin:18px 0 4px;display:flex;align-items:center;gap:8px}
+  .stop{display:flex;gap:13px;padding:12px 0;border-bottom:1px solid var(--line-soft)}
+  .stop:last-child{border-bottom:none}
+  .stopn{flex:none;width:28px;height:28px;border-radius:50%;color:#fff;font-family:var(--sans);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .stop .snm{font-size:15.5px;font-weight:600}
+  .stop .svisit{font-family:var(--sans);font-size:11.5px;color:var(--wine-2);font-style:italic;margin-top:1px}
+  .stop .snote{font-size:13px;color:var(--ink-soft);margin-top:3px;line-height:1.45}
+  .visittag{font-family:var(--sans);font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:2px 7px;border-radius:10px;margin-left:7px;vertical-align:middle}
+  .v-walk{background:#3f6b46;color:#fff}.v-appt{background:#b8893b;color:#fff}.v-book{background:#7d7461;color:#fff}
+  .tdactions{padding:14px 24px;border-top:1px solid var(--line);display:flex;gap:9px;flex-wrap:wrap}
+  .caveat{font-family:var(--sans);font-size:12px;color:var(--ink-soft);background:#f3ebda;border:1px solid var(--line);border-radius:9px;padding:9px 13px;margin-bottom:16px;display:flex;gap:9px;align-items:flex-start}
+  @media(max-width:900px){.tlayout{grid-template-columns:1fr}.tlist{position:static;max-height:none;flex-direction:row;overflow-x:auto}.tcard{min-width:260px}}
+</style>
+</head>
+<body>
+<div id="nav"></div>
+<div class="page">
+  <div class="page-head">
+    <div class="kicker">The Almanac</div>
+    <h1>Wine Trips</h1>
+    <p class="lede">Curated tasting road-trips through France's great regions — built only from estates and cellars that genuinely welcome visitors. Pick one, follow the route, and export it to take on the road.</p>
+  </div>
+  <div class="caveat ui" id="caveat"></div>
+  <div class="toolbar ui">
+    <label>Region</label><select class="sel" id="region"></select>
+    <span class="muted ui" style="font-size:12px" id="tripcount"></span>
+  </div>
+  <div class="tlayout">
+    <div class="tlist" id="tlist"></div>
+    <div class="tdetail" id="tdetail"></div>
+  </div>
+</div>
+<script src="assets/almanac-data.js"></script>
+<script src="assets/almanac.js"></script>
+<script>
+AL.renderNav('trips.html');
+document.getElementById('caveat').innerHTML=AL.icon('star',15)+'<div>Every stop here is a producer that receives visitors (walk-in tasting room, scheduled tours, or by appointment) — the legendary appointment-only or closed estates are deliberately left out. Opening times change seasonally; <b>always confirm and book ahead</b> before you travel.</div>';
+
+// flatten trips
+const TRIPS=[];
+AL.regionsArr().forEach(r=>(r.trips||[]).forEach((t,i)=>TRIPS.push({...t,regionId:r.id,region:r.name,idx:i})));
+let region='all', current=0;
+const regionSel=document.getElementById('region');
+const withTrips=AL.regionsArr().filter(r=>(r.trips||[]).length);
+regionSel.innerHTML='<option value="all">All regions</option>'+withTrips.map(r=>`<option value="${r.id}">${AL.esc(r.name)}</option>`).join('');
+
+function visitClass(v){const s=v.toLowerCase();if(s.includes('appointment'))return['v-appt','By appt'];if(s.includes('walk-in')||s.includes('no booking')||s.includes('daily')||s.includes('open'))return['v-walk','Walk-in'];return['v-book','Booking'];}
+function list(){
+  const items=TRIPS.filter(t=>region==='all'||t.regionId===region);
+  document.getElementById('tripcount').textContent=`${items.length} trips`;
+  document.getElementById('tlist').innerHTML=items.map((t,i)=>`
+    <div class="tcard ${i===current?'active':''}" style="border-left-color:${AL.COLORS[t.regionId]}" onclick="sel(${i})">
+      <div class="rg">${AL.esc(t.region)}</div>
+      <h3>${AL.esc(t.name)}</h3>
+      <div class="meta"><span>${AL.icon('cal',13)} ${t.days} day${t.days>1?'s':''}</span><span>${AL.icon('pin',13)} ${t.stops.length} stops</span><span>${AL.esc(t.driving)}</span></div>
+    </div>`).join('');
+  return items;
+}
+function miniMap(t){
+  const r=AL.data.regions[t.regionId], col=AL.COLORS[t.regionId];
+  const bb=t.bbox, pad=Math.max(bb[2],bb[3])*0.25||30, S=Math.max(bb[2],bb[3])||60;
+  const vb=`${bb[0]-pad} ${bb[1]-pad} ${bb[2]+2*pad} ${bb[3]+2*pad}`;
+  const route=t.route&&t.route.length>1?`<path d="M${t.route.map(p=>p.join(',')).join('L')}" fill="none" stroke="${col}" stroke-width="${S/120}" stroke-linecap="round" stroke-dasharray="${S/55} ${S/85}"/>`:'';
+  const seen={};
+  const marks=t.stops.map((s,i)=>{if(s.x==null)return'';const k=s.x+','+s.y;const o=(seen[k]=(seen[k]||0)+1)-1;const ox=o*S/30;
+    return `<g><circle cx="${s.x+ox}" cy="${s.y}" r="${S/40}" fill="${col}" stroke="#fff" stroke-width="${S/220}"/><text x="${s.x+ox}" y="${s.y+S/85}" font-size="${S/50}" fill="#fff" text-anchor="middle" font-family="sans-serif" font-weight="700">${i+1}</text></g>`;}).join('');
+  return `<svg viewBox="${vb}" preserveAspectRatio="xMidYMid meet"><path d="${r.geo.path}" fill="${col}" fill-opacity="0.13" stroke="${col}" stroke-opacity="0.45" stroke-width="${S/240}"/>${route}${marks}</svg>`;
+}
+function detail(t){
+  const col=AL.COLORS[t.regionId];
+  const days=[...new Set(t.stops.map(s=>s.day))].sort();
+  const itin=days.map(d=>`<div class="dayh">${AL.icon('cal',13)} Day ${d}</div>`+
+    t.stops.map((s,i)=>({s,i})).filter(o=>o.s.day===d).map(o=>{const vc=visitClass(o.s.visit);
+      return `<div class="stop"><div class="stopn" style="background:${col}">${o.i+1}</div>
+        <div><div class="snm">${AL.esc(o.s.name)}<span class="visittag ${vc[0]}">${vc[1]}</span></div>
+        <div class="svisit">${AL.esc(o.s.town)} — ${AL.esc(o.s.visit)}</div>
+        ${o.s.note?`<div class="snote">${AL.esc(o.s.note)}</div>`:''}</div></div>`;}).join('')).join('');
+  document.getElementById('tdetail').innerHTML=`
+    <div class="tdhead"><div class="rg">${AL.esc(t.region)} · Wine trip</div>
+      <h2 style="color:${col}">${AL.esc(t.name)}</h2>
+      <div class="meta"><span>${AL.icon('cal',13)} <b>${t.days}</b> days</span><span>${AL.icon('house',13)} based in <b>${AL.esc(t.basedIn)}</b></span><span>${AL.icon('star',13)} best <b>${AL.esc(t.bestSeason)}</b></span><span>${AL.icon('route',13)} ${AL.esc(t.driving)}</span></div>
+      <p>${AL.esc(t.summary)}</p>
+    </div>
+    <div class="tmap">${miniMap(t)}</div>
+    <div class="titin">${itin}</div>
+    <div class="tdactions">
+      <button class="btn primary" onclick="AL.snapshotTrip('${t.regionId}',${t.idx})">${AL.icon('download',14)} Export this trip</button>
+      <a class="btn" href="index.html?region=${t.regionId}">${AL.icon('map',14)} See region map</a>
+      <a class="btn" href="houses.html?region=${t.regionId}">${AL.icon('bottle',14)} Region's houses</a>
+    </div>`;
+}
+window.sel=i=>{const items=list();current=i;detail(items[i]);window.scrollTo({top:0,behavior:'smooth'});};
+regionSel.onchange=e=>{region=e.target.value;current=0;const items=list();if(items.length)detail(items[0]);else document.getElementById('tdetail').innerHTML='<div class="empty">No trips for this region yet.</div>';};
+// init + deep link
+const params=new URLSearchParams(location.search);
+if(params.get('region')&&AL.data.regions[params.get('region')]){region=params.get('region');regionSel.value=region;}
+const items=list(); if(items.length) detail(items[0]);
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grapes — Frank's Wine Almanac</title>
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+<div id="nav"></div>
+<div class="page">
+  <div class="page-head">
+    <div class="kicker">The Almanac</div>
+    <h1>Grape Varieties</h1>
+    <p class="lede">Every grape worked by the houses in this atlas — where it grows and who champions it. Click a grape to see its producers.</p>
+  </div>
+  <div class="toolbar ui">
+    <div class="field grow"><span class="mag">&#x1F50D;</span><input class="search" id="q" placeholder="Search grapes…" autocomplete="off"></div>
+    <label>Colour</label>
+    <div class="chips" id="colourchips">
+      <button class="chip on" data-c="all">All</button>
+      <button class="chip" data-c="Red grape"><span class="dot" style="background:#7b2d3b"></span>Red</button>
+      <button class="chip" data-c="White grape"><span class="dot" style="background:#cda84e"></span>White</button>
+    </div>
+  </div>
+  <div class="resultcount ui" id="rc"></div>
+  <div class="tablewrap">
+    <table class="data"><thead id="thead"></thead><tbody id="tbody"></tbody></table>
+  </div>
+</div>
+<script src="assets/almanac-data.js"></script>
+<script src="assets/almanac.js"></script>
+<script>
+AL.renderNav('grapes.html');
+const houses=AL.houses();
+// build grape index
+const map={};
+for(const id in AL.data.regions){const r=AL.data.regions[id];
+  (r.grapes||[]).forEach(g=>{map[g]=map[g]||{name:g,regions:new Set(),houses:0,examples:[]};map[g].regions.add(r.name);});
+}
+houses.forEach(h=>(h.grapes||[]).forEach(g=>{ if(map[g]){map[g].houses++; if(map[g].examples.length<3&&!map[g].examples.includes(h.name))map[g].examples.push(h.name);} }));
+let rows=Object.values(map).map(g=>({name:g.name,colour:AL.grapeColor(g.name),regions:[...g.regions],houses:g.houses,examples:g.examples}));
+
+const COLS=[
+  {k:'name',label:'Grape',get:g=>g.name},
+  {k:'colour',label:'Colour',get:g=>g.colour},
+  {k:'regions',label:'Regions',get:g=>g.regions.length,num:true},
+  {k:'houses',label:'Houses',get:g=>g.houses,num:true},
+  {k:'examples',label:'Notable producers',get:g=>g.examples.join(', ')},
+];
+let sortK='houses',sortDir=-1,q='',colour='all';
+const go=g=>location.href='houses.html?grape='+encodeURIComponent(g);
+function thead(){
+  document.getElementById('thead').innerHTML='<tr>'+COLS.map(c=>`<th data-k="${c.k}" class="${sortK===c.k?'sorted':''}">${c.label}<span class="ar">${sortK===c.k?(sortDir>0?'▲':'▼'):'⇅'}</span></th>`).join('')+'</tr>';
+  document.querySelectorAll('#thead th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(sortK===k)sortDir*=-1;else{sortK=k;sortDir=(k==='name'||k==='colour'||k==='examples')?1:-1;}render();});
+}
+function filtered(){
+  let r=rows.slice();
+  if(colour!=='all')r=r.filter(g=>g.colour===colour);
+  if(q){const n=AL.norm(q);r=r.filter(g=>AL.norm(g.name+' '+g.regions.join(' ')).includes(n));}
+  const col=COLS.find(c=>c.k===sortK);
+  r.sort((a,b)=>{const va=col.get(a),vb=col.get(b);return (typeof va==='number'?va-vb:String(va).localeCompare(String(vb)))*sortDir;});
+  return r;
+}
+function render(){
+  thead(); const r=filtered();
+  document.getElementById('rc').textContent=`${r.length} grape varieties`;
+  document.getElementById('tbody').innerHTML=r.map(g=>`
+    <tr onclick="go('${g.name.replace(/'/g,"\\'")}')">
+      <td>${AL.grapeDot(g.name)}<span class="cellname">${AL.esc(g.name)}</span></td>
+      <td class="muted">${g.colour}</td>
+      <td>${g.regions.slice(0,4).map(x=>`<span class="tag">${AL.esc(x)}</span>`).join('')}${g.regions.length>4?` <span class="muted">+${g.regions.length-4}</span>`:''}</td>
+      <td><span class="count-pill">${g.houses}</span></td>
+      <td class="cellsub">${AL.esc(g.examples.join(', '))}</td>
+    </tr>`).join('');
+}
+document.getElementById('q').oninput=e=>{q=e.target.value.trim();render();};
+document.querySelectorAll('#colourchips .chip').forEach(c=>c.onclick=()=>{colour=c.dataset.c;document.querySelectorAll('#colourchips .chip').forEach(x=>x.classList.toggle('on',x===c));render();});
+render();
+</script>
+</body>
+</html>

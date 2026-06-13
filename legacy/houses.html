@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wine Houses — Frank's Wine Almanac</title>
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+<div id="nav"></div>
+<div class="page">
+  <div class="page-head">
+    <div class="kicker">The Almanac</div>
+    <h1>Wine Houses &amp; Estates</h1>
+    <p class="lede">Every curated producer across France — filter by region, wine type or grape, and sort any column. Click a house to see it on the map within its region.</p>
+  </div>
+  <div class="toolbar ui">
+    <div class="field grow"><span class="mag">&#x1F50D;</span><input class="search" id="q" placeholder="Search houses, appellations, grapes, wines…" autocomplete="off"></div>
+    <label>Region</label><select class="sel" id="region"></select>
+    <label>Grape</label><select class="sel" id="grape"></select>
+  </div>
+  <div class="toolbar ui" style="top:112px">
+    <label>Wine type</label><div class="chips" id="typechips"></div>
+  </div>
+  <div class="resultcount ui" id="rc"></div>
+  <div class="tablewrap">
+    <table class="data"><thead id="thead"></thead><tbody id="tbody"></tbody></table>
+  </div>
+</div>
+<script src="assets/almanac-data.js"></script>
+<script src="assets/almanac.js"></script>
+<script>
+AL.renderNav('houses.html');
+const all=AL.houses();
+const COLS=[
+  {k:'name', label:'House', get:h=>h.name},
+  {k:'region', label:'Region', get:h=>h.region},
+  {k:'appellation', label:'Appellation', get:h=>h.appellation||''},
+  {k:'classification', label:'Class', get:h=>AL.prodTier(h)},
+  {k:'types', label:'Wines', get:h=>(h.types||[]).join(','), sort:h=>(h.types||[]).length},
+  {k:'grapes', label:'Grapes', get:h=>(h.grapes||[]).join(', ')},
+];
+let sortK='name', sortDir=1, q='', region='all', grape='all';
+const types=new Set();
+// populate selects
+const regionSel=document.getElementById('region');
+regionSel.innerHTML='<option value="all">All regions</option>'+AL.regionsArr().map(r=>`<option value="${r.id}">${AL.esc(r.name)}</option>`).join('');
+const grapeSet=[...new Set(all.flatMap(h=>h.grapes||[]))].sort();
+document.getElementById('grape').innerHTML='<option value="all">All grapes</option>'+grapeSet.map(g=>`<option value="${AL.esc(g)}">${AL.esc(g)}</option>`).join('');
+const tc=document.getElementById('typechips');
+tc.innerHTML=['all',...AL.TYPE_ORDER].map(t=>`<button class="chip ${t==='all'?'on':''}" data-t="${t}">${t==='all'?'All':AL.typeDot(t)+t}</button>`).join('');
+let typeF='all';
+tc.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{typeF=c.dataset.t; tc.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===c)); render();});
+
+const go=h=>location.href=`index.html?region=${h.regionId}&house=${encodeURIComponent(h.name)}`;
+function thead(){
+  document.getElementById('thead').innerHTML='<tr>'+COLS.map(c=>
+    `<th data-k="${c.k}" class="${sortK===c.k?'sorted':''}">${c.label}<span class="ar">${sortK===c.k?(sortDir>0?'▲':'▼'):'⇅'}</span></th>`).join('')+'</tr>';
+  document.querySelectorAll('#thead th').forEach(th=>th.onclick=()=>{const k=th.dataset.k; if(sortK===k)sortDir*=-1; else{sortK=k;sortDir=1;} render();});
+}
+function filtered(){
+  let r=all.slice();
+  if(region!=='all') r=r.filter(h=>h.regionId===region);
+  if(grape!=='all') r=r.filter(h=>(h.grapes||[]).includes(grape));
+  if(typeF!=='all') r=r.filter(h=>(h.types||[]).includes(typeF));
+  if(q){const n=AL.norm(q); r=r.filter(h=>AL.norm([h.name,h.appellation,h.region,(h.grapes||[]).join(' '),h.flagship,h.note].join(' ')).includes(n));}
+  const col=COLS.find(c=>c.k===sortK);
+  r.sort((a,b)=>{const va=col.sort?col.sort(a):col.get(a), vb=col.sort?col.sort(b):col.get(b);
+    return (typeof va==='number'?va-vb:String(va).localeCompare(String(vb)))*sortDir;});
+  return r;
+}
+function render(){
+  thead();
+  const r=filtered();
+  document.getElementById('rc').textContent=`${r.length} house${r.length!==1?'s':''}`;
+  document.getElementById('tbody').innerHTML=r.map(h=>{
+    const b=AL.classBadge(h.classification);
+    return `<tr onclick='go(${JSON.stringify({regionId:h.regionId,name:h.name})})'>
+      <td><div class="cellname">${AL.esc(h.name)}</div>${h.flagship?`<div class="cellsub muted">${AL.esc(h.flagship)}</div>`:''}</td>
+      <td><span class="swatch" style="background:${AL.COLORS[h.regionId]}"></span>${AL.esc(h.region)}</td>
+      <td>${AL.esc(h.appellation||'')}</td>
+      <td>${b?`<span class="badge ${b[0]}">${AL.esc(b[1])}</span>`:'<span class="muted">—</span>'}</td>
+      <td>${(h.types||[]).map(t=>AL.typeBadge(t)).join(' ')}</td>
+      <td>${(h.grapes||[]).map(g=>`<span class="tag">${AL.esc(g)}</span>`).join('')}</td>
+    </tr>`;}).join('');
+}
+document.getElementById('q').oninput=e=>{q=e.target.value.trim();render();};
+regionSel.onchange=e=>{region=e.target.value;render();};
+document.getElementById('grape').onchange=e=>{grape=e.target.value;render();};
+// deep-link ?region=
+const params=new URLSearchParams(location.search);
+if(params.get('region')&&AL.data.regions[params.get('region')]){region=params.get('region');regionSel.value=region;}
+if(params.get('grape')&&grapeSet.includes(params.get('grape'))){grape=params.get('grape');document.getElementById('grape').value=grape;}
+render();
+</script>
+</body>
+</html>

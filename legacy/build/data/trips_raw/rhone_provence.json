@@ -1,0 +1,62 @@
+{
+  "Vallée du Rhône": [
+    {
+      "name": "Northern Rhône Syrah & Viognier",
+      "days": 2,
+      "basedIn": "Tain-l'Hermitage",
+      "bestSeason": "May-Jun, Sep",
+      "summary": "Granite-hill Syrah from Hermitage plus Côte-Rôtie and Condrieu Viognier, walking the famous slopes between tastings. Big-name houses with proper tasting rooms, two estates by appointment.",
+      "driving": "~110 km total",
+      "stops": [
+        {"day": 1, "name": "Cave de Tain", "town": "Tain-l'Hermitage", "visit": "Free walk-in boutique tasting facing the Hermitage hill", "note": "Top co-op, great value"},
+        {"day": 1, "name": "Maison M. Chapoutier", "town": "Tain-l'Hermitage", "visit": "Tasting room and bookable vineyard tours with sommelier", "note": "Biodynamic flagship"},
+        {"day": 1, "name": "Vineum Paul Jaboulet Aîné", "town": "Tain-l'Hermitage", "visit": "Wine bar and cellar tasting, La Chapelle verticals", "note": "Closed Mon-Tue"},
+        {"day": 2, "name": "E. Guigal – Caveau du Château", "town": "Ampuis", "visit": "Cellar tour and tasting at Château d'Ampuis", "note": "Book ahead"},
+        {"day": 2, "name": "Domaine Georges Vernay", "town": "Condrieu", "visit": "Benchmark Condrieu Viognier tasting", "note": "By appointment only"}
+      ]
+    },
+    {
+      "name": "Châteauneuf-du-Pape & Gigondas Grenache",
+      "days": 2,
+      "basedIn": "Châteauneuf-du-Pape",
+      "bestSeason": "May-Jun, Sep",
+      "summary": "Galets-pebble Grenache blends in the papal village, then the Dentelles de Montmirail for Gigondas. Mix of walk-in village caveaux and prestige estates by appointment.",
+      "driving": "~80 km total",
+      "stops": [
+        {"day": 1, "name": "Château Mont-Redon", "town": "Châteauneuf-du-Pape", "visit": "Caveau tasting, optional cellar visit with plateau views", "note": "No appointment for tasting"},
+        {"day": 1, "name": "La Cave Famille Perrin (Beaucastel)", "town": "Châteauneuf-du-Pape", "visit": "Village shop tasting of 5 wines daily", "note": "Walk-in, Place du Portail"},
+        {"day": 1, "name": "Domaine du Vieux Télégraphe", "town": "Bédarrides", "visit": "La Crau estate tasting on the high plateau", "note": "By appointment"},
+        {"day": 2, "name": "Château de Beaucastel", "town": "Courthézon", "visit": "Biodynamic estate tour, all 13 varieties", "note": "By appointment, book 2-3 weeks ahead"},
+        {"day": 2, "name": "Caveau du Gigondas", "town": "Gigondas", "visit": "Appellation tasting room, 100+ Gigondas at cellar prices", "note": "Walk-in, year-round"}
+      ]
+    }
+  ],
+  "Provence": [
+    {
+      "name": "Bandol Mourvèdre & Cassis Whites",
+      "days": 2,
+      "basedIn": "Bandol",
+      "bestSeason": "May-Jun, Sep",
+      "summary": "Age-worthy Mourvèdre reds and serious rosé on Bandol's sea-facing terraces, then crisp coastal whites in the cliffside amphitheatre of Cassis. Two Bandol icons plus a Calanques estate.",
+      "driving": "~90 km total",
+      "stops": [
+        {"day": 1, "name": "Domaine Tempier", "town": "Le Castellet", "visit": "Tour and tasting of legendary Bandol reds with charcuterie", "note": "Call for appointment"},
+        {"day": 1, "name": "Château de Pibarnon", "town": "La Cadière-d'Azur", "visit": "Hilltop tasting room with panoramic vineyard views", "note": "Reservation required, free for up to 8"},
+        {"day": 2, "name": "Clos Sainte Magdeleine", "town": "Cassis", "visit": "Seaside-terroir Cassis white tasting and sales", "note": "Small estate by the Calanques"}
+      ]
+    },
+    {
+      "name": "Côtes de Provence Rosé Trail",
+      "days": 2,
+      "basedIn": "Vidauban",
+      "bestSeason": "May-Jun, Sep",
+      "summary": "The world's most famous Provence rosés, from Gassin near Saint-Tropez to the inland Var estates. Polished tasting rooms welcoming walk-ins and booked visits.",
+      "driving": "~120 km total",
+      "stops": [
+        {"day": 1, "name": "Château Minuty", "town": "Gassin", "visit": "Modern tasting room, full white/rosé/red range", "note": "Walk-in, L'essentiel tasting"},
+        {"day": 2, "name": "Château d'Esclans", "town": "La Motte", "visit": "Discovery or Prestige visit, home of Whispering Angel and Garrus", "note": "Book the guided visit"},
+        {"day": 2, "name": "Domaines Ott – Château de Selle", "town": "Taradeau", "visit": "Tasting in contemporary cellar of the iconic skittle bottle", "note": "Dedicated tasting space"}
+      ]
+    }
+  ]
+}

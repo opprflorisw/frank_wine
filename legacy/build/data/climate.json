@@ -1,0 +1,93 @@
+{
+  "Bordeaux": {
+    "profile": "An Atlantic-facing region on the Gironde estuary in southwest France, split by rivers into Left Bank, Right Bank and Entre-Deux-Mers. Its maritime climate is moderated by the ocean and the protective Landes pine forest, giving warm, humid summers ideal for ripening Cabernet and Merlot.",
+    "climate": {"climateType": "oceanic", "latitude": "45°N", "soils": "gravel, limestone-clay, sand", "growingSeason": "warm, humid; long ripening", "rainfall": "~900mm, autumn rain a risk", "vintageConsistency": "Variable — vintage matters greatly"},
+    "terroirScore": 9.3,
+    "visit": {"bestMonths": "May-Jun, Sep-Oct", "scenery": "grand châteaux, gentle vineyards, estuary", "accessibility": "Bordeaux airport + TGV (~2h from Paris)", "visitableDensity": "High", "baseTown": "Bordeaux (or Saint-Émilion)"},
+    "visitScore": 8.7
+  },
+  "Sud-Ouest": {
+    "profile": "A patchwork of inland appellations (Cahors, Madiran, Gaillac, Jurançon) stretching from the Dordogne to the Pyrenean foothills. Climate shifts from oceanic-influenced near Bergerac to warmer, more continental and increasingly mountain-tempered toward the south.",
+    "climate": {"climateType": "oceanic", "latitude": "44°N", "soils": "limestone, clay-limestone, gravel terraces", "growingSeason": "warm, sunny; autumn foehn winds", "rainfall": "moderate, ~800mm", "vintageConsistency": "Medium — fairly reliable ripening"},
+    "terroirScore": 7.4,
+    "visit": {"bestMonths": "May-Jun, Sep-Oct", "scenery": "rolling hills, bastide towns, Pyrenees backdrop", "accessibility": "Toulouse/Bergerac airports; TGV to Agen", "visitableDensity": "Medium", "baseTown": "Cahors (or Bergerac)"},
+    "visitScore": 6.8
+  },
+  "Bourgogne": {
+    "profile": "A narrow north-south limestone escarpment in east-central France running from Chablis through the Côte d'Or to the Mâconnais. Its semi-continental climate with cold winters and warm summers, combined with finely parcelled limestone-marl slopes, produces the world's benchmark Pinot Noir and Chardonnay.",
+    "climate": {"climateType": "semi-continental", "latitude": "47°N", "soils": "limestone, marl, clay-limestone", "growingSeason": "cool-to-warm; frost-prone spring", "rainfall": "~700mm, fairly even", "vintageConsistency": "Variable — marginal climate, vintage-sensitive"},
+    "terroirScore": 9.7,
+    "visit": {"bestMonths": "May-Jun, Sep-Oct", "scenery": "iconic walled clos, golden slopes, charming villages", "accessibility": "TGV to Dijon/Beaune; Lyon/Geneva airports", "visitableDensity": "High", "baseTown": "Beaune"},
+    "visitScore": 9.2
+  },
+  "Beaujolais": {
+    "profile": "A hilly granite region just south of Mâcon and north of Lyon, dominated by the Gamay grape. A semi-continental climate with warm summers and granitic, schist and clay-limestone soils gives the ten crus their structure and the wider region its juicy, fruit-forward style.",
+    "climate": {"climateType": "semi-continental", "latitude": "46°N", "soils": "granite, schist, clay-limestone", "growingSeason": "warm, sunny summers", "rainfall": "~750mm", "vintageConsistency": "Medium — generally ripens reliably"},
+    "terroirScore": 7.6,
+    "visit": {"bestMonths": "May-Jun, Sep-Oct", "scenery": "golden-stone villages, rolling granite hills (Pierres Dorées)", "accessibility": "Lyon airport + TGV (~30min)", "visitableDensity": "Medium", "baseTown": "Villefranche-sur-Saône (or Fleurie)"},
+    "visitScore": 7.4
+  },
+  "Champagne": {
+    "profile": "France's northernmost major region, around Reims and Épernay, at the cool climatic limit of viticulture. Its cold semi-continental climate and chalk-dominated subsoils preserve the high acidity essential for world-class traditional-method sparkling wine.",
+    "climate": {"climateType": "semi-continental", "latitude": "49°N", "soils": "chalk, limestone, marl", "growingSeason": "cool, marginal; frost risk", "rainfall": "~700mm", "vintageConsistency": "Variable — blending/reserves smooth vintages"},
+    "terroirScore": 9.2,
+    "visit": {"bestMonths": "May-Jun, Sep (harvest)", "scenery": "chalk cellars, grand maisons, Montagne de Reims slopes", "accessibility": "TGV to Reims (~45min from Paris); Paris airports", "visitableDensity": "High", "baseTown": "Reims (or Épernay)"},
+    "visitScore": 9.0
+  },
+  "Vallée du Rhône": {
+    "profile": "A long river corridor from Vienne to Avignon, sharply divided into the steep continental Northern Rhône and the broad, Mediterranean Southern Rhône. Syrah dominates the granite terraces of the north while Grenache-led blends thrive on the warm, stony soils of the south.",
+    "climate": {"climateType": "mediterranean", "latitude": "44°N", "soils": "granite (north), galets/clay-limestone (south)", "growingSeason": "warm to hot; Mistral wind", "rainfall": "~700mm, drier south", "vintageConsistency": "Medium — south more reliable than north"},
+    "terroirScore": 9.0,
+    "visit": {"bestMonths": "May-Jun, Sep-Oct", "scenery": "steep terraced cliffs (north), galet vineyards & Mont Ventoux (south)", "accessibility": "TGV to Valence/Avignon; Lyon/Marseille airports", "visitableDensity": "High", "baseTown": "Avignon (or Tain-l'Hermitage)"},
+    "visitScore": 8.3
+  },
+  "Vallée de la Loire": {
+    "profile": "France's longest wine region, following the Loire river from the Atlantic coast at Nantes inland to Sancerre. Climate grades from cool oceanic in the west to semi-continental in the east, producing diverse styles across limestone (tuffeau), flint and schist soils.",
+    "climate": {"climateType": "oceanic", "latitude": "47°N", "soils": "tuffeau limestone, flint (silex), schist, clay", "growingSeason": "cool to moderate; eastern frost risk", "rainfall": "~700mm", "vintageConsistency": "Variable — cool-climate vintage swings"},
+    "terroirScore": 8.2,
+    "visit": {"bestMonths": "May-Jun, Sep-Oct", "scenery": "Renaissance châteaux, river valleys, troglodyte cellars", "accessibility": "TGV to Tours/Angers/Nantes (~1-2h Paris)", "visitableDensity": "High", "baseTown": "Tours (or Saumur)"},
+    "visitScore": 8.4
+  },
+  "Alsace": {
+    "profile": "A narrow strip on the eastern flank of the Vosges mountains along the Rhine, bordering Germany. The Vosges rain shadow makes it one of France's driest, sunniest regions, with a complex mosaic of soils ideal for aromatic Riesling, Gewurztraminer and Pinot Gris.",
+    "climate": {"climateType": "semi-continental", "latitude": "48°N", "soils": "granite, limestone, schist, marl (very varied)", "growingSeason": "warm, sunny, dry (rain shadow)", "rainfall": "low, ~500-600mm", "vintageConsistency": "Medium — dry climate aids consistency"},
+    "terroirScore": 8.5,
+    "visit": {"bestMonths": "May-Jun, Sep-Oct (+Dec markets)", "scenery": "half-timbered villages, Vosges foothills, Route des Vins", "accessibility": "TGV to Colmar/Strasbourg; Basel-Mulhouse airport", "visitableDensity": "High", "baseTown": "Colmar"},
+    "visitScore": 9.3
+  },
+  "Languedoc-Roussillon": {
+    "profile": "France's largest vineyard, sweeping along the Mediterranean arc from Nîmes to the Spanish border. A hot, dry Mediterranean climate with relentless sunshine and varied schist, limestone and galet soils underpins robust Grenache-Syrah-Mourvèdre reds and fortified Roussillon wines.",
+    "climate": {"climateType": "mediterranean", "latitude": "43°N", "soils": "schist, limestone, clay-limestone, galets", "growingSeason": "hot, sunny, dry; Tramontane wind", "rainfall": "low, ~500-600mm; drought risk", "vintageConsistency": "High — reliably warm and dry"},
+    "terroirScore": 7.8,
+    "visit": {"bestMonths": "May-Jun, Sep-Oct", "scenery": "garrigue hills, coast, Cathar castles, Pyrenees (Roussillon)", "accessibility": "Montpellier/Béziers/Perpignan airports; TGV", "visitableDensity": "Medium", "baseTown": "Montpellier (or Perpignan)"},
+    "visitScore": 7.3
+  },
+  "Provence": {
+    "profile": "A sun-drenched region between the Rhône delta and the Côte d'Azur, the world's reference for dry rosé. A classic Mediterranean climate with abundant sunshine, the cooling Mistral and limestone-schist soils suits Grenache, Cinsault and Mourvèdre, with Bandol a serious red enclave.",
+    "climate": {"climateType": "mediterranean", "latitude": "43°N", "soils": "limestone, schist, clay-limestone", "growingSeason": "hot, sunny, dry; Mistral", "rainfall": "low, ~600mm", "vintageConsistency": "High — consistently warm"},
+    "terroirScore": 7.5,
+    "visit": {"bestMonths": "May-Jun, Sep-Oct", "scenery": "lavender, hilltop villages, coast, Sainte-Victoire", "accessibility": "Marseille/Nice/Toulon airports; TGV to Aix", "visitableDensity": "High", "baseTown": "Aix-en-Provence"},
+    "visitScore": 8.5
+  },
+  "Jura": {
+    "profile": "A small region tucked between Burgundy and the Swiss border on the foothills of the Jura mountains. Its cold semi-continental climate and distinctive blue-grey marl and limestone soils yield singular wines, above all the oxidative Vin Jaune and Chardonnay/Savagnin/Poulsard.",
+    "climate": {"climateType": "semi-continental", "latitude": "47°N", "soils": "marl, limestone, lias clay", "growingSeason": "cool; cold winters, dry warm autumns", "rainfall": "~1000mm, fairly high", "vintageConsistency": "Variable — frost and cool vintages"},
+    "terroirScore": 7.7,
+    "visit": {"bestMonths": "May-Jun, Sep-Oct", "scenery": "forested foothills, vineyards, Château-Chalon hilltop", "accessibility": "TGV to Dijon/Mouchard; Geneva/Lyon airports", "visitableDensity": "Medium", "baseTown": "Arbois"},
+    "visitScore": 7.0
+  },
+  "Savoie": {
+    "profile": "An alpine region scattered across the slopes and lake shores of the French Alps near Chambéry and Lake Geneva. A cool alpine-continental climate moderated by lakes and steep limestone scree slopes gives fresh, light wines from local grapes like Jacquère, Altesse and Mondeuse.",
+    "climate": {"climateType": "alpine/continental", "latitude": "45.5°N", "soils": "limestone scree, glacial moraine, clay", "growingSeason": "cool, short; lake moderation", "rainfall": "high, ~1000-1200mm", "vintageConsistency": "Variable — cool, mountain vintages"},
+    "terroirScore": 6.8,
+    "visit": {"bestMonths": "Jun, Sep (+ winter ski combo)", "scenery": "dramatic alpine peaks, lakes, steep vineyards", "accessibility": "TGV to Chambéry; Geneva/Lyon airports", "visitableDensity": "Low", "baseTown": "Chambéry"},
+    "visitScore": 7.2
+  },
+  "Corse": {
+    "profile": "A mountainous Mediterranean island between France and Italy, ringed by coastal and hillside vineyards. A sunny maritime Mediterranean climate tempered by sea breezes and altitude, with granite in the west/south and schist in the east, suits indigenous Nielluccio, Sciaccarello and Vermentino.",
+    "climate": {"climateType": "mediterranean", "latitude": "42°N", "soils": "granite, schist, limestone, alluvium", "growingSeason": "hot, sunny, very high sunshine", "rainfall": "moderate, mild wet winters", "vintageConsistency": "High — abundant sun, sea-cooled"},
+    "terroirScore": 7.3,
+    "visit": {"bestMonths": "May-Jun, Sep", "scenery": "mountains meeting sea, beaches, maquis, hill towns", "accessibility": "Ajaccio/Bastia/Calvi airports; ferries", "visitableDensity": "Medium", "baseTown": "Patrimonio (or Ajaccio)"},
+    "visitScore": 7.8
+  }
+}
