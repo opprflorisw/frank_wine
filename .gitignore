@@ -29,3 +29,7 @@ dist-ssr
 # local test artifacts
 verify_*.png
 verify_app.cjs
+
+.vercel
+live_*.png
+verify_*.cjs
