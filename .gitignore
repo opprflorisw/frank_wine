@@ -26,3 +26,7 @@ convex/_generated
 *.njsproj
 *.sln
 *.sw?
+
+# local test artifacts
+verify_*.png
+verify_app.cjs
