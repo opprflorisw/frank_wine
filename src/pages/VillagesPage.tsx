@@ -49,13 +49,13 @@ export default function VillagesPage() {
                   onClick={() => nav(toMap)}
                   onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); nav(toMap); } }}
                   tabIndex={0} role="button">
-                  <td><span className="cellname">{v.name}</span></td>
-                  <td onClick={(e) => e.stopPropagation()} onKeyDown={(e) => e.stopPropagation()}>
+                  <td className="cell-title"><span className="cellname">{v.name}</span></td>
+                  <td data-label="Region" onClick={(e) => e.stopPropagation()} onKeyDown={(e) => e.stopPropagation()}>
                     <Link className="region-link" to={`/houses?region=${v.regionSlug}`} title={`Houses in ${v.regionName}`}>
                       <span className="swatch" style={{ background: colorBy(v.regionSlug) }} />{v.regionName}
                     </Link>
                   </td>
-                  <td className="muted">{v.commune || v.name}</td>
+                  <td className="muted" data-label="Commune">{v.commune || v.name}</td>
                   <td className="actcell" onClick={(e) => e.stopPropagation()} onKeyDown={(e) => e.stopPropagation()}>
                     <Link className="btn sm" to={`/houses?region=${v.regionSlug}`} title={`Houses in ${v.regionName}`}><Icon name="bottle" size={13} /> Houses</Link>
                   </td>

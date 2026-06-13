@@ -1,0 +1,89 @@
+/* ============================================================
+   Mobile-first CARD layouts for data tables.
+   Loaded LAST so it overrides table styles on small screens.
+   On phones, every <table class="data"> row becomes a readable card;
+   each <td data-label="…"> shows its column name. Desktop is untouched.
+   ============================================================ */
+
+@media (max-width: 640px) {
+  /* the scroll wrapper no longer needs to scroll horizontally */
+  .tablewrap { overflow: visible; border: none; background: none; box-shadow: none; border-radius: 0; }
+
+  table.data { display: block; width: 100%; background: none; border: none; }
+  table.data thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } /* visually hide header */
+  table.data tbody { display: block; }
+
+  /* each data row = a card */
+  table.data tbody tr {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    margin: 0 0 11px;
+    padding: 11px 14px;
+    box-shadow: 0 1px 8px var(--shadow);
+    position: relative;
+  }
+  table.data tbody tr.row-click { cursor: pointer; }
+  table.data tbody tr.row-click.exp { border-color: var(--gold); box-shadow: 0 2px 14px var(--shadow); }
+
+  /* each cell = a label : value line */
+  table.data tbody tr > td {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+    border: none; padding: 5px 0; text-align: right; min-height: 0;
+    font-size: 13.5px;
+  }
+  table.data tbody tr > td + td { border-top: 1px solid var(--line-soft); }
+  table.data tbody tr > td::before {
+    content: attr(data-label);
+    font-family: var(--sans); font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .6px; color: var(--gold);
+    flex: 0 0 34%; text-align: left; padding-top: 3px;
+  }
+  /* cells without a data-label (plain stacking) shouldn't reserve label space */
+  table.data tbody tr > td:not([data-label])::before { content: none; }
+  table.data tbody tr > td:not([data-label]) { justify-content: flex-start; text-align: left; }
+
+  /* the prominent title cell — full-width header of the card, no label */
+  table.data tbody tr > td.cell-title,
+  table.data tbody tr > td:first-child:not(.cell-exp):not([data-label]) {
+    display: block; text-align: left; padding: 0 0 7px; margin-bottom: 3px;
+    border-bottom: 1px solid var(--line); border-top: none;
+  }
+  table.data tbody tr > td.cell-title::before { content: none; }
+  table.data tbody tr > td.cell-title .cellname { font-size: 16px; }
+  .cellname { white-space: normal !important; }
+
+  /* hide the expander chevron column — the whole card toggles */
+  table.data tbody tr > td.cell-exp { display: none; }
+
+  /* chip/tag cells wrap to the right neatly */
+  table.data tbody tr > td[data-label="Wines"],
+  table.data tbody tr > td[data-label="Grapes"],
+  table.data tbody tr > td[data-label="Regions"],
+  table.data tbody tr > td[data-label="Notable producers"] { flex-wrap: wrap; justify-content: flex-end; }
+  table.data tbody tr > td[data-label="Wines"] > *,
+  table.data tbody tr > td[data-label="Grapes"] > * { margin: 2px 0 0 4px; }
+  .tag, .tbadge { white-space: nowrap; }
+
+  /* swatch + region link stays inline */
+  table.data tbody tr > td .region-link { justify-content: flex-end; }
+
+  /* the accordion detail row spans the full card width */
+  table.data tbody tr.detail-row {
+    background: none; border: none; box-shadow: none; padding: 0; margin: -7px 0 11px;
+  }
+  table.data tbody tr.detail-row > td { display: block; padding: 0; border: none; text-align: left; }
+  table.data tbody tr.detail-row > td::before { content: none; }
+  .house-detail { grid-template-columns: 1fr; gap: 12px; }
+  .hd-actions { flex-wrap: wrap; }
+  .hd-actions .btn { flex: 1 1 auto; justify-content: center; }
+
+  /* result count / active filters comfortable */
+  .activefilters { flex-wrap: wrap; gap: 7px; }
+}
+
+/* tablets: keep horizontal scroll but a touch more breathing room */
+@media (min-width: 641px) and (max-width: 860px) {
+  table.data thead th, table.data tbody td { padding: 9px 11px; }
+}

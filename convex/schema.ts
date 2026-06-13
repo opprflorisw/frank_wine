@@ -41,6 +41,15 @@ export default defineSchema({
     grapes: v.array(v.string()),
     flagship: v.optional(v.string()),
     tier: v.string(), // grand | growth | premier | cru | other (for filtering/sorting)
+    // location: x/y are projected SVG map coords (always present); lat/lon/address/town
+    // are real-world enrichment where reliably known. geoSrc: appellation|town|region|geocoded.
+    x: v.optional(v.number()),
+    y: v.optional(v.number()),
+    lat: v.optional(v.number()),
+    lon: v.optional(v.number()),
+    address: v.optional(v.string()),
+    town: v.optional(v.string()),
+    geoSrc: v.optional(v.string()),
   })
     .index("by_region", ["regionSlug"])
     .searchIndex("search_name", { searchField: "name", filterFields: ["regionSlug"] }),

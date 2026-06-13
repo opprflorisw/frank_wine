@@ -47,8 +47,8 @@ export default function AskPage() {
     <div className="page ask-page">
       <div className="page-head">
         <div className="kicker">The Almanac</div>
-        <h1>Ask the Sommelier</h1>
-        <p className="lede">A wine-savvy AI guide with the whole almanac at its fingertips — ask about regions, houses, grapes, terroir or planning a tasting trip.</p>
+        <h1>Ask Franky</h1>
+        <p className="lede">Meet Franky, the wine guide of Frank's Wine Almanac — with the whole atlas at his fingertips. Ask about regions, houses, grapes, terroir or planning a tasting trip.</p>
       </div>
 
       <div className="chat">
@@ -56,7 +56,7 @@ export default function AskPage() {
           {messages.length === 0 && (
             <div className="chat-empty">
               <div className="big"><Icon name="chat" size={40} sw={1.3} /></div>
-              <p>Start a conversation, or try one of these:</p>
+              <p>Hi, I'm Franky — start a conversation, or try one of these:</p>
               <div className="suggest">
                 {SUGGESTIONS.map((s) => (
                   <button key={s} className="chip" onClick={() => send(s)}>{s}</button>
@@ -96,11 +96,11 @@ export default function AskPage() {
         </div>
 
         <form className="chat-input" onSubmit={(e) => { e.preventDefault(); send(input); }}>
-          <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Ask about French wine…" autoFocus />
+          <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Ask Franky about French wine…" autoFocus />
           <button type="submit" className="btn primary" disabled={sending || !input.trim()}><Icon name="send" size={16} /></button>
         </form>
         {messages.length > 0 && (
-          <button className="chat-clear" onClick={() => clear({ threadId: tid })}>Clear conversation</button>
+          <button className="chat-clear" onClick={() => clear({ threadId: tid })}><span aria-hidden>⟲</span> Clear conversation</button>
         )}
       </div>
     </div>

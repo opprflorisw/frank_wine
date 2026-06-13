@@ -89,7 +89,7 @@ export default function ChatWidget() {
     return (
       <button
         className="cw-fab"
-        aria-label="Ask the Sommelier"
+        aria-label="Ask Franky"
         onClick={() => setOpen(true)}
       >
         <span className="cw-fab-glass" aria-hidden>🍷</span>
@@ -99,23 +99,35 @@ export default function ChatWidget() {
   }
 
   return (
-    <div className="cw-panel" role="dialog" aria-label="Ask the Sommelier">
+    <div className="cw-panel" role="dialog" aria-label="Ask Franky">
       <header className="cw-head">
         <div className="cw-head-text">
           <div className="cw-title">
-            <span aria-hidden>🍷</span> Ask the Sommelier
+            <span aria-hidden>🍷</span> Franky
           </div>
-          <div className="cw-sub">Your AI guide to French wine</div>
+          <div className="cw-sub">Frank's wine guide</div>
         </div>
-        <button className="cw-x" aria-label="Close" onClick={() => setOpen(false)}>
-          ✕
-        </button>
+        <div className="cw-head-actions">
+          {messages.length > 0 && (
+            <button
+              className="cw-new"
+              aria-label="Clear conversation"
+              title="Clear conversation"
+              onClick={() => clear({ threadId: tid })}
+            >
+              <span aria-hidden>⟲</span> New chat
+            </button>
+          )}
+          <button className="cw-x" aria-label="Close" onClick={() => setOpen(false)}>
+            ✕
+          </button>
+        </div>
       </header>
 
       <div className="cw-log">
         {messages.length === 0 && !pending && (
           <div className="cw-empty">
-            <p>Ask me anything about regions, houses, grapes or planning a trip.</p>
+            <p>Hi, I'm Franky — ask me about French wine: regions, houses, grapes or planning a trip.</p>
             <div className="cw-suggest">
               {SUGGESTIONS.map((s) => (
                 <button key={s} className="chip" onClick={() => send(s)}>
@@ -173,7 +185,7 @@ export default function ChatWidget() {
           ref={inputRef}
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask about French wine…"
+          placeholder="Ask Franky about French wine…"
         />
         <button type="submit" className="cw-send" disabled={sending || !input.trim()} aria-label="Send">
           <Icon name="send" size={16} />

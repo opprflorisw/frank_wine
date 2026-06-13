@@ -1,5 +1,6 @@
 import { internalMutation } from "./_generated/server";
 import almanac from "./almanacSeed.json";
+import houseGeo from "./houseGeo.json";
 
 const COLORS: Record<string, string> = {
   bordeaux: "#7b2d3b", sudouest: "#9c5a3c", bourgogne: "#8a3324", beaujolais: "#b4532f",
@@ -52,12 +53,15 @@ export const run = internalMutation({
         villageCount: (r.towns || []).length,
         tripCount: (r.trips || []).length,
       });
+      const geo = houseGeo as Record<string, { x?: number; y?: number; lat?: number; lon?: number; address?: string; town?: string; src?: string }>;
       for (const p of r.producers || []) {
+        const g = geo[`${slug}||${p.name}`] || {};
         await ctx.db.insert("houses", {
           regionSlug: slug, regionName: r.name, name: p.name,
           appellation: p.appellation, classification: p.classification, note: p.note,
           types: p.types || [], grapes: p.grapes || [], flagship: p.flagship,
           tier: tier(p.classification),
+          x: g.x, y: g.y, lat: g.lat, lon: g.lon, address: g.address, town: g.town, geoSrc: g.src,
         });
         nh++;
       }

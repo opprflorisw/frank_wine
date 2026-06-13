@@ -7,6 +7,7 @@ import "./styles/almanac.css";
 import "./styles/map.css";
 import "./styles/chat.css";
 import "./styles/mobile.css";
+import "./styles/cards.css";
 
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
 

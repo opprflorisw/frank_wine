@@ -51,9 +51,9 @@ export default function GrapesPage() {
                   role="button" tabIndex={0}
                   onClick={() => nav(toGrape)}
                   onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); nav(toGrape); } }}>
-                  <td><GrapeDot name={g.name} /><span className="cellname">{g.name}</span></td>
-                  <td className="muted">{g.color === "red" ? "Red grape" : "White grape"}</td>
-                  <td onClick={(e) => e.stopPropagation()} onKeyDown={(e) => e.stopPropagation()}>
+                  <td className="cell-title"><GrapeDot name={g.name} /><span className="cellname">{g.name}</span></td>
+                  <td className="muted" data-label="Colour">{g.color === "red" ? "Red grape" : "White grape"}</td>
+                  <td data-label="Regions" onClick={(e) => e.stopPropagation()} onKeyDown={(e) => e.stopPropagation()}>
                     {g.regions.slice(0, 4).map((x) => {
                       const slug = slugByName[x];
                       return slug
@@ -62,8 +62,8 @@ export default function GrapesPage() {
                     })}
                     {g.regions.length > 4 && <span className="muted"> +{g.regions.length - 4}</span>}
                   </td>
-                  <td><span className="count-pill">{g.houses}</span></td>
-                  <td className="cellsub" onClick={(e) => e.stopPropagation()} onKeyDown={(e) => e.stopPropagation()}>
+                  <td data-label="Houses"><span className="count-pill">{g.houses}</span></td>
+                  <td className="cellsub" data-label="Notable producers" onClick={(e) => e.stopPropagation()} onKeyDown={(e) => e.stopPropagation()}>
                     {g.examples.map((name, i) => (
                       <span key={name}>
                         {i > 0 && ", "}

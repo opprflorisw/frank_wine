@@ -29,9 +29,29 @@ svg#map.grabbing{cursor:grabbing}
 .layers .lh{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-soft);margin-bottom:6px;display:flex;align-items:center;gap:6px}
 .layers label{display:flex;align-items:center;gap:8px;padding:3px 0;cursor:pointer}
 .layers input{accent-color:var(--wine);width:16px;height:16px}
-/* mobile sheet affordances — hidden on desktop */
+/* wine-house pins */
+.house-pin{cursor:pointer}
+.house-pin .hhit{fill:transparent}
+.house-pin .hdot{fill:#fff;transition:fill .12s}
+.house-pin:hover .hdot,.house-pin.on .hdot{fill:var(--gold)}
+.hlabel{font-family:var(--sans);fill:#2b211c;pointer-events:none;font-weight:600}
+
+/* detail header controls (region + house modes) */
+.dhead-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.dback{display:inline-flex;align-items:center;gap:6px;background:#f3ebda;border:1px solid var(--line);color:var(--wine);font-family:var(--sans);font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:15px;cursor:pointer;min-height:34px}
+.dback:hover{border-color:var(--gold)}
+.dmin{display:none}
+.intro-toggle{display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--gold);font-family:var(--sans);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;cursor:pointer;padding:6px 0 4px;margin-top:6px}
+.intro-toggle .chev{transition:transform .2s;display:inline-block}
+.intro-toggle .chev.up{transform:rotate(180deg)}
+.intro{overflow:hidden}
+.intro:not(.open){display:none}
+.hloc{font-family:var(--sans);font-size:12.5px;color:var(--wine-2);margin:4px 0 0;display:flex;align-items:flex-start;gap:5px}
+.hnote{font-size:13.5px;line-height:1.55;color:var(--ink-soft);margin:0}
+
+/* mobile sheet affordances — hidden on desktop, shown in mobile.css */
 .sheet-handle{display:none}
-.dback{display:none}
+.sheet-peek{display:none}
 .zoomctl{position:absolute;right:13px;bottom:13px;display:flex;flex-direction:column;gap:6px;z-index:6}
 .zoomctl button{width:37px;height:37px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.94);font-size:18px;color:var(--wine);box-shadow:0 1px 6px var(--shadow);line-height:1}
 .zoomctl button:hover{background:#fff;border-color:var(--gold)}

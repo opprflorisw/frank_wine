@@ -12,7 +12,7 @@ const LINKS: [string, string, string][] = [
   ["/villages", "pin", "Villages"],
   ["/best", "chartL", "Best Regions"],
   ["/trips", "route", "Wine Trips"],
-  ["/ask", "chat", "Ask the Sommelier"],
+  ["/ask", "chat", "Ask Franky"],
 ];
 
 export default function Nav() {

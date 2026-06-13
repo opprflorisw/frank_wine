@@ -127,23 +127,23 @@ function Row({
         role="button" tabIndex={0} aria-expanded={isOpen}
         onClick={toggle}
         onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } }}>
-        <td><span className={`twist ${isOpen ? "down" : ""}`} aria-hidden="true">›</span></td>
-        <td><div className="cellname">{h.name}</div>{h.flagship && <div className="cellsub muted">{h.flagship}</div>}</td>
-        <td onClick={stop} onKeyDown={stop}>
+        <td className="cell-exp"><span className={`twist ${isOpen ? "down" : ""}`} aria-hidden="true">›</span></td>
+        <td className="cell-title" data-label="House"><div className="cellname">{h.name}</div>{h.flagship && <div className="cellsub muted">{h.flagship}</div>}</td>
+        <td data-label="Region" onClick={stop} onKeyDown={stop}>
           <Link className="region-link" to={`/?region=${h.regionSlug}`} title={`See ${h.regionName} on the map`}>
             <span className="swatch" style={{ background: color }} />{h.regionName}
           </Link>
         </td>
-        <td onClick={stop} onKeyDown={stop}>
+        <td data-label="Appellation" onClick={stop} onKeyDown={stop}>
           {h.appellation
             ? <span className="app app-click" role="button" tabIndex={0} title={`Filter by ${h.appellation}`}
                 onClick={() => setAppellation(h.appellation)}
                 onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setAppellation(h.appellation); } }}>{h.appellation}</span>
             : <span className="muted">—</span>}
         </td>
-        <td>{classBadge(h.classification) ? <Badge cls={h.classification} /> : <span className="muted">—</span>}</td>
-        <td>{(h.types || []).map((t: string) => <TypeBadge key={t} t={t} />)}</td>
-        <td onClick={stop} onKeyDown={stop}>{(h.grapes || []).map((g: string) => (
+        <td data-label="Class">{classBadge(h.classification) ? <Badge cls={h.classification} /> : <span className="muted">—</span>}</td>
+        <td data-label="Wines">{(h.types || []).map((t: string) => <TypeBadge key={t} t={t} />)}</td>
+        <td data-label="Grapes" onClick={stop} onKeyDown={stop}>{(h.grapes || []).map((g: string) => (
           <span key={g} className="tag tag-click" role="button" tabIndex={0} title={`Filter by ${g}`}
             onClick={() => setGrape(g)}
             onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setGrape(g); } }}>
@@ -181,9 +181,9 @@ function Row({
                   ))}
                 </div>
                 <div className="hd-actions">
-                  <button type="button" className="btn primary" title={`Ask the sommelier about ${h.name}`}
+                  <button type="button" className="btn primary" title={`Ask Franky about ${h.name}`}
                     onClick={() => openChat(`Tell me about ${h.name}${h.appellation ? ` in ${h.appellation}` : ""} (${h.regionName}) — its wines, style and whether I can visit.`)}>
-                    <Icon name="chat" size={14} /> Ask the sommelier
+                    <Icon name="chat" size={14} /> Ask Franky
                   </button>
                   <Link className="btn" to={`/?region=${h.regionSlug}`}><Icon name="map" size={14} /> On the map</Link>
                 </div>
