@@ -51,7 +51,7 @@ export default function GrapesPage() {
                   role="button" tabIndex={0}
                   onClick={() => nav(toGrape)}
                   onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); nav(toGrape); } }}>
-                  <td className="cell-title"><GrapeDot name={g.name} /><span className="cellname">{g.name}</span></td>
+                  <td className="cell-title"><GrapeDot name={g.name} /><span className="cellname">{g.name}</span>{g.desc && <div className="cellsub muted gdesc">{g.desc}</div>}</td>
                   <td className="muted" data-label="Colour">{g.color === "red" ? "Red grape" : "White grape"}</td>
                   <td data-label="Regions" onClick={(e) => e.stopPropagation()} onKeyDown={(e) => e.stopPropagation()}>
                     {g.regions.slice(0, 4).map((x) => {

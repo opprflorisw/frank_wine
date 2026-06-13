@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Icon } from "../lib/ui";
+import { openSearch } from "../lib/search";
 
 const LINKS: [string, string, string][] = [
   ["/", "map", "Map"],
@@ -11,7 +12,9 @@ const LINKS: [string, string, string][] = [
   ["/grapes", "grape", "Grapes"],
   ["/villages", "pin", "Villages"],
   ["/best", "chartL", "Best Regions"],
+  ["/compare", "chartL", "Compare"],
   ["/trips", "route", "Wine Trips"],
+  ["/cellar", "star", "My Cellar"],
   ["/ask", "chat", "Ask Franky"],
 ];
 
@@ -36,6 +39,9 @@ export default function Nav() {
         ))}
       </div>
       <span className="spacer" />
+      <button type="button" className="nav-search ui" onClick={() => openSearch()} aria-label="Search the almanac" title="Search (Ctrl/⌘ K)">
+        <Icon name="search" size={14} /><span className="ns-label">Search</span><kbd>⌘K</kbd>
+      </button>
       <span className="count ui">{stats}</span>
       <button type="button" className="nav-burger ui"
         aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}

@@ -1,0 +1,75 @@
+/* ============================================================
+   New features — command-palette search, My Cellar, Compare.
+   ============================================================ */
+
+/* ---------- Nav search button ---------- */
+.nav-search{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(231,201,142,.4);
+  color:#f3e9d6;font-family:var(--sans);font-size:12.5px;padding:7px 11px;border-radius:18px;cursor:pointer;min-height:34px}
+.nav-search:hover{background:rgba(255,255,255,.18);border-color:var(--gold)}
+.nav-search kbd{font-family:var(--sans);font-size:10px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.18);border-radius:5px;padding:1px 5px;letter-spacing:.5px}
+.favbtn{background:none;border:none;cursor:pointer;color:var(--gold);font-size:19px;line-height:1;padding:2px 4px;transition:transform .12s}
+.favbtn:hover{transform:scale(1.18)}
+.favbtn.on{color:#d9a72c;filter:drop-shadow(0 0 4px rgba(217,167,44,.4))}
+
+/* ---------- Command palette ---------- */
+.sp-overlay{position:fixed;inset:0;z-index:80;background:rgba(40,22,18,.42);backdrop-filter:blur(3px);
+  display:flex;justify-content:center;align-items:flex-start;padding:9vh 16px 16px;animation:sp-fade .14s ease}
+@keyframes sp-fade{from{opacity:0}to{opacity:1}}
+.sp-panel{width:100%;max-width:600px;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;
+  background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 24px 70px rgba(30,15,12,.5);
+  font-family:var(--serif);animation:sp-pop .16s ease}
+@keyframes sp-pop{from{opacity:0;transform:translateY(-10px) scale(.99)}to{opacity:1;transform:none}}
+.sp-input{display:flex;align-items:center;gap:11px;padding:14px 16px;border-bottom:1px solid var(--line);color:var(--gold)}
+.sp-input input{flex:1;border:none;outline:none;background:none;font-family:var(--serif);font-size:17px;color:var(--ink)}
+.sp-esc{font-family:var(--sans);font-size:10px;color:var(--ink-faint);border:1px solid var(--line);border-radius:5px;padding:2px 6px}
+.sp-results{overflow-y:auto;padding:6px 8px 10px}
+.sp-hint{padding:18px 12px;color:var(--ink-soft);font-size:13.5px;text-align:center;line-height:1.5}
+.sp-group{margin-top:6px}
+.sp-group-h{font-family:var(--sans);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--gold);font-weight:700;padding:8px 10px 4px}
+.sp-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:none;cursor:pointer;
+  padding:9px 11px;border-radius:9px;color:var(--ink);font-family:var(--serif)}
+.sp-item.on{background:#f4ead6}
+.sp-dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--wine)}
+.sp-dot[data-kind="regions"]{background:#7b2d3b}.sp-dot[data-kind="houses"]{background:#b8893b}
+.sp-dot[data-kind="appellations"]{background:#6d4076}.sp-dot[data-kind="grapes"]{background:#5c8a4a}
+.sp-dot[data-kind="villages"]{background:#3f7d8c}.sp-dot[data-kind="trips"]{background:#c06b8a}
+.sp-label{font-size:15px;font-weight:600}
+.sp-sub{margin-left:auto;font-family:var(--sans);font-size:11px;color:var(--ink-faint);white-space:nowrap}
+.sp-foot{border-top:1px solid var(--line);padding:8px 14px;font-family:var(--sans);font-size:11px;color:var(--ink-faint);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.sp-foot kbd{font-size:10px;background:#efe6d3;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+
+/* ---------- My Cellar ---------- */
+.cellar-empty{text-align:center;padding:36px 16px}
+.cellar-empty .big{font-size:42px;color:var(--gold);margin-bottom:6px}
+.cellar-empty .suggest{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.cellar-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0}
+.cellar-sec{margin-top:20px}
+.cellar-h{font-family:var(--sans);font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px;margin:0 0 10px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.cellar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:11px}
+.cellar-card{display:flex;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:11px 13px;box-shadow:0 1px 8px var(--shadow)}
+.cellar-card .cc-main{flex:1;min-width:0;display:flex;flex-direction:column;color:inherit}
+.cellar-card .cc-main b{font-size:15px}.cellar-card .cc-main span{font-family:var(--sans);font-size:11.5px;color:var(--ink-soft)}
+.cellar-card:hover{border-color:var(--gold)}
+.cc-ask,.cc-x{flex:none;width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:#f3ebda;cursor:pointer;color:var(--wine);display:flex;align-items:center;justify-content:center;margin-left:6px}
+.cc-ask:hover,.cc-x:hover{border-color:var(--gold)}
+
+/* ---------- Compare ---------- */
+.cmp-pick{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 18px}
+.cmp-pick .chip:disabled{opacity:.4;cursor:not-allowed}
+table.data.cmp td,table.data.cmp th{vertical-align:top}
+.cmp-rowh{font-family:var(--sans);font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+.cmp-score{font-size:18px;color:var(--wine)}
+.cmp-best{background:#f3f0e0}
+.cmp-best .cmp-score{color:#3f6b46}
+.cmp-best::after{content:" ★";color:var(--gold);font-size:11px}
+.cmp-chips{display:flex;flex-wrap:wrap;gap:5px}
+.cmp-cls{font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+.cmp-sum{font-size:12.5px;color:var(--ink-soft);line-height:1.5;display:block;max-width:320px}
+
+@media (max-width:560px){
+  .sp-overlay{padding:0}
+  .sp-panel{max-width:100%;max-height:100dvh;height:100dvh;border-radius:0}
+  .sp-sub{display:none}
+  .cellar-grid{grid-template-columns:1fr}
+  .cmp-sum{max-width:none}
+}

@@ -4,6 +4,7 @@ import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Badge, TypeBadge, TypeDot, Icon, GrapePill } from "../lib/ui";
 import { openChat } from "../lib/chat";
+import { FavButton } from "../lib/favorites";
 
 type View = { x: number; y: number; w: number; h: number };
 type House = {
@@ -273,7 +274,10 @@ export default function MapPage() {
                 <div className="dhead">
                   <div className="dhead-top">
                     <button className="dback" onClick={() => setHouse(null)}><Icon name="map" size={13} /> {sel.name}</button>
-                    <button className="dmin" onClick={() => setSheetMin(true)}><Icon name="map" size={13} /> Map</button>
+                    <div className="dh-right">
+                      <FavButton item={{ type: "house", id: house._id, label: house.name, sub: `Wine house · ${house.appellation || sel.name}`, to: `/houses?region=${sel.slug}&q=${encodeURIComponent(house.name)}` }} />
+                      <button className="dmin" onClick={() => setSheetMin(true)}><Icon name="map" size={13} /> Map</button>
+                    </div>
                   </div>
                   <div className="bar" style={{ background: sel.color }} />
                   <div className="k">Wine house{house.appellation ? ` · ${house.appellation}` : ""}</div>
@@ -298,7 +302,10 @@ export default function MapPage() {
                 <div className="dhead">
                   <div className="dhead-top">
                     <button className="dback" onClick={reset}><Icon name="map" size={13} /> France</button>
-                    <button className="dmin" onClick={() => setSheetMin(true)}><Icon name="map" size={13} /> Map</button>
+                    <div className="dh-right">
+                      <FavButton item={{ type: "region", id: sel.slug, label: sel.name, sub: "Wine region", to: `/?region=${sel.slug}` }} />
+                      <button className="dmin" onClick={() => setSheetMin(true)}><Icon name="map" size={13} /> Map</button>
+                    </div>
                   </div>
                   <div className="bar" style={{ background: sel.color }} />
                   <div className="k">Wine region · France</div>

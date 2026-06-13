@@ -38,6 +38,8 @@ svg#map.grabbing{cursor:grabbing}
 
 /* detail header controls (region + house modes) */
 .dhead-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.dh-right{display:flex;align-items:center;gap:8px}
+.gdesc{font-size:12px;line-height:1.4;margin-top:3px;max-width:520px;white-space:normal}
 .dback{display:inline-flex;align-items:center;gap:6px;background:#f3ebda;border:1px solid var(--line);color:var(--wine);font-family:var(--sans);font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:15px;cursor:pointer;min-height:34px}
 .dback:hover{border-color:var(--gold)}
 .dmin{display:none}
