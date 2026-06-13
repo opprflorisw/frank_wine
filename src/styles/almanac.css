@@ -128,6 +128,68 @@ table.data tbody tr:last-child td{border-bottom:none}
 .tip{position:fixed; pointer-events:none; background:#2b211c; color:#f6f1e7; padding:5px 9px; border-radius:6px;
   font-family:var(--sans); font-size:12px; opacity:0; transform:translate(-50%,-135%); transition:opacity .12s; z-index:80; white-space:nowrap}
 
+/* ---------------- Navigation: back bar & breadcrumbs ---------------- */
+.backbar{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:0 0 14px}
+.backbtn{font-family:var(--sans); font-size:13px; font-weight:600; min-height:40px; padding:8px 16px 8px 13px;
+  border-radius:9px; border:1px solid var(--line); background:var(--card); color:var(--wine);
+  display:inline-flex; align-items:center; gap:6px; transition:.13s}
+.backbtn:hover{border-color:var(--gold); background:#fffdf8}
+.backbtn:focus-visible{outline:none; box-shadow:0 0 0 3px rgba(184,137,59,.3)}
+.backbtn span{font-size:18px; line-height:0}
+.crumbs{font-family:var(--sans); font-size:12.5px; color:var(--ink-faint); display:flex; align-items:center; flex-wrap:wrap; gap:4px}
+.crumbs .sep{color:var(--line); margin:0 2px}
+.crumbs a{color:var(--ink-soft)} .crumbs a:hover{color:var(--wine-2)}
+.crumbs .cur{color:var(--ink); font-weight:600}
+.backbar-actions{margin-left:auto; display:flex; gap:8px; flex-wrap:wrap}
+
+/* ---------------- Active filters summary ---------------- */
+.activefilters{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin:2px 2px 12px}
+.activefilters .af-label{font-family:var(--sans); font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--ink-soft)}
+.filter-chip{font-family:var(--sans); font-size:11.5px; min-height:30px; display:inline-flex; align-items:center; gap:6px;
+  padding:4px 11px; border-radius:14px; border:1px solid var(--wine); background:var(--wine); color:#fff; transition:.13s}
+.filter-chip:hover{background:var(--wine-2); border-color:var(--wine-2)}
+.filter-chip:focus-visible{outline:none; box-shadow:0 0 0 3px rgba(184,137,59,.35)}
+.filter-chip .fc-k{opacity:.72; font-size:10px; text-transform:uppercase; letter-spacing:.5px}
+.filter-chip .fc-v{font-weight:600}
+.filter-chip .fc-x{opacity:.8; font-size:11px}
+.btn.sm{font-size:12px; padding:6px 10px; min-height:32px}
+.clearall{color:var(--ink-soft)}
+
+/* ---------------- Region cards: grapes row + quick actions ---------------- */
+.grapes-row{display:flex; flex-wrap:wrap; gap:6px; margin:11px 0 0}
+.cardactions{display:flex; flex-wrap:wrap; gap:7px; margin:13px 0 0; padding-top:12px; border-top:1px solid var(--line-soft)}
+
+/* ---------------- Inline link affordances in tables ---------------- */
+.region-link,.prod-link,.tag-link{cursor:pointer}
+.region-link{display:inline-flex; align-items:center; color:var(--ink); font-weight:600}
+.region-link:hover{color:var(--wine-2); text-decoration:none}
+.region-link:hover .swatch{box-shadow:0 0 0 2px var(--gold) inset}
+.prod-link{color:var(--wine-2)} .prod-link:hover{text-decoration:underline}
+.tag-link{color:var(--ink-soft)} .tag-link:hover{border-color:var(--gold); background:#f1e6cf; color:var(--ink); text-decoration:none}
+.region-link:focus-visible,.prod-link:focus-visible,.tag-link:focus-visible{outline:none; box-shadow:0 0 0 3px rgba(184,137,59,.3); border-radius:6px}
+td.actcell{white-space:nowrap; text-align:right}
+
+/* ---------------- Houses: expandable row detail ---------------- */
+.twist{display:inline-block; color:var(--ink-faint); font-size:16px; transition:transform .15s; transform:translateY(-1px)}
+.twist.down{transform:rotate(90deg) translateX(-1px); color:var(--wine)}
+table.data tbody tr.exp{background:#fbf3e2}
+table.data tbody tr.exp:hover{background:#fbf3e2}
+.house-detail{display:grid; grid-template-columns:1.4fr 1fr; gap:20px; padding:16px 18px 18px;
+  border-left:3px solid var(--wine); background:#fbf7ee}
+.house-detail .hd-flagship{font-size:14px; color:var(--ink); margin:0 0 8px}
+.house-detail .hd-note{font-size:13.5px; color:var(--ink-soft); line-height:1.55; margin:0 0 12px}
+.house-detail dt{align-self:center}
+.house-detail .hd-types{display:flex; flex-wrap:wrap; gap:5px}
+.hd-side h4{font-family:var(--sans); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--ink-soft); margin:0 0 8px}
+.hd-actions{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px}
+@media(max-width:640px){.house-detail{grid-template-columns:1fr}}
+
+/* trip stops are clickable */
+.stop-click{cursor:pointer; border-radius:9px; transition:background .12s; padding-left:6px; margin-left:-6px}
+.stop-click:hover{background:#f6edd9}
+.stop-click:focus-visible{outline:none; box-shadow:0 0 0 2px rgba(184,137,59,.4)}
+.tcard:focus-visible{outline:none; box-shadow:0 0 0 3px rgba(184,137,59,.3)}
+
 @media(max-width:680px){
   .page{padding:18px 14px 50px}
   .nav{gap:12px; padding:0 14px}

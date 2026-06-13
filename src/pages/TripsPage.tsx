@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { Icon } from "../lib/ui";
+import { Icon, BackBar } from "../lib/ui";
+import { openChat } from "../lib/chat";
 
 function visitTag(v: string): [string, string] {
   const s = (v || "").toLowerCase();
@@ -28,6 +29,7 @@ export default function TripsPage() {
 
   return (
     <div className="page">
+      <BackBar crumbs={[{ label: "Map", to: "/" }, { label: "Trips" }]} />
       <div className="page-head">
         <div className="kicker">The Almanac</div>
         <h1>Wine Trips</h1>
@@ -46,7 +48,10 @@ export default function TripsPage() {
       <div className="tlayout">
         <div className="tlist">
           {list.map((tr, i) => (
-            <div key={tr._id} className={`tcard ${i === sel ? "active" : ""}`} style={{ borderLeftColor: colorBy(tr.regionSlug) }} onClick={() => setSel(i)}>
+            <div key={tr._id} className={`tcard ${i === sel ? "active" : ""}`} style={{ borderLeftColor: colorBy(tr.regionSlug) }}
+              role="button" tabIndex={0} title={`View ${tr.name}`}
+              onClick={() => setSel(i)}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSel(i); } }}>
               <div className="rg">{tr.regionName}</div>
               <h3>{tr.name}</h3>
               <div className="meta"><span><Icon name="cal" size={13} /> {tr.days} day{tr.days > 1 ? "s" : ""}</span><span><Icon name="pin" size={13} /> {tr.stops.length} stops</span><span>{tr.driving}</span></div>
@@ -60,16 +65,20 @@ export default function TripsPage() {
 }
 
 function TripDetail({ trip, color, geoPath }: { trip: any; color: string; geoPath: string }) {
+  const nav = useNavigate();
   const bb = trip.bbox as number[];
   const S = Math.max(bb[2], bb[3]) || 60;
   const pad = S * 0.25;
   const vb = `${bb[0] - pad} ${bb[1] - pad} ${bb[2] + 2 * pad} ${bb[3] + 2 * pad}`;
   const days = [...new Set(trip.stops.map((s: any) => s.day))].sort() as number[];
   const seen: Record<string, number> = {};
+  const stopTo = (s: any) => `/houses?region=${trip.regionSlug}&q=${encodeURIComponent(s.name)}`;
   return (
     <div className="tdetail">
       <div className="tdhead">
-        <div className="rg">{trip.regionName} · Wine trip</div>
+        <div className="rg">
+          <Link className="region-link" to={`/?region=${trip.regionSlug}`} title={`See ${trip.regionName} on the map`}>{trip.regionName}</Link> · Wine trip
+        </div>
         <h2 style={{ color }}>{trip.name}</h2>
         <div className="meta">
           <span><Icon name="cal" size={13} /> <b>{trip.days}</b> days</span>
@@ -106,7 +115,9 @@ function TripDetail({ trip, color, geoPath }: { trip: any; color: string; geoPat
             {trip.stops.map((s: any, i: number) => ({ s, i })).filter((o: any) => o.s.day === d).map(({ s, i }: any) => {
               const vt = visitTag(s.visit);
               return (
-                <div key={i} className="stop">
+                <div key={i} className="stop stop-click" role="button" tabIndex={0} title={`Find ${s.name} in houses`}
+                  onClick={() => nav(stopTo(s))}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); nav(stopTo(s)); } }}>
                   <div className="stopn" style={{ background: color }}>{i + 1}</div>
                   <div>
                     <div className="snm">{s.name}<span className={`visittag ${vt[0]}`}>{vt[1]}</span></div>
@@ -122,6 +133,10 @@ function TripDetail({ trip, color, geoPath }: { trip: any; color: string; geoPat
       <div className="tdactions">
         <Link className="btn" to={`/?region=${trip.regionSlug}`}><Icon name="map" size={14} /> See region map</Link>
         <Link className="btn" to={`/houses?region=${trip.regionSlug}`}><Icon name="bottle" size={14} /> Region's houses</Link>
+        <button type="button" className="btn primary" title={`Ask the sommelier about ${trip.name}`}
+          onClick={() => openChat(`Tell me more about the "${trip.name}" wine trip in ${trip.regionName} — what to expect at each stop and tips for the route.`)}>
+          <Icon name="chat" size={14} /> Ask about this trip
+        </button>
       </div>
     </div>
   );

@@ -10,12 +10,11 @@ const clamp = (x: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, x
 
 export default function MapPage() {
   const data = useQuery(api.wine.mapData);
-  const [params] = useSearchParams();
+  const [params, setParams] = useSearchParams();
   const navigate = useNavigate();
-  const [selected, setSelected] = useState<string | null>(null);
   const [vis, setVis] = useState({ wineRoutes: true, autoroutes: true, cities: true, villages: true, neighbours: true });
+  const [layersOpen, setLayersOpen] = useState(false);
   const svgRef = useRef<SVGSVGElement>(null);
-  const drag = useRef<{ x: number; y: number; vx: number; vy: number; moved: boolean } | null>(null);
   const anim = useRef<number | null>(null);
 
   const FULL: View = useMemo(() => {
@@ -23,21 +22,44 @@ export default function MapPage() {
     return { x: 0, y: 0, w: vb[2], h: vb[3] };
   }, [data]);
   const [view, setView] = useState<View>(FULL);
+  const viewRef = useRef(view);
+  viewRef.current = view;
   useEffect(() => { setView(FULL); }, [FULL]);
 
+  // ----- selection is driven by the URL so browser back/forward works -----
+  const selected = useMemo(() => {
+    const rp = params.get("region");
+    return rp && data?.regions.some((r) => r.slug === rp) ? rp : null;
+  }, [params, data]);
   const sel = data?.regions.find((r) => r.slug === selected) || null;
   const detail = useQuery(api.wine.getRegion, selected ? { slug: selected } : "skip");
 
-  // deep link ?region=
+  function setRegionParam(slug: string | null) {
+    setParams((prev) => {
+      const p = new URLSearchParams(prev);
+      if (slug) p.set("region", slug); else p.delete("region");
+      return p;
+    });
+  }
+
+  // animate the viewport whenever the selected region changes (tap, back, fwd, deep-link)
+  const prevSel = useRef<string | null | undefined>(undefined);
   useEffect(() => {
-    const rp = params.get("region");
-    if (rp && data?.regions.some((r) => r.slug === rp)) selectRegion(rp);
+    if (!data) return;
+    if (prevSel.current === selected) return;
+    prevSel.current = selected;
+    if (selected) {
+      const r = data.regions.find((x) => x.slug === selected);
+      if (r) animateTo(bboxToView(r.bbox));
+    } else {
+      animateTo(FULL);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [selected, data]);
 
   function animateTo(target: View, ms = 560) {
     if (anim.current) cancelAnimationFrame(anim.current);
-    const s = { ...view }, t0 = performance.now(), ease = (x: number) => 1 - Math.pow(1 - x, 3);
+    const s = { ...viewRef.current }, t0 = performance.now(), ease = (x: number) => 1 - Math.pow(1 - x, 3);
     const step = (now: number) => {
       const k = Math.min(1, (now - t0) / ms), e = ease(k);
       setView({ x: s.x + (target.x - s.x) * e, y: s.y + (target.y - s.y) * e, w: s.w + (target.w - s.w) * e, h: s.h + (target.h - s.h) * e });
@@ -52,45 +74,118 @@ export default function MapPage() {
     if (w / h < ar) { const nw = h * ar; x -= (nw - w) / 2; w = nw; } else { const nh = w / ar; y -= (nh - h) / 2; h = nh; }
     return { x, y, w, h };
   }
-  function selectRegion(slug: string) {
-    const r = data?.regions.find((x) => x.slug === slug);
-    if (!r) return;
-    setSelected(slug);
-    animateTo(bboxToView(r.bbox));
-  }
-  function reset() { setSelected(null); animateTo(FULL); }
+  function selectRegion(slug: string) { setRegionParam(slug); }
+  function reset() { setRegionParam(null); }
 
-  // pan & zoom
-  function clientToSvg(cx: number, cy: number) {
+  // ---------- pointer-based pan + pinch zoom (Google-Maps style) ----------
+  const pointers = useRef<Map<number, { x: number; y: number }>>(new Map());
+  const gesture = useRef<{ startView: View; pinch: boolean; startX: number; startY: number; startDist: number; midSvg: { x: number; y: number }; moved: boolean } | null>(null);
+  const movedRef = useRef(false);
+  const lastTap = useRef<{ t: number; x: number; y: number }>({ t: 0, x: 0, y: 0 });
+  const suppressClick = useRef(false);
+
+  const MINW = () => FULL.w * 0.02, MAXW = () => FULL.w * 1.2;
+
+  function toSvg(v: View, cx: number, cy: number) {
     const rect = svgRef.current!.getBoundingClientRect();
-    return { x: view.x + ((cx - rect.left) / rect.width) * view.w, y: view.y + ((cy - rect.top) / rect.height) * view.h };
+    return { x: v.x + ((cx - rect.left) / rect.width) * v.w, y: v.y + ((cy - rect.top) / rect.height) * v.h };
+  }
+
+  function syncGesture() {
+    const pts = [...pointers.current.values()];
+    if (pts.length === 0) { gesture.current = null; return; }
+    const startView = { ...viewRef.current };
+    const moved = gesture.current?.moved ?? false;
+    if (pts.length === 1) {
+      gesture.current = { startView, pinch: false, startX: pts[0].x, startY: pts[0].y, startDist: 0, midSvg: { x: 0, y: 0 }, moved };
+    } else {
+      const a = pts[0], b = pts[1];
+      const startDist = Math.hypot(a.x - b.x, a.y - b.y) || 1;
+      const midClient = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+      gesture.current = { startView, pinch: true, startX: midClient.x, startY: midClient.y, startDist, midSvg: toSvg(startView, midClient.x, midClient.y), moved };
+    }
+  }
+
+  function onDown(e: React.PointerEvent) {
+    (e.target as Element).setPointerCapture?.(e.pointerId);
+    pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (anim.current) cancelAnimationFrame(anim.current);
+    if (pointers.current.size === 1) movedRef.current = false;
+    syncGesture();
+  }
+  function onMove(e: React.PointerEvent) {
+    const p = pointers.current.get(e.pointerId);
+    if (!p) return;
+    p.x = e.clientX; p.y = e.clientY;
+    const g = gesture.current;
+    if (!g) return;
+    const rect = svgRef.current!.getBoundingClientRect();
+    const pts = [...pointers.current.values()];
+    if (g.pinch && pts.length >= 2) {
+      const a = pts[0], b = pts[1];
+      const dist = Math.hypot(a.x - b.x, a.y - b.y) || 1;
+      const mid = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+      const nw = clamp(g.startView.w * (g.startDist / dist), MINW(), MAXW());
+      const nh = nw * (FULL.h / FULL.w);
+      const nx = g.midSvg.x - ((mid.x - rect.left) / rect.width) * nw;
+      const ny = g.midSvg.y - ((mid.y - rect.top) / rect.height) * nh;
+      g.moved = true; movedRef.current = true;
+      setView({ x: nx, y: ny, w: nw, h: nh });
+    } else if (!g.pinch && pts.length === 1) {
+      const dx = pts[0].x - g.startX, dy = pts[0].y - g.startY;
+      if (Math.hypot(dx, dy) > 4) { g.moved = true; movedRef.current = true; }
+      setView({ x: g.startView.x - (dx / rect.width) * g.startView.w, y: g.startView.y - (dy / rect.height) * g.startView.h, w: g.startView.w, h: g.startView.h });
+    }
+  }
+  function onUp(e: React.PointerEvent) {
+    const wasPinch = gesture.current?.pinch;
+    pointers.current.delete(e.pointerId);
+    if (pointers.current.size === 0) {
+      // tap vs double-tap (only on empty map, not on a region path)
+      const onRegion = (e.target as Element)?.classList?.contains?.("reg");
+      if (!movedRef.current && !wasPinch && !onRegion) {
+        const now = performance.now();
+        if (now - lastTap.current.t < 300 && Math.hypot(e.clientX - lastTap.current.x, e.clientY - lastTap.current.y) < 32) {
+          zoomAt(e.clientX, e.clientY, 0.58);
+          suppressClick.current = true;
+          lastTap.current = { t: 0, x: 0, y: 0 };
+        } else {
+          lastTap.current = { t: now, x: e.clientX, y: e.clientY };
+        }
+      }
+      gesture.current = null;
+    } else {
+      syncGesture(); // re-anchor the remaining finger so it doesn't jump
+    }
+  }
+  function onCancel(e: React.PointerEvent) { pointers.current.delete(e.pointerId); if (pointers.current.size === 0) gesture.current = null; else syncGesture(); }
+
+  function zoomAt(cx: number, cy: number, factor: number, animate = true) {
+    const v = viewRef.current;
+    const rect = svgRef.current!.getBoundingClientRect();
+    const px = v.x + ((cx - rect.left) / rect.width) * v.w;
+    const py = v.y + ((cy - rect.top) / rect.height) * v.h;
+    const nw = clamp(v.w * factor, MINW(), MAXW());
+    const nh = nw * (FULL.h / FULL.w);
+    const target = { x: px - (px - v.x) * (nw / v.w), y: py - (py - v.y) * (nh / v.h), w: nw, h: nh };
+    if (animate) animateTo(target, 200); else setView(target);
   }
   function onWheel(e: React.WheelEvent) {
     e.preventDefault();
     if (anim.current) cancelAnimationFrame(anim.current);
-    const f = e.deltaY < 0 ? 0.85 : 1 / 0.85;
-    const p = clientToSvg(e.clientX, e.clientY);
-    let nw = clamp(view.w * f, FULL.w * 0.03, FULL.w * 1.12);
-    const nh = nw * (FULL.h / FULL.w);
-    setView({ x: p.x - (p.x - view.x) * (nw / view.w), y: p.y - (p.y - view.y) * (nh / view.h), w: nw, h: nh });
+    zoomAt(e.clientX, e.clientY, e.deltaY < 0 ? 0.85 : 1 / 0.85, false);
   }
-  function onDown(e: React.PointerEvent) { drag.current = { x: e.clientX, y: e.clientY, vx: view.x, vy: view.y, moved: false }; }
-  function onMove(e: React.PointerEvent) {
-    if (!drag.current) return;
-    const rect = svgRef.current!.getBoundingClientRect();
-    if (Math.hypot(e.clientX - drag.current.x, e.clientY - drag.current.y) > 4) drag.current.moved = true;
-    setView((v) => ({ ...v, x: drag.current!.vx - ((e.clientX - drag.current!.x) / rect.width) * v.w, y: drag.current!.vy - ((e.clientY - drag.current!.y) / rect.height) * v.h }));
+  function zoomBtn(factor: number) {
+    const rect = svgRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    zoomAt(rect.left + rect.width / 2, rect.top + rect.height / 2, factor, true);
   }
-  function onUp() { drag.current = null; }
-
-  function zoomBtn(f: number) {
-    const cx = view.x + view.w / 2, cy = view.y + view.h / 2;
-    let nw = clamp(view.w * f, FULL.w * 0.03, FULL.w * 1.12);
-    const nh = nw * (FULL.h / FULL.w);
-    animateTo({ x: cx - nw / 2, y: cy - nh / 2, w: nw, h: nh }, 280);
+  function onMapClick() {
+    if (suppressClick.current) { suppressClick.current = false; return; }
+    if (!movedRef.current && selected) reset();
   }
 
-  if (!data || !data.context) return <div className="maplayout"><div className="stage"><div className="empty">Loading the atlas…</div></div></div>;
+  if (!data || !data.context) return <div className="maplayout nodetail"><div className="stage"><div className="empty">Loading the atlas…</div></div></div>;
 
   const ctx = data.context;
   const k = view.w / FULL.w;
@@ -107,32 +202,37 @@ export default function MapPage() {
     <div className={`maplayout ${selected ? "" : "nodetail"}`}>
       <main className="stage">
         <div className="breadcrumb">
-          <div className="crumb btn" onClick={reset}>🏠 France</div>
-          {sel && <div className="crumb" style={{ borderColor: sel.color }}><Icon name="pin" size={14} /> {sel.name}</div>}
-        </div>
-        <div className="layers ui">
-          <div className="lh"><Icon name="map" size={13} />Map layers</div>
-          {([["wineRoutes", "Wine routes"], ["autoroutes", "Autoroutes"], ["cities", "Cities"], ["villages", "Villages"], ["neighbours", "Neighbours"]] as const).map(([key, label]) => (
-            <label key={key}><input type="checkbox" checked={(vis as any)[key]} onChange={(e) => setVis({ ...vis, [key]: e.target.checked })} /> {label}</label>
-          ))}
+          <div className="crumb btn" onClick={reset}><Icon name="map" size={13} /> France</div>
+          {sel && <div className="crumb" style={{ borderColor: sel.color }}><Icon name="pin" size={13} /> {sel.name}</div>}
         </div>
 
-        <svg ref={svgRef} id="map" className={drag.current ? "grabbing" : ""}
+        <div className={`layers ui ${layersOpen ? "open" : ""}`}>
+          <button className="layers-toggle" onClick={() => setLayersOpen((o) => !o)} aria-expanded={layersOpen} aria-label="Map layers">
+            <Icon name="map" size={15} /><span className="lt-label">Layers</span>
+          </button>
+          <div className="layers-body">
+            <div className="lh"><Icon name="map" size={13} />Map layers</div>
+            {([["wineRoutes", "Wine routes"], ["autoroutes", "Autoroutes"], ["cities", "Cities"], ["villages", "Villages"], ["neighbours", "Neighbours"]] as const).map(([key, label]) => (
+              <label key={key}><input type="checkbox" checked={(vis as any)[key]} onChange={(e) => setVis({ ...vis, [key]: e.target.checked })} /> {label}</label>
+            ))}
+          </div>
+        </div>
+
+        <svg ref={svgRef} id="map" className={gesture.current ? "grabbing" : ""}
           viewBox={`${view.x} ${view.y} ${view.w} ${view.h}`} preserveAspectRatio="xMidYMid meet"
-          onWheel={onWheel} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp}
-          onClick={() => { if (!drag.current?.moved && selected) reset(); }}>
+          onWheel={onWheel} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onCancel}
+          onClick={onMapClick}>
           <rect className="sea" x={-2000} y={-2000} width={6000} height={6000} />
           {vis.neighbours && (ctx.neighbours as any[]).map((nb, i) => <path key={i} className="nb" d={nb.path} />)}
           <path className="base" d={ctx.france} />
           {data.regions.map((r) => (
             <path key={r.slug} className={`reg ${selected && selected !== r.slug ? "dim" : ""} ${selected === r.slug ? "sel" : ""}`}
               d={r.geoPath} fill={r.color}
-              onClick={(e) => { e.stopPropagation(); if (!drag.current?.moved) selectRegion(r.slug); }} />
+              onClick={(e) => { e.stopPropagation(); if (!movedRef.current) selectRegion(r.slug); }} />
           ))}
           {vis.autoroutes && (ctx.autoroutes as any[]).map((a, i) => (
             <path key={i} className="aroute" d={`M${a.pts.map((p: number[]) => p.join(",")).join("L")}`} strokeWidth={1.1 * f} />
           ))}
-          {/* selected region's wine route + villages */}
           {selected && vis.wineRoutes && (ctx.wineRoutes as any)[selected]?.length > 1 && (
             <path className="wroute" d={`M${(ctx.wineRoutes as any)[selected].map((p: number[]) => p.join(",")).join("L")}`} stroke={sel!.color} />
           )}
@@ -143,7 +243,6 @@ export default function MapPage() {
               <text className="tlabel" x={t.x + 3} y={t.y + 1} fontSize={8.2 * f}>{t.name}</text>
             </g>
           ))}
-          {/* region labels */}
           {data.regions.map((r) => {
             if (selected === r.slug) return null;
             const fs = 13 * f;
@@ -154,7 +253,6 @@ export default function MapPage() {
               </g>
             );
           })}
-          {/* cities */}
           {vis.cities && cities.slice(0, cityN).map((c, i) => {
             const fs = (c.name === "Paris" ? 10 : 8.6) * f;
             return (
@@ -167,18 +265,20 @@ export default function MapPage() {
           })}
         </svg>
 
-        <div className="legend ui">{selected ? "Scroll to zoom · drag to pan · click empty space to go back." : "Click a region to zoom in and reveal its villages, wine route & houses."}</div>
+        <div className="legend ui">{selected ? "Pinch / scroll to zoom · drag to pan · double-tap to zoom · tap empty space to go back." : "Tap a region to explore its villages, wine route & houses. Pinch or scroll to zoom."}</div>
         <div className="zoomctl ui">
-          <button onClick={() => zoomBtn(0.7)}>+</button>
-          <button onClick={() => zoomBtn(1 / 0.7)}>−</button>
-          <button onClick={reset} title="Reset">⌂</button>
+          <button onClick={() => zoomBtn(0.7)} aria-label="Zoom in">+</button>
+          <button onClick={() => zoomBtn(1 / 0.7)} aria-label="Zoom out">−</button>
+          <button onClick={reset} title="Reset view" aria-label="Reset view"><Icon name="map" size={15} /></button>
         </div>
       </main>
 
       {sel && (
         <section className="detail">
           <div className="dinner">
+            <div className="sheet-handle" onClick={reset} />
             <div className="dhead">
+              <button className="dback" onClick={reset} aria-label="Back to France"><Icon name="map" size={14} /> France</button>
               <div className="bar" style={{ background: sel.color }} />
               <div className="k">Wine region · France</div>
               <h2 style={{ color: sel.color }}>{sel.name}</h2>

@@ -1,4 +1,6 @@
 // Shared UI helpers ported from the standalone almanac.
+import type { ReactNode } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export const COLORS: Record<string, string> = {
   bordeaux: "#7b2d3b", sudouest: "#9c5a3c", bourgogne: "#8a3324", beaujolais: "#b4532f",
@@ -66,6 +68,75 @@ export function GrapePill({ name, onClick }: { name: string; onClick?: () => voi
       <GrapeDot name={name} />
       {name}
     </span>
+  );
+}
+
+// ---- Navigation helpers (additive) ----
+
+export type Crumb = { label: string; to?: string };
+
+/**
+ * Universal "never a dead end" affordance: a ‹ Back button (history -1) plus
+ * optional breadcrumb links and trailing action children. Keyboard friendly,
+ * ≥44px tap target.
+ */
+export function BackBar({
+  crumbs,
+  fallback = "/",
+  children,
+}: {
+  crumbs?: Crumb[];
+  fallback?: string;
+  children?: ReactNode;
+}) {
+  const nav = useNavigate();
+  const goBack = () => {
+    if (window.history.length > 1) nav(-1);
+    else nav(fallback);
+  };
+  return (
+    <div className="backbar ui">
+      <button type="button" className="backbtn" onClick={goBack} title="Go back" aria-label="Go back">
+        <span aria-hidden="true">‹</span> Back
+      </button>
+      {crumbs && crumbs.length > 0 && (
+        <nav className="crumbs" aria-label="Breadcrumb">
+          {crumbs.map((c, i) => (
+            <span className="crumb" key={i}>
+              {i > 0 && <span className="sep" aria-hidden="true">/</span>}
+              {c.to ? <Link to={c.to}>{c.label}</Link> : <span className="cur">{c.label}</span>}
+            </span>
+          ))}
+        </nav>
+      )}
+      {children && <div className="backbar-actions">{children}</div>}
+    </div>
+  );
+}
+
+/** A removable active-filter chip (label + ✕). ≥44px-friendly tap target. */
+export function RemovableChip({
+  label,
+  value,
+  onRemove,
+  title,
+}: {
+  label: string;
+  value?: ReactNode;
+  onRemove: () => void;
+  title?: string;
+}) {
+  return (
+    <button
+      type="button"
+      className="chip on filter-chip"
+      onClick={onRemove}
+      title={title || `Remove filter: ${label}`}
+    >
+      <span className="fc-k">{label}</span>
+      {value != null && <span className="fc-v">{value}</span>}
+      <span className="fc-x" aria-hidden="true">✕</span>
+    </button>
   );
 }
 
