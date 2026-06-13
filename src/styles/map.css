@@ -56,6 +56,26 @@ svg#map.grabbing{cursor:grabbing}
 .prod .pg{font-family:var(--sans);font-size:11px;color:var(--ink-faint);margin-top:2px}
 .prod .pnote{font-size:12.5px;color:var(--ink-soft);margin-top:3px;line-height:1.45}
 .dactions{padding:12px 20px;border-top:1px solid var(--line);display:flex;gap:8px;flex-wrap:wrap}
+
+/* ===== Clickable interactivity (grapes / appellations / houses) ===== */
+.gdot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:0;box-shadow:0 0 0 1px rgba(0,0,0,.12) inset;flex:none}
+.grape-pill{display:inline-flex;align-items:center;cursor:pointer;transition:.13s}
+.grape-pill:hover,.grape-pill:focus-visible{border-color:var(--gold);background:#f6edd9;outline:none}
+.grape-pill:focus-visible{box-shadow:0 0 0 3px rgba(184,137,59,.25)}
+.app-click{cursor:pointer;transition:.13s}
+.app-click:hover,.app-click:focus-visible{border-color:var(--gold);background:#f6edd9;outline:none}
+.app-click:focus-visible{box-shadow:0 0 0 3px rgba(184,137,59,.25)}
+.prod-click{cursor:pointer;border-radius:8px;transition:background .12s}
+.prod-click:hover,.prod-click:focus-visible{background:#f6edd9;outline:none}
+.prod-click:focus-visible{box-shadow:0 0 0 2px rgba(184,137,59,.35)}
+/* clickable grape tags in tables */
+.tag-click{cursor:pointer;display:inline-flex;align-items:center;transition:.13s}
+.tag-click:hover,.tag-click:focus-visible{border-color:var(--gold);background:#f1e6cf;color:var(--ink);outline:none}
+.tag-click .gdot{width:8px;height:8px;margin-right:5px}
+/* removable filter chip */
+.filter-chip{cursor:pointer}
+/* clearer clickable rows (Grapes table) */
+table.data tbody tr.row-click:hover{background:#f8efdb}
 @media(max-width:900px){.maplayout{grid-template-columns:1fr}.detail{position:fixed;top:58px;right:0;bottom:0;width:min(384px,92vw);z-index:30;box-shadow:-8px 0 30px var(--shadow)}}
 
 /* ===== Scorecard (Best) ===== */

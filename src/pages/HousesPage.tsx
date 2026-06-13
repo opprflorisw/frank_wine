@@ -2,22 +2,26 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { Badge, TypeBadge, TypeDot, TYPE_ORDER, classBadge } from "../lib/ui";
+import { Badge, TypeBadge, TypeDot, GrapeDot, TYPE_ORDER, classBadge } from "../lib/ui";
 
 export default function HousesPage() {
   const [params] = useSearchParams();
   const regions = useQuery(api.wine.listRegions);
   const [region, setRegion] = useState(params.get("region") || "all");
   const [grape, setGrape] = useState(params.get("grape") || "all");
-  const [type, setType] = useState("all");
-  const [q, setQ] = useState("");
+  const [type, setType] = useState(params.get("type") || "all");
+  const [q, setQ] = useState(params.get("q") || "");
+  const [appellation, setAppellation] = useState(params.get("appellation") || "");
 
-  const houses = useQuery(api.wine.listHouses, {
+  const rawHouses = useQuery(api.wine.listHouses, {
     region: region === "all" ? undefined : region,
     grape: grape === "all" ? undefined : grape,
     type: type === "all" ? undefined : type,
     search: q.trim() || undefined,
   });
+  const houses = rawHouses?.filter(
+    (h) => !appellation || (h.appellation || "") === appellation || (h.appellation || "").includes(appellation),
+  );
   const grapeOpts = useMemo(
     () => [...new Set((regions ?? []).flatMap((r) => r.grapes))].sort(),
     [regions],
@@ -44,6 +48,11 @@ export default function HousesPage() {
           <option value="all">All grapes</option>
           {grapeOpts.map((g) => <option key={g} value={g}>{g}</option>)}
         </select>
+        {appellation && (
+          <button className="chip on filter-chip" title="Clear appellation filter" onClick={() => setAppellation("")}>
+            Appellation: {appellation} ✕
+          </button>
+        )}
       </div>
       <div className="toolbar ui" style={{ top: 112 }}>
         <label>Wine type</label>
@@ -67,7 +76,13 @@ export default function HousesPage() {
                 <td>{h.appellation}</td>
                 <td>{classBadge(h.classification) ? <Badge cls={h.classification} /> : <span className="muted">—</span>}</td>
                 <td>{(h.types || []).map((t) => <TypeBadge key={t} t={t} />)}</td>
-                <td>{(h.grapes || []).map((g) => <span key={g} className="tag">{g}</span>)}</td>
+                <td>{(h.grapes || []).map((g) => (
+                  <span key={g} className="tag tag-click" role="button" tabIndex={0} title={`Filter by ${g}`}
+                    onClick={() => setGrape(g)}
+                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setGrape(g); } }}>
+                    <GrapeDot name={g} />{g}
+                  </span>
+                ))}</td>
               </tr>
             ))}
           </tbody>

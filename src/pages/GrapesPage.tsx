@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { norm } from "../lib/ui";
+import { norm, GrapeDot } from "../lib/ui";
 
 export default function GrapesPage() {
   const grapes = useQuery(api.wine.listGrapes);
@@ -38,8 +38,8 @@ export default function GrapesPage() {
           <thead><tr><th>Grape</th><th>Colour</th><th>Regions</th><th>Houses</th><th>Notable producers</th></tr></thead>
           <tbody>
             {list.map((g) => (
-              <tr key={g.name} onClick={() => nav(`/houses?grape=${encodeURIComponent(g.name)}`)}>
-                <td><span className="dot" style={{ background: g.color === "red" ? "#7b2d3b" : "#cda84e", display: "inline-block", width: 9, height: 9, borderRadius: "50%", marginRight: 7 }} /><span className="cellname">{g.name}</span></td>
+              <tr key={g.name} className="row-click" onClick={() => nav(`/houses?grape=${encodeURIComponent(g.name)}`)}>
+                <td><GrapeDot name={g.name} /><span className="cellname">{g.name}</span></td>
                 <td className="muted">{g.color === "red" ? "Red grape" : "White grape"}</td>
                 <td>{g.regions.slice(0, 4).map((x) => <span key={x} className="tag">{x}</span>)}{g.regions.length > 4 && <span className="muted"> +{g.regions.length - 4}</span>}</td>
                 <td><span className="count-pill">{g.houses}</span></td>

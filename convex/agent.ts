@@ -25,18 +25,21 @@ const TOOLS: any = [
 export const chat = action({
   args: { threadId: v.string(), message: v.string() },
   handler: async (ctx, { threadId, message }) => {
-    await ctx.runMutation(internal.messages.add, { threadId, role: "user", content: message });
+    await ctx.runMutation(internal.messages.add, { threadId, role: "user", content: message, done: true });
+    const asstId = await ctx.runMutation(internal.messages.add, { threadId, role: "assistant", content: "", done: false });
 
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
       const msg =
         "The AI guide isn't switched on yet — a Gemini API key needs to be set on the backend. Run `npx convex env set GEMINI_API_KEY …` to enable me. Meanwhile, explore the map, regions, houses and trips from the menu!";
-      await ctx.runMutation(internal.messages.add, { threadId, role: "assistant", content: msg });
+      await ctx.runMutation(internal.messages.patch, { id: asstId, content: msg, done: true });
       return msg;
     }
 
     const history = await ctx.runQuery(api.messages.listByThread, { threadId });
-    const contents: any[] = history.map((m) => ({ role: m.role === "assistant" ? "model" : "user", parts: [{ text: m.content }] }));
+    const contents: any[] = history
+      .filter((m) => m._id !== asstId && m.content)
+      .map((m) => ({ role: m.role === "assistant" ? "model" : "user", parts: [{ text: m.content }] }));
 
     const ai = new GoogleGenAI({ apiKey });
     const model = process.env.CHAT_MODEL || "gemini-3.1-flash-lite";
@@ -73,6 +76,17 @@ export const chat = action({
     }
 
     let answer = "";
+    let lastPatch = 0;
+    let lastPatched = "";
+    async function flush(force: boolean) {
+      const now = Date.now();
+      if (!force && now - lastPatch < 60 && answer.length - lastPatched.length < 40) return;
+      if (!force && answer === lastPatched) return;
+      lastPatch = now;
+      lastPatched = answer;
+      await ctx.runMutation(internal.messages.patch, { id: asstId, content: answer });
+    }
+
     for (let turn = 0; turn < 6; turn++) {
       const resp: any = await ai.models.generateContent({ model, contents, config: { systemInstruction: SYSTEM, tools: TOOLS } });
       const fcs = resp.functionCalls;
@@ -87,11 +101,25 @@ export const chat = action({
         contents.push({ role: "user", parts });
         continue;
       }
-      answer = resp.text || "";
+      // Final answer: re-issue the same request as a stream so we can patch
+      // the assistant doc token-by-token as the text grows.
+      const stream = await ai.models.generateContentStream({ model, contents, config: { systemInstruction: SYSTEM, tools: TOOLS } });
+      for await (const chunk of stream) {
+        let t = "";
+        try {
+          t = chunk.text || "";
+        } catch {
+          t = "";
+        }
+        if (t) {
+          answer += t;
+          await flush(false);
+        }
+      }
       break;
     }
     if (!answer) answer = "Sorry — I couldn't put together an answer just then. Try rephrasing?";
-    await ctx.runMutation(internal.messages.add, { threadId, role: "assistant", content: answer });
+    await ctx.runMutation(internal.messages.patch, { id: asstId, content: answer, done: true });
     return answer;
   },
 });

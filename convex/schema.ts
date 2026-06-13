@@ -86,5 +86,6 @@ export default defineSchema({
     threadId: v.string(),
     role: v.string(), // user | assistant
     content: v.string(),
+    done: v.optional(v.boolean()),
   }).index("by_thread", ["threadId"]),
 });

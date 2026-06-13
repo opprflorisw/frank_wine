@@ -42,6 +42,33 @@ export function Badge({ cls }: { cls?: string }) {
   return <span className={`badge ${b[0]}`}>{b[1]}</span>;
 }
 
+// Red/white grape colour dot (red #7b2d3b / white #cda84e)
+export function GrapeDot({ name }: { name: string }) {
+  return <span className="gdot" style={{ background: grapeIsRed(name) ? "#7b2d3b" : "#cda84e" }} />;
+}
+
+// Clickable grape pill: dot + name. Keyboard-activatable, dependency-free.
+export function GrapePill({ name, onClick }: { name: string; onClick?: () => void }) {
+  return (
+    <span
+      className="app grape-pill"
+      role="button"
+      tabIndex={0}
+      title={`See producers of ${name}`}
+      onClick={onClick}
+      onKeyDown={(e) => {
+        if (onClick && (e.key === "Enter" || e.key === " ")) {
+          e.preventDefault();
+          onClick();
+        }
+      }}
+    >
+      <GrapeDot name={name} />
+      {name}
+    </span>
+  );
+}
+
 const ICON: Record<string, string> = {
   map: '<path d="M9 4 3 6v15l6-2 6 2 6-2V3l-6 2-6-2z"/><path d="M9 4v15M15 5v15"/>',
   grid: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',

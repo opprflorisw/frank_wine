@@ -1,0 +1,289 @@
+/* ============================================================
+   Frank's Wine Almanac — Responsive / mobile layer
+   Loaded LAST in main.tsx, so it overrides base styles.
+   Palette reused from almanac.css (wine reds, --gold, etc.).
+   Breakpoints:
+     <= 860px  tablet / nav collapse
+     <= 560px  phones
+     <= 480px  narrow phones (drop low-priority table columns)
+   ============================================================ */
+
+/* ---------- Global guards: never scroll the page sideways ---------- */
+html, body { max-width: 100%; overflow-x: hidden; }
+
+/* Subtle tap highlight + comfortable touch defaults */
+@media (max-width: 860px) {
+  a, button, .chip, .crumb, label { -webkit-tap-highlight-color: rgba(107, 31, 46, .12); }
+  /* iOS zooms on inputs with font-size < 16px; force 16px on phones */
+  input.search, .chat-input input, .cw-input input, select.sel {
+    font-size: 16px;
+  }
+}
+
+/* The burger lives in markup always but is desktop-hidden */
+.nav-burger { display: none; }
+
+/* ============================================================
+   1. NAV  — collapse the inline links into a burger dropdown
+   ============================================================ */
+@media (max-width: 860px) {
+  .nav {
+    gap: 12px;
+    padding: 0 14px;
+    position: sticky; /* keep sticky; dropdown is positioned relative to it */
+  }
+  .nav .logo { font-size: 18px; }
+
+  /* Hide the stats on small screens */
+  .nav .count { display: none; }
+
+  /* Show the hamburger, right-aligned (after .spacer) */
+  .nav-burger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex: none;
+    border: 1px solid rgba(231, 201, 142, .45);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .08);
+    color: #f7ecd9;
+    font-size: 20px;
+    line-height: 1;
+  }
+  .nav-burger:hover { background: rgba(255, 255, 255, .16); }
+
+  /* Links become a full-width dropdown panel under the bar, hidden by default */
+  .nav .links {
+    position: fixed;
+    top: 58px;           /* directly under the 58px nav bar */
+    left: 0;
+    right: 0;
+    display: none;       /* revealed via .open */
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 2px;
+    margin: 0;
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px));
+    max-height: calc(100vh - 58px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background: linear-gradient(180deg, #6b1f2e, #5a1622);
+    border-bottom: 3px solid var(--gold);
+    box-shadow: 0 14px 30px rgba(40, 12, 16, .5);
+    z-index: 39; /* just under the nav bar (z40), above page content */
+  }
+  .nav .links.open { display: flex; }
+
+  /* Full-width, tall tap targets (>= 44px) */
+  .nav .links a {
+    width: 100%;
+    font-size: 16px;
+    padding: 13px 14px;        /* ~46px tall */
+    border-radius: 9px;
+    gap: 12px;
+  }
+  .nav .links a.active {
+    box-shadow: inset 3px 0 0 var(--gold);
+  }
+}
+
+/* ============================================================
+   2. MAP PAGE — stack the map over a scrollable detail panel
+   ============================================================ */
+@media (max-width: 860px) {
+  /* Stack vertically: map on top, detail below. Override the desktop
+     fixed-sidebar rule from map.css (which kicks in at <=900px). */
+  .maplayout,
+  .maplayout.nodetail {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: calc(100vh - 58px);
+  }
+
+  .stage {
+    height: 52vh;
+    min-height: 320px;
+    flex: none;
+  }
+  svg#map { touch-action: none; } /* keep pan/zoom gestures working */
+
+  /* Detail panel: full-width stacked card below the map (not a sidebar) */
+  .detail {
+    position: static;        /* undo map.css fixed sidebar */
+    top: auto; right: auto; bottom: auto;
+    width: 100%;
+    max-width: 100%;
+    min-height: 40vh;
+    border-left: none;
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -4px 18px var(--shadow);
+    z-index: auto;
+  }
+  .detail .dbody { overflow-y: visible; } /* page scrolls, not an inner box */
+
+  /* Shrink the floating map controls so they don't overlap */
+  .breadcrumb { top: 10px; left: 10px; gap: 5px; max-width: calc(100% - 20px); flex-wrap: wrap; }
+  .crumb { font-size: 12px; padding: 6px 10px; }
+
+  .layers {
+    top: 10px; right: 10px;
+    padding: 7px 9px;
+    font-size: 12px;
+    max-width: 46vw;
+  }
+  .layers .lh { margin-bottom: 4px; }
+  .layers label { padding: 4px 0; min-height: 30px; } /* easier to tap */
+
+  .legend {
+    left: 10px; bottom: 10px;
+    font-size: 10.5px;
+    padding: 7px 9px;
+    max-width: 56vw;
+  }
+
+  /* Zoom buttons: keep bottom-right but nudge UP so they clear the chat FAB
+     (FAB sits ~bottom:16-22px right:16-22px, 58px wide). */
+  .zoomctl {
+    right: 10px;
+    bottom: 84px;            /* above the FAB */
+    gap: 8px;
+  }
+  .zoomctl button { width: 42px; height: 42px; font-size: 19px; } /* >=44 target-ish */
+}
+
+@media (max-width: 560px) {
+  .stage { height: 46vh; min-height: 280px; }
+  .dhead { padding: 14px 16px 12px; }
+  .dhead h2 { font-size: 22px; }
+  .dbody { padding: 4px 16px 20px; }
+  .dactions { padding: 12px 16px; }
+  .dactions .btn { flex: 1 1 auto; justify-content: center; }
+}
+
+/* ============================================================
+   3. TOOLBARS — drop sticky/absolute positioning, wrap controls
+   ============================================================ */
+@media (max-width: 860px) {
+  .toolbar.ui,
+  .toolbar {
+    position: static !important;  /* override sticky + inline style={{top:112}} */
+    top: auto !important;
+    margin: 12px 0;
+    padding: 10px 12px;
+    gap: 8px;
+  }
+  /* Search spans the full row; selects/labels/chips wrap underneath */
+  .toolbar .field.grow,
+  .toolbar .field { flex: 1 1 100%; width: 100%; }
+  .toolbar .grow { flex: 1 1 100%; }
+  input.search { font-size: 16px; }
+  .toolbar label { width: 100%; margin-top: 2px; }
+  select.sel { flex: 1 1 140px; font-size: 16px; padding: 9px 10px; }
+  .chips { width: 100%; }
+}
+
+@media (max-width: 560px) {
+  .toolbar select.sel { flex: 1 1 100%; }
+  .chip { padding: 8px 12px; font-size: 12.5px; } /* taller tap target */
+}
+
+/* ============================================================
+   4. TABLES — horizontal scroll + shrink + hide low-priority cols
+   ============================================================ */
+.tablewrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 560px) {
+  table.data { font-size: 12.5px; }
+  table.data thead th { padding: 9px 10px; font-size: 10px; }
+  table.data tbody td { padding: 8px 10px; }
+  .cellname { font-size: 13px; }
+  .tag { font-size: 10px; padding: 1px 7px; }
+}
+
+/* Very narrow phones: all four data tables (Houses, Grapes, Villages, Best)
+   share the same `table.data` class with NO per-table hook, and their column
+   orders differ — hiding a fixed nth-child would drop "Regions" on Grapes or a
+   score column on Best. Rather than corrupt some tables, we keep every column
+   and guarantee usability through always-on horizontal scroll (.tablewrap above)
+   plus tighter type below, with key columns kept from wrapping. */
+@media (max-width: 480px) {
+  .tablewrap { border-radius: 10px; }
+  table.data { font-size: 12px; }
+  table.data thead th { padding: 8px 9px; }
+  table.data tbody td { padding: 7px 9px; }
+  /* Keep the primary name/grape column legible and on one line */
+  table.data tbody td:first-child .cellname { white-space: nowrap; }
+}
+
+/* ============================================================
+   5. GENERIC PAGES — padding, heading scale, card grids
+   ============================================================ */
+@media (max-width: 860px) {
+  .page { padding: 20px 16px 56px; }
+  .page-head h1 { font-size: 25px; }
+  .page-head .lede { font-size: 14px; }
+  /* RegionsPage cards: two columns on tablets */
+  .grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 13px; }
+}
+
+@media (max-width: 560px) {
+  .page { padding: 16px 13px 50px; }
+  .page-head h1 { font-size: 22px; }
+  .page-head .lede { font-size: 13.5px; }
+  .kicker { font-size: 10px; }
+  /* Single-column cards on phones */
+  .grid { grid-template-columns: 1fr; }
+  .rcardL h3 { font-size: 18px; }
+
+  /* BestPage scorecard: keep the inline bar compact, detail already
+     stacks to 1col at <=640px (map.css). Make the score detail comfy. */
+  .detailbox { padding: 12px 14px 16px; }
+  .scorebar { min-width: 92px; }
+  .scorebar .track { min-width: 44px; }
+
+  /* TripsPage: tlayout already 1col at <=900px; tighten the detail + mini-map */
+  .tdhead { padding: 16px 16px; }
+  .tdhead h2 { font-size: 22px; }
+  .tmap svg { height: 220px; }
+  .titin { padding: 6px 14px 18px; }
+  .tdactions { padding: 12px 14px; }
+  .stop { gap: 10px; }
+}
+
+/* ============================================================
+   6. FULL-PAGE CHAT (AskPage) — comfy input/log on phones
+   ============================================================ */
+@media (max-width: 560px) {
+  .ask-page { max-width: 100%; }
+  .chat {
+    height: calc(100vh - 200px);
+    min-height: 360px;
+    border-radius: 12px;
+  }
+  .chat-log { padding: 14px 14px; }
+  .msg .bubble { max-width: 84%; font-size: 14px; }
+  .chat-input { padding: 10px; }
+  .chat-input input { font-size: 16px; }
+  .suggest .chip { font-size: 12px; }
+}
+
+/* The floating widget already self-handles <=480px in chat.css.
+   Just make sure the FAB never sits under the map zoom controls — the
+   zoomctl override above lifts the buttons to bottom:84px, clear of the
+   FAB at bottom:16-22px. Nothing further needed here. */
+
+/* ============================================================
+   7. TOUCH-ONLY affordances
+   ============================================================ */
+@media (hover: none) {
+  /* Make clickable rows/cards feel tappable (no hover state on touch) */
+  table.data tbody tr:active { background: #fff; }
+  .rcardL:active { border-color: var(--gold); }
+  .chip:active { border-color: var(--gold); }
+}

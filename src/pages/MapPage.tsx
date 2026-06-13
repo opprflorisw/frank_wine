@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { Badge, TypeBadge, TypeDot, Icon } from "../lib/ui";
+import { Badge, TypeBadge, TypeDot, Icon, GrapePill } from "../lib/ui";
+import { openChat } from "../lib/chat";
 
 type View = { x: number; y: number; w: number; h: number };
 const clamp = (x: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, x));
@@ -10,6 +11,7 @@ const clamp = (x: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, x
 export default function MapPage() {
   const data = useQuery(api.wine.mapData);
   const [params] = useSearchParams();
+  const navigate = useNavigate();
   const [selected, setSelected] = useState<string | null>(null);
   const [vis, setVis] = useState({ wineRoutes: true, autoroutes: true, cities: true, villages: true, neighbours: true });
   const svgRef = useRef<SVGSVGElement>(null);
@@ -191,12 +193,20 @@ export default function MapPage() {
                 </div>
               )}
               <div className="block"><h3><Icon name="star" size={14} />Classification</h3><div className="classbox">{sel.classification}</div></div>
-              <div className="block"><h3><Icon name="grape" size={14} />Principal grapes</h3><div className="apps">{sel.grapes.slice(0, 12).map((g) => <span key={g} className="app">{g}</span>)}</div></div>
-              <div className="block"><h3><Icon name="pin" size={14} />Key appellations &amp; crus</h3><div className="apps">{sel.subAppellations.map((a) => <span key={a} className="app">{a}</span>)}</div></div>
+              <div className="block"><h3><Icon name="grape" size={14} />Principal grapes</h3><div className="apps">{sel.grapes.slice(0, 12).map((g) => (
+                <GrapePill key={g} name={g} onClick={() => navigate(`/houses?region=${sel.slug}&grape=${encodeURIComponent(g)}`)} />
+              ))}</div></div>
+              <div className="block"><h3><Icon name="pin" size={14} />Key appellations &amp; crus</h3><div className="apps">{sel.subAppellations.map((a) => (
+                <span key={a} className="app app-click" role="button" tabIndex={0} title={`See houses in ${a}`}
+                  onClick={() => navigate(`/houses?region=${sel.slug}&appellation=${encodeURIComponent(a)}`)}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); navigate(`/houses?region=${sel.slug}&appellation=${encodeURIComponent(a)}`); } }}>{a}</span>
+              ))}</div></div>
               <div className="block">
                 <h3><Icon name="bottle" size={14} />Major wine houses · {detail?.houses.length ?? "…"}</h3>
                 {(detail?.houses ?? []).map((h) => (
-                  <div key={h._id} className="prod">
+                  <div key={h._id} className="prod prod-click" role="button" tabIndex={0} title={`See ${h.name} in all houses`}
+                    onClick={() => navigate(`/houses?region=${sel.slug}&q=${encodeURIComponent(h.name)}`)}
+                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); navigate(`/houses?region=${sel.slug}&q=${encodeURIComponent(h.name)}`); } }}>
                     <div className="pn">{h.name}<Badge cls={h.classification} /></div>
                     <div className="pa">{h.appellation}</div>
                     <div className="pg">{(h.types || []).map((t) => <span key={t}><TypeDot t={t} />{t} </span>)} {h.grapes?.length ? "· " + h.grapes.join(", ") : ""}</div>
@@ -208,7 +218,7 @@ export default function MapPage() {
             <div className="dactions ui">
               {sel.tripCount > 0 && <Link className="btn primary" to={`/trips?region=${sel.slug}`}><Icon name="route" size={14} /> {sel.tripCount} wine trip{sel.tripCount > 1 ? "s" : ""}</Link>}
               <Link className="btn" to={`/houses?region=${sel.slug}`}><Icon name="bottle" size={14} /> All houses</Link>
-              <Link className="btn" to={`/ask`}><Icon name="chat" size={14} /> Ask about {sel.name}</Link>
+              <button className="btn" onClick={() => openChat(`Tell me about ${sel.name} — its terroir, top houses to visit, and a good wine trip.`)}><Icon name="chat" size={14} /> Ask about {sel.name}</button>
             </div>
           </div>
         </section>

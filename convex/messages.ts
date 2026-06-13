@@ -2,9 +2,16 @@ import { internalMutation, mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
 export const add = internalMutation({
-  args: { threadId: v.string(), role: v.string(), content: v.string() },
+  args: { threadId: v.string(), role: v.string(), content: v.string(), done: v.optional(v.boolean()) },
   handler: async (ctx, args) => {
-    await ctx.db.insert("messages", args);
+    return await ctx.db.insert("messages", args);
+  },
+});
+
+export const patch = internalMutation({
+  args: { id: v.id("messages"), content: v.string(), done: v.optional(v.boolean()) },
+  handler: async (ctx, { id, content, done }) => {
+    await ctx.db.patch(id, { content, ...(done !== undefined ? { done } : {}) });
   },
 });
 

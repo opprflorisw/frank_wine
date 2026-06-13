@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useAction, useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Icon } from "../lib/ui";
+import Markdown from "../components/Markdown";
 
 function threadId(): string {
   let id = localStorage.getItem("fw_thread");
@@ -26,7 +27,12 @@ export default function AskPage() {
   const [sending, setSending] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => { endRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages.length, sending]);
+  const last = messages[messages.length - 1];
+  const lastStreaming = !!last && last.role === "assistant" && last.done !== true;
+  const pending = (sending || lastStreaming) && (!last || last.role === "user");
+  const lastLen = last?.content?.length ?? 0;
+
+  useEffect(() => { endRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages.length, lastLen, pending]);
 
   async function send(text: string) {
     const q = text.trim();
@@ -58,13 +64,29 @@ export default function AskPage() {
               </div>
             </div>
           )}
-          {messages.map((m) => (
-            <div key={m._id} className={`msg ${m.role}`}>
-              <div className="avatar">{m.role === "assistant" ? "🍷" : "🙂"}</div>
-              <div className="bubble">{m.content}</div>
-            </div>
-          ))}
-          {sending && (
+          {messages.map((m, idx) => {
+            const isLast = idx === messages.length - 1;
+            const streamingThis = isLast && m.role === "assistant" && m.done !== true;
+            const empty = !m.content || !m.content.trim();
+            if (streamingThis && empty) {
+              return (
+                <div key={m._id} className="msg assistant">
+                  <div className="avatar">🍷</div>
+                  <div className="bubble typing"><span></span><span></span><span></span></div>
+                </div>
+              );
+            }
+            return (
+              <div key={m._id} className={`msg ${m.role}`}>
+                <div className="avatar">{m.role === "assistant" ? "🍷" : "🙂"}</div>
+                <div className="bubble">
+                  {m.role === "assistant" ? <Markdown text={m.content} /> : m.content}
+                  {streamingThis && !empty && <span className="caret" />}
+                </div>
+              </div>
+            );
+          })}
+          {pending && (
             <div className="msg assistant">
               <div className="avatar">🍷</div>
               <div className="bubble typing"><span></span><span></span><span></span></div>
