@@ -5,12 +5,14 @@ import { api } from "../../convex/_generated/api";
 import { Badge, TypeBadge, TypeDot, Icon, GrapePill } from "../lib/ui";
 import { openChat } from "../lib/chat";
 import { FavButton } from "../lib/favorites";
+import { RouteButton, RouteFab } from "../components/RouteControls";
+import { useRoute, type Stop } from "../lib/route";
 
 type View = { x: number; y: number; w: number; h: number };
 type House = {
   _id: string; name: string; appellation?: string; classification?: string; note?: string;
   types?: string[]; grapes?: string[]; flagship?: string; x?: number; y?: number;
-  address?: string; town?: string;
+  lat?: number; lon?: number; address?: string; town?: string;
 };
 type Tab = "overview" | "houses" | "terroir";
 const clamp = (x: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, x));
@@ -19,8 +21,11 @@ const TYPE_ORDER = ["Red", "White", "Rosé", "Sparkling", "Sweet", "Fortified"];
 
 export default function MapPage() {
   const data = useQuery(api.wine.mapData);
+  const myRoute = useRoute();
   const [params, setParams] = useSearchParams();
   const navigate = useNavigate();
+  const houseToStop = (h: House, slug: string, regionName?: string): Stop =>
+    ({ id: h._id, name: h.name, town: h.town, appellation: h.appellation, region: slug, regionName, x: h.x, y: h.y, lat: h.lat, lon: h.lon });
   const [vis, setVis] = useState({ wineRoutes: true, autoroutes: true, cities: true, villages: true, houses: true, neighbours: true });
   const [layersOpen, setLayersOpen] = useState(false);
   const [house, setHouse] = useState<House | null>(null);   // selected wine house (pin / row)
@@ -277,6 +282,8 @@ export default function MapPage() {
   const pinPath = (x: number, y: number, s: number) => `M${x} ${y}L${x - s} ${y - 2.4 * s}A${s} ${s} 0 1 1 ${x + s} ${y - 2.4 * s}Z`;
 
   const tabsFor = (n: number): [Tab, string][] => [["overview", "Overview"], ["houses", `Houses · ${n}`], ["terroir", "Terroir"]];
+  const routeIds = new Set(myRoute.map((s) => s.id));
+  const routePts = myRoute.filter((s) => s.x != null && s.y != null);
 
   return (
     <div className={`maplayout ${selected ? "" : "nodetail"} ${sheetMin ? "sheetmin" : ""} ${sheetFull ? "sheetfull" : ""}`}>
@@ -316,6 +323,16 @@ export default function MapPage() {
           {selected && vis.wineRoutes && (ctx.wineRoutes as any)[selected]?.length > 1 && (
             <path className="wroute" d={`M${(ctx.wineRoutes as any)[selected].map((p: number[]) => p.join(",")).join("L")}`} stroke={sel!.color} />
           )}
+          {/* the user's own route, drawn across the whole map */}
+          {routePts.length > 1 && (
+            <path className="myroute-line" d={`M${routePts.map((s) => `${s.x},${s.y}`).join("L")}`} strokeWidth={1.8 * f} strokeDasharray={`${4 * f} ${2.6 * f}`} />
+          )}
+          {routePts.map((s, i) => (
+            <g key={"mr" + s.id} className="myroute-pin" pointerEvents="none">
+              <circle cx={s.x!} cy={s.y!} r={3 * f} />
+              <text x={s.x!} y={s.y! + 1.05 * f} fontSize={3.4 * f} textAnchor="middle">{i + 1}</text>
+            </g>
+          ))}
           {/* villages / crus — open rings in the region colour */}
           {selected && vis.villages && (detail?.villages ?? []).map((t) => (
             <g key={t._id} className="village">
@@ -325,7 +342,7 @@ export default function MapPage() {
           ))}
           {/* wine-house pins — teardrop markers, click for that exact house */}
           {selected && vis.houses && houses.filter((h) => h.x != null && h.y != null).map((h) => (
-            <g key={h._id} className={`house-pin ${house?._id === h._id ? "on" : ""}`}
+            <g key={h._id} className={`house-pin ${house?._id === h._id ? "on" : ""} ${routeIds.has(h._id) ? "inroute" : ""}`}
               onClick={(e) => { e.stopPropagation(); if (!movedRef.current) selectHouse(h); }}>
               <circle className="hhit" cx={h.x} cy={h.y} r={4.4 * f} />
               <path className="hpin" d={pinPath(h.x!, h.y!, (house?._id === h._id ? 2.5 : 1.9) * f)} fill={house?._id === h._id ? undefined : sel!.color} strokeWidth={1 * f} />
@@ -354,6 +371,7 @@ export default function MapPage() {
           <span className="mt-item"><i className="mt-vill" style={{ borderColor: sel?.color || "#9c7" }} /> Village / cru</span>
           <span className="mt-item"><i className="mt-house" style={{ background: sel?.color || "var(--wine)" }} /> Wine house</span>
         </div>
+        <RouteFab />
         <div className="zoomctl ui">
           <button onClick={() => zoomBtn(0.7)} aria-label="Zoom in">+</button>
           <button onClick={() => zoomBtn(1 / 0.7)} aria-label="Zoom out">−</button>
@@ -390,6 +408,7 @@ export default function MapPage() {
                   <h2 style={{ color: sel.color }}>{house.name}<Badge cls={house.classification} /></h2>
                   {(house.town || house.address) && <p className="hloc"><Icon name="pin" size={13} /> {house.address || house.town}{house.address && house.town && house.address.indexOf(house.town) < 0 ? `, ${house.town}` : ""}</p>}
                   <div className="types">{(house.types || []).map((t) => <TypeBadge key={t} t={t} />)}</div>
+                  {house.x != null && <div className="hroute-add"><RouteButton stop={houseToStop(house, sel.slug, sel.name)} /></div>}
                 </div>
                 <div className="dbody">
                   {house.flagship && <div className="block"><h3><Icon name="star" size={14} />Flagship</h3><div className="classbox">{house.flagship}</div></div>}
@@ -468,6 +487,7 @@ export default function MapPage() {
                         <div className="pn">{h.name}<Badge cls={h.classification} /></div>
                         <div className="pa">{h.appellation}{h.town ? ` · ${h.town}` : ""}</div>
                         <div className="pg">{(h.types || []).map((t) => <span key={t}><TypeDot t={t} />{t} </span>)}{h.grapes?.length ? "· " + h.grapes.slice(0, 4).join(", ") : ""}</div>
+                        {h.x != null && <div className="prod-route"><RouteButton compact stop={houseToStop(h, sel.slug, sel.name)} /></div>}
                       </div>
                     ))}
                     {!houses.length && <div className="empty mini">No {typeFilter} houses listed here.</div>}
@@ -489,7 +509,8 @@ export default function MapPage() {
                 )}
 
                 <div className="dactions ui">
-                  {sel.tripCount > 0 && <Link className="btn primary" to={`/trips?region=${sel.slug}`}><Icon name="route" size={14} /> {sel.tripCount} wine trip{sel.tripCount > 1 ? "s" : ""}</Link>}
+                  <Link className="btn primary" to={`/routes?region=${sel.slug}`}><Icon name="route" size={14} /> Scenic routes</Link>
+                  {sel.tripCount > 0 && <Link className="btn" to={`/trips?region=${sel.slug}`}><Icon name="cal" size={14} /> {sel.tripCount} trip{sel.tripCount > 1 ? "s" : ""}</Link>}
                   <Link className="btn" to={`/houses?region=${sel.slug}`}><Icon name="bottle" size={14} /> All houses</Link>
                   <button className="btn" onClick={() => openChat(`Tell me about ${sel.name} — its terroir, top houses to visit, and a good wine trip.`)}><Icon name="chat" size={14} /> Ask Franky</button>
                 </div>

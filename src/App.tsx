@@ -10,8 +10,11 @@ import TripsPage from "./pages/TripsPage";
 import AskPage from "./pages/AskPage";
 import ComparePage from "./pages/ComparePage";
 import MyCellarPage from "./pages/MyCellarPage";
+import RoutesPage from "./pages/RoutesPage";
+import RoutePage from "./pages/RoutePage";
 import ChatWidget from "./components/ChatWidget";
 import SearchPalette from "./components/SearchPalette";
+import MobileTabBar from "./components/MobileTabBar";
 
 export default function App() {
   return (
@@ -26,11 +29,14 @@ export default function App() {
         <Route path="/best" element={<BestPage />} />
         <Route path="/compare" element={<ComparePage />} />
         <Route path="/trips" element={<TripsPage />} />
+        <Route path="/routes" element={<RoutesPage />} />
+        <Route path="/route" element={<RoutePage />} />
         <Route path="/cellar" element={<MyCellarPage />} />
         <Route path="/ask" element={<AskPage />} />
       </Routes>
       <SearchPalette />
       <ChatWidget />
+      <MobileTabBar />
     </>
   );
 }

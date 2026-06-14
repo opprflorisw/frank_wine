@@ -1,0 +1,153 @@
+/* ============================================================
+   Wine Routes + Route Builder + dedicated mobile tab bar.
+   Imported LAST in main.tsx so it can override earlier layers.
+   ============================================================ */
+
+/* ---------- Add-to-route button ---------- */
+.routebtn{display:inline-flex;align-items:center;gap:6px;background:#f3ebda;border:1px solid var(--line);
+  color:var(--wine);font-family:var(--sans);font-size:12px;font-weight:600;border-radius:14px;padding:6px 12px;
+  cursor:pointer;min-height:32px;transition:.12s}
+.routebtn:hover{border-color:var(--gold)}
+.routebtn.on{background:var(--wine);border-color:var(--wine);color:#fff}
+.routebtn.compact{padding:5px;width:32px;height:32px;justify-content:center;border-radius:50%}
+.hroute-add{margin-top:9px}
+.prod-route{margin-top:6px}
+.prod{position:relative}
+
+/* ---------- Route line drawn on the main map ---------- */
+.myroute-line{fill:none;stroke:#1f6b4a;stroke-linecap:round;stroke-linejoin:round;opacity:.92;vector-effect:non-scaling-stroke}
+.myroute-pin circle{fill:#1f6b4a;stroke:#fff;stroke-width:.6px}
+.myroute-pin text{fill:#fff;font-family:var(--sans);font-weight:700}
+.house-pin.inroute .hpin{stroke:#1f6b4a;stroke-width:1.6px}
+
+/* ---------- Route FAB on the map (desktop) ---------- */
+.route-fab{position:absolute;left:13px;bottom:58px;z-index:7;display:inline-flex;align-items:center;gap:7px;
+  background:#1f6b4a;color:#fff;border-radius:22px;padding:9px 15px;font-family:var(--sans);font-size:13px;
+  box-shadow:0 3px 12px rgba(0,0,0,.28);text-decoration:none}
+.route-fab b{font-size:15px}
+.route-fab:hover{background:#185539;text-decoration:none}
+
+/* ============================================================
+   Named "Scenic Wine Routes" listing + detail
+   ============================================================ */
+.rtgroup{margin-top:22px}
+.rtgroup-h{font-family:var(--serif);font-size:18px;color:var(--wine);margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.rtcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.rtcard{display:block;background:var(--card);border:1px solid var(--line);border-left-width:5px;border-radius:12px;
+  padding:13px 15px;text-decoration:none;color:var(--ink);transition:.14s}
+.rtcard:hover{box-shadow:0 3px 14px var(--shadow);border-color:var(--gold);text-decoration:none;transform:translateY(-1px)}
+.rtc-name{font-family:var(--serif);font-size:16.5px;font-weight:600}
+.rtc-sub{font-family:var(--sans);font-size:12px;color:var(--wine-2);font-style:italic;margin-top:2px}
+.rtc-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft)}
+.rtc-meta span{display:inline-flex;align-items:center;gap:5px}
+
+.rtdetail{max-width:780px}
+.rtd-head{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--wine);border-radius:14px;padding:20px 22px}
+.rtd-region{font-family:var(--sans);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft)}
+.rtd-head h1{margin:5px 0 3px;font-size:27px}
+.rtd-sub{font-family:var(--sans);font-style:italic;color:var(--wine-2);margin:0 0 10px;font-size:14.5px}
+.rtd-meta{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);margin-bottom:12px}
+.rtd-meta span{display:inline-flex;align-items:center;gap:6px}.rtd-meta b{color:var(--ink)}
+.rtd-summary{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink-soft)}
+.rtd-highlights{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.hl-chip{font-family:var(--sans);font-size:11.5px;background:#efe6d3;border:1px solid var(--line);border-radius:13px;padding:4px 10px}
+
+.rtd-map,.route-map{background:linear-gradient(160deg,#f0eadc,#e9dfca);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:16px 0}
+.rtd-map svg,.route-map svg{width:100%;height:300px;display:block}
+.route-map.empty-map,.empty-map{padding:40px;text-align:center;color:var(--ink-soft);font-family:var(--sans);font-size:13px}
+
+.rtd-stops{list-style:none;margin:0;padding:0}
+.rtd-stop{display:flex;gap:13px;padding:13px 2px;border-bottom:1px solid var(--line-soft);align-items:flex-start}
+.rtd-stop:last-child{border-bottom:none}
+.rsn{flex:none;width:28px;height:28px;border-radius:50%;color:#fff;font-family:var(--sans);font-weight:700;font-size:13px;
+  display:flex;align-items:center;justify-content:center}
+.rtd-sbody{flex:1;min-width:0}
+.rtd-sname{font-size:15.5px;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rtd-sname a{color:var(--wine)}
+.role-tag{font-family:var(--sans);font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#fff;padding:2px 7px;border-radius:10px}
+.kind-tag{font-family:var(--sans);font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--wine);background:#f3ebda;border:1px solid var(--line);padding:2px 7px;border-radius:10px}
+.rtd-stown{font-family:var(--sans);font-size:12px;color:var(--wine-2);font-style:italic;margin-top:1px}
+.rtd-snote{font-size:13px;color:var(--ink-soft);margin-top:3px;line-height:1.45}
+
+.route-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+
+/* ============================================================
+   "My Route" builder page
+   ============================================================ */
+.route-empty{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:42px 18px;color:var(--ink-soft)}
+.route-empty h3{margin:6px 0 0;color:var(--ink);font-size:20px}
+.route-empty p{max-width:420px;font-size:14px;line-height:1.55}
+.route-empty .btn{margin-top:8px}
+
+.route-stats{display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);
+  border-radius:12px;padding:13px 18px;margin-bottom:14px}
+.route-stats .rs{display:flex;flex-direction:column}
+.route-stats .rs b{font-size:22px;color:var(--wine);line-height:1}
+.route-stats .rs span{font-family:var(--sans);font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft);margin-top:3px}
+.route-stats .rs-actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.btn.sm{padding:7px 11px;font-size:12.5px}
+
+.route-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.route-list{list-style:none;margin:0;padding:0;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.route-stop{display:flex;gap:12px;padding:12px 14px;border-bottom:1px solid var(--line-soft);align-items:center}
+.route-stop:last-child{border-bottom:none}
+.route-stop .rsn{background:#6b1f2e}
+.route-stop .rsbody{flex:1;min-width:0}
+.rsname{font-size:15px;font-weight:600;color:var(--wine);text-decoration:none;display:block}
+.rsname:hover{text-decoration:underline}
+.rsmeta{font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);margin-top:1px}
+.rsleg{font-family:var(--sans);font-size:10.5px;color:var(--ink-faint);margin-top:3px}
+.rsctl{display:flex;align-items:center;gap:3px}
+.rsctl button{width:30px;height:30px;border:1px solid var(--line);background:#f7f1e6;border-radius:7px;color:var(--ink-soft);cursor:pointer;font-size:11px}
+.rsctl button:hover:not(:disabled){border-color:var(--gold);color:var(--ink)}
+.rsctl button:disabled{opacity:.35;cursor:default}
+.rsctl .rsx{color:var(--wine)}
+.btn.danger{color:var(--wine)}
+.btn.danger:hover{background:#f6e3e3;border-color:var(--wine)}
+
+@media(max-width:760px){ .route-grid{grid-template-columns:1fr} }
+
+/* ============================================================
+   DEDICATED MOBILE TAB BAR — one-tap primary navigation
+   ============================================================ */
+.mtab{display:none}
+@media (max-width:860px){
+  .mtab{
+    display:grid;grid-template-columns:repeat(5,1fr);
+    position:fixed;left:0;right:0;bottom:0;z-index:40;
+    height:calc(56px + env(safe-area-inset-bottom,0px));
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    background:#fffdf8;border-top:1px solid var(--line);
+    box-shadow:0 -4px 18px rgba(40,20,15,.13);
+  }
+  .mtab-i{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+    background:none;border:none;font-family:var(--sans);font-size:10px;font-weight:600;
+    color:var(--ink-soft);cursor:pointer;text-decoration:none;padding:7px 0 0}
+  .mtab-i .ic{opacity:.8}
+  .mtab-i.on{color:var(--wine)}
+  .mtab-i.on .ic{opacity:1}
+  .mtab-i:active{background:rgba(107,31,46,.06)}
+  .mtab-badgewrap{position:relative;display:inline-flex}
+  .mtab-badge{position:absolute;top:-6px;right:-10px;background:#1f6b4a;color:#fff;border-radius:9px;
+    min-width:16px;height:16px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px}
+
+  /* Make room for the bar; the map shrinks, other pages get bottom padding */
+  .maplayout, .maplayout.nodetail{
+    height:calc(100dvh - 58px - 56px - env(safe-area-inset-bottom,0px));
+    min-height:0;
+  }
+  .page{ padding-bottom:calc(56px + env(safe-area-inset-bottom,0px) + 22px); }
+
+  /* Franky now lives in the tab bar → drop the floating FAB & desktop route FAB */
+  .cw-fab{ display:none; }
+  .route-fab{ display:none; }
+  /* chat panel must cover the tab bar */
+  .cw-panel{ z-index:60; }
+
+  /* route page tweaks */
+  .route-stats{gap:12px;padding:12px 14px}
+  .route-stats .rs b{font-size:19px}
+  .route-stats .rs-actions{width:100%;margin-left:0}
+  .rtd-map svg,.route-map svg{height:240px}
+  .route-actions .btn{flex:1 1 auto;justify-content:center}
+}

@@ -77,6 +77,22 @@ export default defineSchema({
     bbox: v.array(v.number()),
   }).index("by_region", ["regionSlug"]),
 
+  // named scenic wine routes (Route des Grands Crus, Route des Vins d'Alsace, …)
+  routes: defineTable({
+    regionSlug: v.string(),
+    regionName: v.string(),
+    name: v.string(),
+    subtitle: v.optional(v.string()),
+    lengthKm: v.optional(v.number()),
+    driveTime: v.optional(v.string()),
+    bestSeason: v.optional(v.string()),
+    summary: v.string(),
+    highlights: v.array(v.string()),
+    stops: v.array(v.any()),   // { name, kind, town, role, note, x?, y?, lat?, lon?, houseId? }
+    path: v.array(v.any()),    // polyline of [x,y] through stops that have coords
+    bbox: v.array(v.number()),
+  }).index("by_region", ["regionSlug"]),
+
   // single-row map context (key === "context")
   appData: defineTable({
     key: v.string(),

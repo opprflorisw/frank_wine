@@ -7,10 +7,10 @@ import { OPEN_SEARCH_EVENT } from "../lib/search";
 
 type Item = { id: string; label: string; sub: string; to: string };
 const GROUPS: [keyof Results, string][] = [
-  ["regions", "Regions"], ["appellations", "Appellations"], ["houses", "Wine houses"],
+  ["regions", "Regions"], ["routes", "Wine routes"], ["appellations", "Appellations"], ["houses", "Wine houses"],
   ["grapes", "Grapes"], ["villages", "Villages"], ["trips", "Trips"],
 ];
-type Results = { regions: Item[]; houses: Item[]; appellations: Item[]; grapes: Item[]; villages: Item[]; trips: Item[] };
+type Results = { regions: Item[]; houses: Item[]; appellations: Item[]; grapes: Item[]; villages: Item[]; trips: Item[]; routes: Item[] };
 
 export default function SearchPalette() {
   const [open, setOpen] = useState(false);

@@ -1,6 +1,7 @@
 import { internalMutation } from "./_generated/server";
 import almanac from "./almanacSeed.json";
 import houseGeo from "./houseGeo.json";
+import wineRoutes from "./wineRoutes.json";
 
 const COLORS: Record<string, string> = {
   bordeaux: "#7b2d3b", sudouest: "#9c5a3c", bourgogne: "#8a3324", beaujolais: "#b4532f",
@@ -20,12 +21,14 @@ function tier(classification?: string): string {
 export const run = internalMutation({
   args: {},
   handler: async (ctx) => {
-    for (const table of ["regions", "houses", "villages", "trips", "appData"] as const) {
+    for (const table of ["regions", "houses", "villages", "trips", "routes", "appData"] as const) {
       const rows = await ctx.db.query(table).collect();
       for (const r of rows) await ctx.db.delete(r._id);
     }
     const data = almanac as any;
-    let nh = 0, nv = 0, nt = 0;
+    const routesData = wineRoutes as Record<string, any[]>;
+    const norm = (s?: string) => (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
+    let nh = 0, nv = 0, nt = 0, nr = 0;
     for (const slug of Object.keys(data.regions)) {
       const r = data.regions[slug];
       await ctx.db.insert("regions", {
@@ -54,15 +57,17 @@ export const run = internalMutation({
         tripCount: (r.trips || []).length,
       });
       const geo = houseGeo as Record<string, { x?: number; y?: number; lat?: number; lon?: number; address?: string; town?: string; src?: string }>;
+      const houseIdByName: Record<string, string> = {};
       for (const p of r.producers || []) {
         const g = geo[`${slug}||${p.name}`] || {};
-        await ctx.db.insert("houses", {
+        const hid = await ctx.db.insert("houses", {
           regionSlug: slug, regionName: r.name, name: p.name,
           appellation: p.appellation, classification: p.classification, note: p.note,
           types: p.types || [], grapes: p.grapes || [], flagship: p.flagship,
           tier: tier(p.classification),
           x: g.x, y: g.y, lat: g.lat, lon: g.lon, address: g.address, town: g.town, geoSrc: g.src,
         });
+        houseIdByName[p.name.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim()] = hid;
         nh++;
       }
       for (const t of r.towns || []) {
@@ -79,6 +84,37 @@ export const run = internalMutation({
         });
         nt++;
       }
+
+      // ---- named wine routes: resolve each stop's coordinates from our own data ----
+      const geo2 = houseGeo as Record<string, { x?: number; y?: number; lat?: number; lon?: number; town?: string }>;
+      const houseByName: Record<string, any> = {};
+      for (const p of r.producers || []) houseByName[norm(p.name)] = { ...(geo2[`${slug}||${p.name}`] || {}), id: null as any };
+      const villageByName: Record<string, any> = {};
+      const townXY: Record<string, any> = {};
+      for (const t of r.towns || []) { villageByName[norm(t.name)] = { x: t.x, y: t.y }; if (t.commune) townXY[norm(t.commune)] = { x: t.x, y: t.y }; }
+      for (const p of r.producers || []) { const g = geo2[`${slug}||${p.name}`]; if (g?.town && g.x != null) townXY[norm(g.town)] ??= { x: g.x, y: g.y, lat: g.lat, lon: g.lon }; }
+      const resolveStop = (s: any) => {
+        let hit: any = null;
+        if (s.kind === "house") hit = houseByName[norm(s.name)];
+        if (!hit) hit = villageByName[norm(s.name)] || townXY[norm(s.town)] || villageByName[norm(s.town)] || townXY[norm(s.name)];
+        const houseId = s.kind === "house" ? (houseIdByName[norm(s.name)] ?? null) : null;
+        return { ...s, houseId, x: hit?.x ?? null, y: hit?.y ?? null, lat: hit?.lat ?? null, lon: hit?.lon ?? null };
+      };
+      for (const route of routesData[slug] || []) {
+        const stops = (route.stops || []).map(resolveStop);
+        const pts = stops.filter((s: any) => s.x != null && s.y != null).map((s: any) => [s.x, s.y]);
+        const xs = pts.map((p: number[]) => p[0]), ys = pts.map((p: number[]) => p[1]);
+        const bbox = pts.length
+          ? [Math.min(...xs), Math.min(...ys), Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys)]
+          : r.geo.bbox;
+        await ctx.db.insert("routes", {
+          regionSlug: slug, regionName: r.name, name: route.name, subtitle: route.subtitle,
+          lengthKm: route.lengthKm, driveTime: route.driveTime, bestSeason: route.bestSeason,
+          summary: route.summary, highlights: route.highlights || [],
+          stops, path: pts, bbox,
+        });
+        nr++;
+      }
     }
     await ctx.db.insert("appData", {
       key: "context",
@@ -92,6 +128,6 @@ export const run = internalMutation({
       wineRoutes: data.context.wineRoutes,
       meta: data.meta,
     });
-    return { regions: Object.keys(data.regions).length, houses: nh, villages: nv, trips: nt };
+    return { regions: Object.keys(data.regions).length, houses: nh, villages: nv, trips: nt, routes: nr };
   },
 });

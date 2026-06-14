@@ -11,9 +11,11 @@ const LINKS: [string, string, string][] = [
   ["/houses", "bottle", "Houses"],
   ["/grapes", "grape", "Grapes"],
   ["/villages", "pin", "Villages"],
+  ["/routes", "route", "Wine Routes"],
+  ["/route", "pin", "My Route"],
+  ["/trips", "cal", "Wine Trips"],
   ["/best", "chartL", "Best Regions"],
   ["/compare", "chartL", "Compare"],
-  ["/trips", "route", "Wine Trips"],
   ["/cellar", "star", "My Cellar"],
   ["/ask", "chat", "Ask Franky"],
 ];

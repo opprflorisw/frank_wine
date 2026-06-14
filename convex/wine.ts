@@ -1,5 +1,6 @@
 import { query } from "./_generated/server";
 import { v as vv } from "convex/values";
+import type { Id } from "./_generated/dataModel";
 import grapeInfo from "./grapeInfo.json";
 
 const nz = (s?: string) => (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
@@ -90,6 +91,21 @@ export const listHouses = query({
   },
 });
 
+// houses by id list (for shared / restored "My Route" links)
+export const housesByIds = query({
+  args: { ids: vv.array(vv.string()) },
+  handler: async (ctx, { ids }) => {
+    const out = [];
+    for (const id of ids.slice(0, 60)) {
+      try {
+        const h = await ctx.db.get(id as Id<"houses">);
+        if (h) out.push(h);
+      } catch { /* ignore malformed ids */ }
+    }
+    return out;
+  },
+});
+
 // ---- villages ----
 export const listVillages = query({
   args: { region: vv.optional(vv.string()) },
@@ -108,6 +124,24 @@ export const listTrips = query({
     return region
       ? await ctx.db.query("trips").withIndex("by_region", (q) => q.eq("regionSlug", region)).collect()
       : await ctx.db.query("trips").collect();
+  },
+});
+
+// ---- named wine routes ----
+export const listRoutes = query({
+  args: { region: vv.optional(vv.string()) },
+  handler: async (ctx, { region }) => {
+    const routes = region
+      ? await ctx.db.query("routes").withIndex("by_region", (q) => q.eq("regionSlug", region)).collect()
+      : await ctx.db.query("routes").collect();
+    return routes.sort((a, b) => a.regionName.localeCompare(b.regionName) || a.name.localeCompare(b.name));
+  },
+});
+
+export const getRoute = query({
+  args: { id: vv.string() },
+  handler: async (ctx, { id }) => {
+    try { return await ctx.db.get(id as Id<"routes">); } catch { return null; }
   },
 });
 
@@ -154,6 +188,7 @@ export const globalSearch = query({
     const housesAll = await ctx.db.query("houses").collect();
     const villagesAll = await ctx.db.query("villages").collect();
     const tripsAll = await ctx.db.query("trips").collect();
+    const routesAll = await ctx.db.query("routes").collect();
 
     const regions = regionsAll
       .filter((r) => nz(r.name).includes(t) || nz(r.summary).includes(t) || (r.grapes || []).some((g) => nz(g).includes(t)))
@@ -184,6 +219,11 @@ export const globalSearch = query({
       .slice(0, 6)
       .map((tr) => ({ id: tr._id, label: tr.name, sub: `Trip · ${tr.regionName}`, to: `/trips?region=${tr.regionSlug}` }));
 
-    return { regions, houses, appellations: appellations.slice(0, 8), grapes, villages, trips };
+    const routes = routesAll
+      .filter((rt) => nz(rt.name).includes(t) || nz(rt.subtitle).includes(t) || (rt.highlights || []).some((hl: string) => nz(hl).includes(t)))
+      .slice(0, 6)
+      .map((rt) => ({ id: rt._id, label: rt.name, sub: `Wine route · ${rt.regionName}`, to: `/routes?id=${rt._id}` }));
+
+    return { regions, houses, appellations: appellations.slice(0, 8), grapes, villages, trips, routes };
   },
 });

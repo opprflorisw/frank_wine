@@ -1,0 +1,1285 @@
+{
+ "bordeaux": [
+  {
+   "name": "Route des Châteaux du Médoc",
+   "subtitle": "The D2 along the Gironde's left bank",
+   "lengthKm": 80,
+   "driveTime": "Full day",
+   "bestSeason": "Sep–Oct (harvest)",
+   "summary": "The legendary D2 runs north from Bordeaux through the Médoc, threading past dozens of classified-growth châteaux and the famous appellations of Margaux, Saint-Julien, Pauillac and Saint-Estèphe. It is home to 61 Grand Cru Classé estates and four of Bordeaux's five First Growths, making it the most prestigious cabernet drive in the world.",
+   "highlights": [
+    "Château Margaux",
+    "Pauillac's First Growths",
+    "Gironde Estuary views",
+    "Saint-Estèphe"
+   ],
+   "stops": [
+    {
+     "name": "Bordeaux",
+     "kind": "town",
+     "town": "Bordeaux",
+     "role": "Start",
+     "note": "Leave the city on the D2 heading north into the Médoc peninsula."
+    },
+    {
+     "name": "Château Palmer",
+     "kind": "house",
+     "town": "Cantenac",
+     "role": "Tasting",
+     "note": "Third-growth Margaux estate with its distinctive turreted château right on the D2."
+    },
+    {
+     "name": "Château Margaux",
+     "kind": "house",
+     "town": "Margaux",
+     "role": "Cellar visit",
+     "note": "First-growth landmark with a neoclassical 'temple' façade; visits by appointment only."
+    },
+    {
+     "name": "Château Ducru-Beaucaillou",
+     "kind": "house",
+     "town": "Saint-Julien-Beychevelle",
+     "role": "Tasting",
+     "note": "Second-growth Saint-Julien overlooking the estuary, named for its 'beautiful pebbles'."
+    },
+    {
+     "name": "Pauillac",
+     "kind": "town",
+     "town": "Pauillac",
+     "role": "Lunch",
+     "note": "Estuary-side town and the heart of three First Growths; good waterfront stop for lunch."
+    },
+    {
+     "name": "Château Mouton Rothschild",
+     "kind": "house",
+     "town": "Pauillac",
+     "role": "Cellar visit",
+     "note": "First growth famous for its artist-designed labels and an excellent wine museum."
+    },
+    {
+     "name": "Château Cos d'Estournel",
+     "kind": "house",
+     "town": "Saint-Estèphe",
+     "role": "Finish",
+     "note": "Unmistakable pagoda-topped Oriental façade marking the northern end of the great châteaux."
+    }
+   ]
+  },
+  {
+   "name": "Saint-Émilion & Pomerol Circuit",
+   "subtitle": "Bordeaux's Right Bank, UNESCO country",
+   "lengthKm": 35,
+   "driveTime": "Half day",
+   "bestSeason": "Sep–Oct (harvest)",
+   "summary": "A compact loop through Bordeaux's Right Bank, where merlot rules on clay-and-limestone soils. It links the modest plateau of Pomerol with the UNESCO-listed medieval village of Saint-Émilion, just five kilometres apart, passing some of the most sought-after estates in the world.",
+   "highlights": [
+    "Saint-Émilion medieval village",
+    "Monolithic church",
+    "Pomerol plateau",
+    "Limestone côtes vineyards"
+   ],
+   "stops": [
+    {
+     "name": "Libourne",
+     "kind": "town",
+     "town": "Libourne",
+     "role": "Start",
+     "note": "Bastide river port that serves as the gateway to the Right Bank vineyards."
+    },
+    {
+     "name": "Vieux Château Certan",
+     "kind": "house",
+     "town": "Pomerol",
+     "role": "Tasting",
+     "note": "Historic Pomerol estate near Petrus on the appellation's prized clay plateau."
+    },
+    {
+     "name": "Château Cheval Blanc",
+     "kind": "house",
+     "town": "Saint-Émilion",
+     "role": "Cellar visit",
+     "note": "Premier Grand Cru Classé A with a striking modern winery by architect Christian de Portzamparc."
+    },
+    {
+     "name": "Château Figeac",
+     "kind": "house",
+     "town": "Saint-Émilion",
+     "role": "Tasting",
+     "note": "Elegant gravel-soil estate, a recently promoted Premier Grand Cru Classé A."
+    },
+    {
+     "name": "Saint-Émilion",
+     "kind": "town",
+     "town": "Saint-Émilion",
+     "role": "Lunch",
+     "note": "UNESCO World Heritage village of stone lanes and the largest monolithic church in Europe."
+    },
+    {
+     "name": "Château Pavie",
+     "kind": "house",
+     "town": "Saint-Émilion",
+     "role": "Finish",
+     "note": "Premier Grand Cru Classé A on the steep limestone côtes above the village."
+    }
+   ]
+  }
+ ],
+ "sudouest": [
+  {
+   "name": "Route des Vins de Cahors",
+   "subtitle": "The black wine of the Lot Valley",
+   "lengthKm": 65,
+   "driveTime": "Full day",
+   "bestSeason": "Sep–Oct (harvest)",
+   "summary": "This route follows the meandering Lot River downstream from Cahors through the heart of Malbec country, the home of the inky 'black wine'. It passes Quercy villages, perched medieval towns and riverside vineyards on both banks, ending near the Cahors–Soturac stretch where the appellation's top estates cluster.",
+   "highlights": [
+    "Pont Valentré, Cahors",
+    "Malbec vineyards",
+    "Puy-l'Évêque",
+    "Lot River meanders"
+   ],
+   "stops": [
+    {
+     "name": "Cahors",
+     "kind": "town",
+     "town": "Cahors",
+     "role": "Start",
+     "note": "Capital of Malbec, crowned by the fortified 14th-century Pont Valentré over the Lot."
+    },
+    {
+     "name": "Château Lagrézette",
+     "kind": "house",
+     "town": "Caillac",
+     "role": "Tasting",
+     "note": "Restored Renaissance château with a high-profile cellar, just west of Cahors."
+    },
+    {
+     "name": "Luzech",
+     "kind": "town",
+     "town": "Luzech",
+     "role": "Village",
+     "note": "Town wrapped in a dramatic horseshoe meander of the Lot, watched over by a keep."
+    },
+    {
+     "name": "Puy-l'Évêque",
+     "kind": "town",
+     "town": "Puy-l'Évêque",
+     "role": "Viewpoint",
+     "note": "Honey-stone medieval town climbing the riverbank, a classic Lot Valley vista."
+    },
+    {
+     "name": "Château du Cèdre",
+     "kind": "house",
+     "town": "Vire-sur-Lot",
+     "role": "Cellar visit",
+     "note": "Benchmark biodynamic Cahors producer in the western heartland of the appellation."
+    },
+    {
+     "name": "Clos Triguedina",
+     "kind": "house",
+     "town": "Vire-sur-Lot",
+     "role": "Finish",
+     "note": "Long-established family estate famed for its single-vineyard and barrel-aged Malbecs."
+    }
+   ]
+  }
+ ],
+ "bourgogne": [
+  {
+   "name": "Route des Grands Crus",
+   "subtitle": "The Champs-Élysées of Burgundy",
+   "lengthKm": 60,
+   "driveTime": "Full day",
+   "bestSeason": "Sep–Oct (harvest)",
+   "summary": "Created in 1937 as France's first signposted wine route, the Route des Grands Crus runs from Dijon to Santenay through 31 villages and 32 grands crus. It crosses the Côte de Nuits, the kingdom of Pinot Noir, and the Côte de Beaune, birthplace of the world's greatest white wines.",
+   "highlights": [
+    "Clos de Vougeot",
+    "Romanée-Conti vineyard",
+    "Hospices de Beaune",
+    "Le Montrachet"
+   ],
+   "stops": [
+    {
+     "name": "Dijon",
+     "kind": "town",
+     "town": "Dijon",
+     "role": "Start",
+     "note": "Ducal capital where the route begins; Marsannay's vines open the Côte just to the south."
+    },
+    {
+     "name": "Domaine Armand Rousseau",
+     "kind": "house",
+     "town": "Gevrey-Chambertin",
+     "role": "Tasting",
+     "note": "Reference domaine of Gevrey, custodian of Chambertin and Clos de Bèze."
+    },
+    {
+     "name": "Clos de Vougeot",
+     "kind": "landmark",
+     "town": "Vougeot",
+     "role": "Cellar visit",
+     "note": "Walled 16th-century château and grand cru, home of the Confrérie des Chevaliers du Tastevin."
+    },
+    {
+     "name": "Domaine Méo-Camuzet",
+     "kind": "house",
+     "town": "Vosne-Romanée",
+     "role": "Tasting",
+     "note": "In the village ringed by Romanée-Conti, La Tâche and Richebourg, Burgundy's holy grail."
+    },
+    {
+     "name": "Beaune",
+     "kind": "town",
+     "town": "Beaune",
+     "role": "Lunch",
+     "note": "Walled wine capital famed for the polychrome-roofed Hospices de Beaune."
+    },
+    {
+     "name": "Maison Louis Jadot",
+     "kind": "house",
+     "town": "Beaune",
+     "role": "Cellar visit",
+     "note": "Major négociant-domaine with extensive cellars at the heart of the Côte de Beaune."
+    },
+    {
+     "name": "Domaine des Comtes Lafon",
+     "kind": "house",
+     "town": "Meursault",
+     "role": "Tasting",
+     "note": "Iconic white-Burgundy estate in the village of buttery, age-worthy Chardonnay."
+    },
+    {
+     "name": "Santenay",
+     "kind": "town",
+     "town": "Santenay",
+     "role": "Finish",
+     "note": "Spa village marking the southern end of the route below the Montrachet hill."
+    }
+   ]
+  },
+  {
+   "name": "Route des Vignobles de l'Yonne (Chablis)",
+   "subtitle": "Steel and stone in northern Burgundy",
+   "lengthKm": 60,
+   "driveTime": "Half day",
+   "bestSeason": "Sep–Oct (harvest)",
+   "summary": "Detached from the Côte d'Or up near Auxerre, this northern Burgundy circuit explores the cool Kimmeridgian-limestone country of Chablis, plus the lesser-known villages of Saint-Bris and Irancy. It is the home of taut, mineral Chardonnay, from Petit Chablis up to the seven grands crus on the slope above town.",
+   "highlights": [
+    "Chablis grand cru slope (Les Clos)",
+    "Kimmeridgian limestone",
+    "Irancy reds",
+    "Saint-Bris Sauvignon"
+   ],
+   "stops": [
+    {
+     "name": "Auxerre",
+     "kind": "town",
+     "town": "Auxerre",
+     "role": "Start",
+     "note": "Historic Yonne riverside city and gateway to the northern Burgundy vineyards."
+    },
+    {
+     "name": "Saint-Bris-le-Vineux",
+     "kind": "town",
+     "town": "Saint-Bris-le-Vineux",
+     "role": "Village",
+     "note": "Unusual Burgundy outpost making Sauvignon under its own Saint-Bris appellation."
+    },
+    {
+     "name": "Irancy",
+     "kind": "town",
+     "town": "Irancy",
+     "role": "Village",
+     "note": "Amphitheatre of vines producing Burgundy's northernmost serious Pinot Noir reds."
+    },
+    {
+     "name": "Chablis",
+     "kind": "town",
+     "town": "Chablis",
+     "role": "Lunch",
+     "note": "Small wine town on the Serein river, the capital of mineral Chardonnay."
+    },
+    {
+     "name": "Domaine William Fèvre",
+     "kind": "house",
+     "town": "Chablis",
+     "role": "Cellar visit",
+     "note": "Leading estate with major grand cru holdings and a visitable cellar in town."
+    },
+    {
+     "name": "Domaine Raveneau",
+     "kind": "house",
+     "town": "Chablis",
+     "role": "Tasting",
+     "note": "Cult Chablis producer; allocations are tiny and visits strictly by appointment."
+    },
+    {
+     "name": "Les Clos grand cru slope",
+     "kind": "landmark",
+     "town": "Chablis",
+     "role": "Viewpoint",
+     "note": "The single south-facing hill holding all seven Chablis grands crus above the Serein."
+    }
+   ]
+  }
+ ],
+ "beaujolais": [
+  {
+   "name": "Route des Vins du Beaujolais (Crus Circuit)",
+   "subtitle": "The ten crus, from Brouilly to Saint-Amour",
+   "lengthKm": 50,
+   "driveTime": "Full day",
+   "bestSeason": "Sep–Oct (harvest)",
+   "summary": "This northern stretch of the Beaujolais wine route links the ten cru villages where Gamay reaches its peak on granite and schist hillsides. From Mont Brouilly in the south up to Saint-Amour, it winds through golden-stone hamlets, the Morgon natural-wine heartland and the windmill of Moulin-à-Vent.",
+   "highlights": [
+    "Mont Brouilly chapel",
+    "Morgon natural wines",
+    "Fleurie",
+    "Moulin-à-Vent windmill"
+   ],
+   "stops": [
+    {
+     "name": "Mont Brouilly",
+     "kind": "landmark",
+     "town": "Odenas",
+     "role": "Viewpoint",
+     "note": "484m hill topped by the Notre-Dame-aux-Raisins chapel, with panoramas over the crus."
+    },
+    {
+     "name": "Château Thivin",
+     "kind": "house",
+     "town": "Odenas",
+     "role": "Tasting",
+     "note": "Historic Côte de Brouilly estate on the slopes of Mont Brouilly itself."
+    },
+    {
+     "name": "Domaine Marcel Lapierre",
+     "kind": "house",
+     "town": "Villié-Morgon",
+     "role": "Cellar visit",
+     "note": "Founding name of the Beaujolais natural-wine movement, in the Morgon cru."
+    },
+    {
+     "name": "Fleurie",
+     "kind": "town",
+     "town": "Fleurie",
+     "role": "Village",
+     "note": "The 'queen of Beaujolais', a pretty village crowned by its hilltop Madonna chapel."
+    },
+    {
+     "name": "Clos de la Roilette (Domaine Coudert)",
+     "kind": "house",
+     "town": "Fleurie",
+     "role": "Tasting",
+     "note": "Renowned Fleurie lieu-dit producing structured, long-lived Gamay."
+    },
+    {
+     "name": "Château des Jacques (Louis Jadot)",
+     "kind": "house",
+     "town": "Romanèche-Thorins",
+     "role": "Tasting",
+     "note": "Burgundian-style estate at the centre of the Moulin-à-Vent cru."
+    },
+    {
+     "name": "Moulin-à-Vent",
+     "kind": "landmark",
+     "town": "Romanèche-Thorins",
+     "role": "Viewpoint",
+     "note": "The old stone windmill that gives the most powerful Beaujolais cru its name."
+    },
+    {
+     "name": "Saint-Amour",
+     "kind": "town",
+     "town": "Saint-Amour-Bellevue",
+     "role": "Finish",
+     "note": "Northernmost cru, on the border with the Mâconnais of southern Burgundy."
+    }
+   ]
+  }
+ ],
+ "champagne": [
+  {
+   "name": "Route Touristique du Champagne — Montagne de Reims",
+   "subtitle": "Reims to Bouzy across the Pinot Noir hill",
+   "lengthKm": 70,
+   "driveTime": "Full day",
+   "bestSeason": "Sep–Oct",
+   "summary": "The signposted circuit loops south from Reims over the wooded Montagne de Reims, a hill ringed by grand cru Pinot Noir villages. It mixes the great cathedral-city houses with hilltop growers, the Verzenay lighthouse and the strange twisted beeches of the Faux de Verzy.",
+   "highlights": [
+    "Reims cathedral",
+    "Phare de Verzenay",
+    "Faux de Verzy",
+    "Ambonnay",
+    "Bouzy"
+   ],
+   "stops": [
+    {
+     "name": "Reims",
+     "kind": "town",
+     "town": "Reims",
+     "role": "Start",
+     "note": "Gothic Notre-Dame cathedral; the great Champagne houses line the city and its chalk cellars"
+    },
+    {
+     "name": "Taittinger",
+     "kind": "house",
+     "town": "Reims",
+     "role": "Tasting",
+     "note": "Tours descend into Gallo-Roman chalk crayères beneath the Saint-Nicaise hill"
+    },
+    {
+     "name": "Vilmart & Cie",
+     "kind": "house",
+     "town": "Rilly-la-Montagne",
+     "role": "Tasting",
+     "note": "Respected premier cru grower on the north slope of the Montagne"
+    },
+    {
+     "name": "Verzenay",
+     "kind": "town",
+     "town": "Verzenay",
+     "role": "Viewpoint",
+     "note": "Grand cru village with a hilltop lighthouse and windmill overlooking the vines"
+    },
+    {
+     "name": "Verzy",
+     "kind": "landmark",
+     "town": "Verzy",
+     "role": "Village",
+     "note": "Faux de Verzy, a forest of naturally twisted dwarf beech trees above the vineyards"
+    },
+    {
+     "name": "Egly-Ouriet",
+     "kind": "house",
+     "town": "Ambonnay",
+     "role": "Tasting",
+     "note": "Benchmark grand cru Pinot Noir grower-producer"
+    },
+    {
+     "name": "Bouzy",
+     "kind": "town",
+     "town": "Bouzy",
+     "role": "Finish",
+     "note": "Grand cru village famed for ripe Pinot Noir and still red Coteaux Champenois"
+    }
+   ]
+  },
+  {
+   "name": "Route Touristique du Champagne — Avenue de Champagne & Côte des Blancs",
+   "subtitle": "Épernay's grand maisons down the Chardonnay slope",
+   "lengthKm": 45,
+   "driveTime": "Full day",
+   "bestSeason": "Sep–Oct",
+   "summary": "From the abbey village of Hautvillers and Épernay's famous Avenue de Champagne, this stretch runs south along the Côte des Blancs, the chalk ridge of grand cru Chardonnay. It links flagship houses with cult grower-producers in Avize, Le Mesnil-sur-Oger and Vertus.",
+   "highlights": [
+    "Avenue de Champagne",
+    "Hautvillers abbey",
+    "Côte des Blancs",
+    "Oger",
+    "Le Mesnil-sur-Oger"
+   ],
+   "stops": [
+    {
+     "name": "Dom Pérignon",
+     "kind": "house",
+     "town": "Hautvillers",
+     "role": "Start",
+     "note": "Hilltop abbey village above the Marne, the spiritual cradle of Champagne"
+    },
+    {
+     "name": "Épernay",
+     "kind": "town",
+     "town": "Épernay",
+     "role": "Village",
+     "note": "The Avenue de Champagne, lined with grand maisons above kilometres of chalk cellars"
+    },
+    {
+     "name": "Pol Roger",
+     "kind": "house",
+     "town": "Épernay",
+     "role": "Tasting",
+     "note": "Family maison on the Avenue, Churchill's favourite Champagne"
+    },
+    {
+     "name": "Jacques Selosse",
+     "kind": "house",
+     "town": "Avize",
+     "role": "Tasting",
+     "note": "Cult grower-producer at the heart of the grand cru Côte des Blancs"
+    },
+    {
+     "name": "Pierre Péters",
+     "kind": "house",
+     "town": "Le Mesnil-sur-Oger",
+     "role": "Tasting",
+     "note": "Single-village Chardonnay specialist beside the legendary Clos du Mesnil"
+    },
+    {
+     "name": "Oger",
+     "kind": "town",
+     "town": "Oger",
+     "role": "Village",
+     "note": "Classified among France's 'plus beaux villages', pure grand cru Chardonnay"
+    },
+    {
+     "name": "Larmandier-Bernier",
+     "kind": "house",
+     "town": "Bergères-lès-Vertus",
+     "role": "Finish",
+     "note": "Biodynamic grower at the southern end of the Côte des Blancs"
+    }
+   ]
+  }
+ ],
+ "alsace": [
+  {
+   "name": "Route des Vins d'Alsace",
+   "subtitle": "Marlenheim to Thann through the fairy-tale villages",
+   "lengthKm": 170,
+   "driveTime": "2 days",
+   "bestSeason": "Sep–Oct",
+   "summary": "France's oldest signposted wine road runs about 170km along the foothills of the Vosges from Marlenheim to Thann. It threads together half-timbered medieval villages and grand cru hillsides, with Riesling, Pinot Gris and Gewurztraminer poured the whole way. Colmar makes the natural central base.",
+   "highlights": [
+    "Riquewihr",
+    "Ribeauvillé",
+    "Eguisheim",
+    "Kaysersberg",
+    "Colmar"
+   ],
+   "stops": [
+    {
+     "name": "Marlenheim",
+     "kind": "town",
+     "town": "Marlenheim",
+     "role": "Start",
+     "note": "Northern gateway and official starting point of the Route des Vins d'Alsace"
+    },
+    {
+     "name": "Domaine Marcel Deiss",
+     "kind": "house",
+     "town": "Bergheim",
+     "role": "Tasting",
+     "note": "Field-blend and terroir pioneer in a fortified medieval town"
+    },
+    {
+     "name": "Trimbach",
+     "kind": "house",
+     "town": "Ribeauvillé",
+     "role": "Tasting",
+     "note": "House founded in 1626, home of the Clos Sainte Hune Riesling"
+    },
+    {
+     "name": "Hugel & Fils",
+     "kind": "house",
+     "town": "Riquewihr",
+     "role": "Tasting",
+     "note": "Centuries-old grower-merchant inside a walled, fairy-tale village"
+    },
+    {
+     "name": "Domaine Weinbach",
+     "kind": "house",
+     "town": "Kaysersberg Vignoble",
+     "role": "Tasting",
+     "note": "Clos des Capucins at the foot of the Schlossberg grand cru"
+    },
+    {
+     "name": "Domaine Zind-Humbrecht",
+     "kind": "house",
+     "town": "Turckheim",
+     "role": "Tasting",
+     "note": "Biodynamic benchmark with grand cru Rangen and Brand"
+    },
+    {
+     "name": "Léon Beyer",
+     "kind": "house",
+     "town": "Eguisheim",
+     "role": "Lunch",
+     "note": "Historic house in the concentric village said to be the birthplace of Pope Leo IX"
+    },
+    {
+     "name": "Colmar",
+     "kind": "town",
+     "town": "Colmar",
+     "role": "Village",
+     "note": "Capital of the wine road, with 'Little Venice' canals and the Unterlinden museum"
+    },
+    {
+     "name": "Thann",
+     "kind": "town",
+     "town": "Thann",
+     "role": "Finish",
+     "note": "Southern terminus, beneath the steep Rangen grand cru"
+    }
+   ]
+  }
+ ],
+ "loire": [
+  {
+   "name": "Route des Vins du Sancerrois — Sancerre & Pouilly",
+   "subtitle": "Flinty Sauvignon Blanc on the Upper Loire",
+   "lengthKm": 40,
+   "driveTime": "Full day",
+   "bestSeason": "Sep–Oct",
+   "summary": "At the eastern end of the Loire vineyards, this compact route circles the hilltop town of Sancerre and crosses the river to Pouilly-Fumé. Sauvignon Blanc here turns flinty and mineral on flint and Kimmeridgian limestone, and Chavignol adds its famous Crottin goat cheese.",
+   "highlights": [
+    "Sancerre hilltop",
+    "Chavignol",
+    "Pouilly-sur-Loire",
+    "Menetou-Salon"
+   ],
+   "stops": [
+    {
+     "name": "Pouilly-sur-Loire",
+     "kind": "town",
+     "town": "Pouilly-sur-Loire",
+     "role": "Start",
+     "note": "Riverside town giving its name to flinty Pouilly-Fumé on the east bank"
+    },
+    {
+     "name": "Didier Dagueneau",
+     "kind": "house",
+     "town": "Saint-Andelain",
+     "role": "Tasting",
+     "note": "Legendary 'Silex' and 'Pur Sang' Pouilly-Fumé from the slopes of Saint-Andelain"
+    },
+    {
+     "name": "Sancerre",
+     "kind": "town",
+     "town": "Sancerre",
+     "role": "Viewpoint",
+     "note": "Hilltop town with panoramic views over the vineyards and the Loire"
+    },
+    {
+     "name": "Domaine Vacheron",
+     "kind": "house",
+     "town": "Sancerre",
+     "role": "Tasting",
+     "note": "Biodynamic family domaine in the town of Sancerre"
+    },
+    {
+     "name": "François Cotat",
+     "kind": "house",
+     "town": "Chavignol",
+     "role": "Tasting",
+     "note": "Steep Les Monts Damnés slopes above Chavignol, home of Crottin goat cheese"
+    },
+    {
+     "name": "Domaine Henri Pellé",
+     "kind": "house",
+     "town": "Menetou-Salon",
+     "role": "Finish",
+     "note": "Reference grower in the neighbouring Menetou-Salon appellation"
+    }
+   ]
+  },
+  {
+   "name": "Route des Vins de Touraine — Vouvray to Bourgueil",
+   "subtitle": "Chenin caves and Cabernet Franc châteaux country",
+   "lengthKm": 80,
+   "driveTime": "Full day",
+   "bestSeason": "Sep–Oct",
+   "summary": "Centred on Tours, this route follows the Loire and Vienne through the heart of Touraine's châteaux country. It pairs the tuffeau cellars of Vouvray and Montlouis, where Chenin Blanc runs from bone-dry to lusciously sweet, with the Cabernet Franc reds of Chinon and Bourgueil.",
+   "highlights": [
+    "Vouvray tuffeau caves",
+    "Montlouis-sur-Loire",
+    "Chinon fortress",
+    "Bourgueil",
+    "Saint-Nicolas-de-Bourgueil"
+   ],
+   "stops": [
+    {
+     "name": "Tours",
+     "kind": "town",
+     "town": "Tours",
+     "role": "Start",
+     "note": "Elegant base city in the heart of the Loire châteaux country"
+    },
+    {
+     "name": "Domaine Huet",
+     "kind": "house",
+     "town": "Vouvray",
+     "role": "Tasting",
+     "note": "Benchmark Vouvray Chenin Blanc, dry to sweet, from biodynamic tuffeau parcels"
+    },
+    {
+     "name": "Domaine du Clos Naudin (Philippe Foreau)",
+     "kind": "house",
+     "town": "Vouvray",
+     "role": "Tasting",
+     "note": "Revered Vouvray estate working in cool tuffeau cellars"
+    },
+    {
+     "name": "François Chidaine",
+     "kind": "house",
+     "town": "Montlouis-sur-Loire",
+     "role": "Tasting",
+     "note": "Leading Montlouis Chenin grower across the river from Vouvray"
+    },
+    {
+     "name": "Chinon",
+     "kind": "town",
+     "town": "Chinon",
+     "role": "Village",
+     "note": "Rabelais's town beneath its royal fortress, capital of Cabernet Franc"
+    },
+    {
+     "name": "Bernard Baudry",
+     "kind": "house",
+     "town": "Cravant-les-Côteaux",
+     "role": "Tasting",
+     "note": "Terroir-focused Chinon Cabernet Franc on limestone slopes"
+    },
+    {
+     "name": "Yannick Amirault",
+     "kind": "house",
+     "town": "Bourgueil",
+     "role": "Tasting",
+     "note": "Reference grower for Bourgueil and Saint-Nicolas-de-Bourgueil reds"
+    },
+    {
+     "name": "Saint-Nicolas-de-Bourgueil",
+     "kind": "town",
+     "town": "Saint-Nicolas-de-Bourgueil",
+     "role": "Finish",
+     "note": "Gravel-terrace Cabernet Franc village close to the Loire"
+    }
+   ]
+  }
+ ],
+ "rhone": [
+  {
+   "name": "Route des Vins du Rhône Septentrional",
+   "subtitle": "Côte-Rôtie to Cornas along the steep granite slopes of the Northern Rhône",
+   "lengthKm": 60,
+   "driveTime": "Full day",
+   "bestSeason": "Late May to early October; September brings harvest activity on the terraces",
+   "summary": "The Northern Rhône packs its greatest Syrah and Viognier vineyards into a narrow corridor of vertiginous granite terraces hugging the river. This route follows the west bank from Ampuis south through Condrieu to the twin hills of Hermitage and the dark slopes of Cornas. Distances are short but the famously steep, hand-worked terraces make every appellation feel hard-won.",
+   "highlights": [
+    "The terraced Côte Brune and Côte Blonde slopes above Ampuis",
+    "Steep Viognier vineyards of Condrieu plunging to the Rhône",
+    "The granite hill of Hermitage crowned by its chapel above Tain-l'Hermitage",
+    "The sun-trapping Syrah amphitheatre of Cornas"
+   ],
+   "stops": [
+    {
+     "name": "E. Guigal",
+     "kind": "house",
+     "town": "Ampuis",
+     "role": "Start",
+     "note": "The defining name of Côte-Rôtie, based at the Château d'Ampuis on the riverbank below the terraces."
+    },
+    {
+     "name": "Domaine Georges Vernay",
+     "kind": "house",
+     "town": "Condrieu",
+     "role": "Tasting",
+     "note": "The estate credited with saving Condrieu's Viognier from near-extinction in the mid-20th century."
+    },
+    {
+     "name": "M. Chapoutier",
+     "kind": "house",
+     "town": "Tain-l'Hermitage",
+     "role": "Tasting",
+     "note": "Long-established négociant and grower at the foot of the Hermitage hill, with cellars in the town centre."
+    },
+    {
+     "name": "Hill of Hermitage",
+     "kind": "landmark",
+     "town": "Tain-l'Hermitage",
+     "role": "Viewpoint",
+     "note": "Climb the granite slope to the small chapel for sweeping views over the Rhône and the Crozes plain."
+    },
+    {
+     "name": "Paul Jaboulet Aîné",
+     "kind": "house",
+     "town": "Tain-l'Hermitage",
+     "role": "Tasting",
+     "note": "Historic Tain house famed for its La Chapelle Hermitage, named for the chapel on the hill above."
+    },
+    {
+     "name": "Domaine Auguste Clape",
+     "kind": "house",
+     "town": "Cornas",
+     "role": "Tasting",
+     "note": "Reference grower of Cornas, working the steep south-facing granite terraces above the village."
+    },
+    {
+     "name": "Saint-Péray",
+     "kind": "town",
+     "town": "Saint-Péray",
+     "role": "Finish",
+     "note": "Sparkling and still whites from Marsanne and Roussanne, the southern tip of the Northern Rhône near Valence."
+    }
+   ]
+  },
+  {
+   "name": "Châteauneuf-du-Pape et les Dentelles de Montmirail",
+   "subtitle": "Galets-strewn plateaux and the lace-like limestone ridges of the Southern Rhône",
+   "lengthKm": 48,
+   "driveTime": "Full day",
+   "bestSeason": "April to October; the Dentelles are spectacular in late spring and at harvest",
+   "summary": "The Southern Rhône trades terraces for sun, mistral and broad Grenache-led blends. This loop pairs the famous galets roulés plateaux of Châteauneuf-du-Pape with the jagged Dentelles de Montmirail, where Gigondas and Vacqueyras sit beneath the limestone teeth. It is a route of warm stone villages, big reds and dramatic ridgelines.",
+   "highlights": [
+    "The rounded galets cobbles of the Châteauneuf-du-Pape plateau",
+    "The ruined papal castle overlooking the vineyards and the Rhône",
+    "The perched village of Séguret, one of France's 'plus beaux villages'",
+    "The sawtooth limestone ridges of the Dentelles de Montmirail above Gigondas"
+   ],
+   "stops": [
+    {
+     "name": "Château de Beaucastel",
+     "kind": "house",
+     "town": "Châteauneuf-du-Pape",
+     "role": "Start",
+     "note": "Landmark estate on the cooler northern edge of the appellation, known for using all thirteen permitted grapes."
+    },
+    {
+     "name": "Domaine du Vieux Télégraphe",
+     "kind": "house",
+     "town": "Châteauneuf-du-Pape",
+     "role": "Tasting",
+     "note": "Sited on the high La Crau plateau, one of the most galets-covered sectors of Châteauneuf."
+    },
+    {
+     "name": "Châteauneuf-du-Pape",
+     "kind": "landmark",
+     "town": "Châteauneuf-du-Pape",
+     "role": "Viewpoint",
+     "note": "The ruined castle of the Avignon popes crowns the village with panoramic views over the vineyards."
+    },
+    {
+     "name": "Séguret",
+     "kind": "town",
+     "town": "Séguret",
+     "role": "Village",
+     "note": "Hillside medieval village listed among the 'plus beaux villages de France', framed by the Dentelles."
+    },
+    {
+     "name": "Château de Saint-Cosme",
+     "kind": "house",
+     "town": "Gigondas",
+     "role": "Tasting",
+     "note": "Historic Gigondas estate with Gallo-Roman cellars at the foot of the Dentelles de Montmirail."
+    },
+    {
+     "name": "Domaine Les Pallières",
+     "kind": "house",
+     "town": "Gigondas",
+     "role": "Tasting",
+     "note": "Long-standing Gigondas domaine set high in a natural amphitheatre below the limestone ridges."
+    },
+    {
+     "name": "Vacqueyras",
+     "kind": "town",
+     "town": "Vacqueyras",
+     "role": "Finish",
+     "note": "Neighbouring cru village producing robust Grenache-led reds on the plain south of Gigondas."
+    }
+   ]
+  }
+ ],
+ "provence": [
+  {
+   "name": "Route des Vins de Provence — Bandol et Cassis",
+   "subtitle": "Mourvèdre amphitheatres and seaside vineyards between Cassis and Bandol",
+   "lengthKm": 45,
+   "driveTime": "Full day",
+   "bestSeason": "April to June and September to October, avoiding peak summer coastal traffic",
+   "summary": "This western stretch of the Route des Vins de Provence links two of the region's most serious coastal appellations. Cassis makes saline whites beneath France's highest sea cliff, while inland Bandol's restanques grow the late-ripening Mourvèdre that yields age-worthy reds and structured rosés. Perched villages and Mediterranean views connect the two.",
+   "highlights": [
+    "Cassis vineyards under the towering Cap Canaille sea cliff",
+    "The cliff-top Route des Crêtes between Cassis and La Ciotat",
+    "The perched village of Le Castellet",
+    "Bandol's terraced Mourvèdre amphitheatre around La Cadière-d'Azur"
+   ],
+   "stops": [
+    {
+     "name": "Clos Sainte Magdeleine",
+     "kind": "house",
+     "town": "Cassis",
+     "role": "Start",
+     "note": "Seaside Cassis estate whose vines run down to the Mediterranean below Cap Canaille."
+    },
+    {
+     "name": "Route des Crêtes",
+     "kind": "landmark",
+     "town": "Cassis",
+     "role": "Viewpoint",
+     "note": "Cliff-top road over Cap Canaille, among the highest sea cliffs in France, with views across the bay."
+    },
+    {
+     "name": "Le Castellet",
+     "kind": "town",
+     "town": "Le Castellet",
+     "role": "Village",
+     "note": "Fortified hilltop village at the heart of the Bandol appellation, overlooking the vineyards."
+    },
+    {
+     "name": "Château de Pibarnon",
+     "kind": "house",
+     "town": "La Cadière-d'Azur",
+     "role": "Viewpoint",
+     "note": "High-altitude Bandol estate on restanque terraces with sweeping views over the appellation's amphitheatre."
+    },
+    {
+     "name": "Domaine Tempier",
+     "kind": "house",
+     "town": "Le Plan-du-Castellet",
+     "role": "Lunch",
+     "note": "Iconic Bandol domaine, a benchmark for Mourvèdre-based reds and rosé."
+    },
+    {
+     "name": "Domaine Gros 'Noré",
+     "kind": "house",
+     "town": "La Cadière-d'Azur",
+     "role": "Tasting",
+     "note": "Family Bandol estate near La Cadière producing deep, traditional Mourvèdre reds."
+    },
+    {
+     "name": "Bandol",
+     "kind": "town",
+     "town": "Bandol",
+     "role": "Finish",
+     "note": "The seaside port that lends its name to the appellation, a fitting close on the coast."
+    }
+   ]
+  }
+ ],
+ "languedoc": [
+  {
+   "name": "Pic Saint-Loup aux Terrasses du Larzac",
+   "subtitle": "From the limestone peak north of Montpellier to the garrigue terraces of the Hérault",
+   "lengthKm": 65,
+   "driveTime": "Full day",
+   "bestSeason": "Spring and autumn; the garrigue is fragrant in May and the light is golden in October",
+   "summary": "This route crosses the rugged hinterland north of Montpellier, joining two of the Languedoc's most dynamic terroirs. It runs from the cool altitude of Pic Saint-Loup, with its dramatic limestone peak, west through the Hérault valley to the schist-and-limestone terraces of the Terrasses du Larzac. The day ends amid the cliffs and gorges around UNESCO-listed Saint-Guilhem-le-Désert.",
+   "highlights": [
+    "The sheer limestone profiles of Pic Saint-Loup and the Montagne de l'Hortus",
+    "Garrigue-clad slopes of Montpeyroux in the Terrasses du Larzac",
+    "The Gassac valley, birthplace of the Languedoc's fine-wine revival",
+    "Medieval Saint-Guilhem-le-Désert and the Pont du Diable over the Hérault gorge"
+   ],
+   "stops": [
+    {
+     "name": "Domaine de l'Hortus",
+     "kind": "house",
+     "town": "Valflaunès",
+     "role": "Start",
+     "note": "Pic Saint-Loup estate set in the valley between the Pic and the Montagne de l'Hortus cliffs."
+    },
+    {
+     "name": "Pic Saint-Loup",
+     "kind": "landmark",
+     "town": "Saint-Mathieu-de-Tréviers",
+     "role": "Viewpoint",
+     "note": "The soaring limestone peak that gives the appellation its name and tempers the vineyards with altitude."
+    },
+    {
+     "name": "Domaine d'Aupilhac",
+     "kind": "house",
+     "town": "Montpeyroux",
+     "role": "Tasting",
+     "note": "Leading Montpeyroux grower in the Terrasses du Larzac, working high garrigue slopes."
+    },
+    {
+     "name": "Mas Jullien",
+     "kind": "house",
+     "town": "Jonquières",
+     "role": "Tasting",
+     "note": "A pioneering Terrasses du Larzac estate that helped define the appellation's identity."
+    },
+    {
+     "name": "Domaine de la Grange des Pères",
+     "kind": "house",
+     "town": "Aniane",
+     "role": "Tasting",
+     "note": "Cult Aniane estate in the Gassac valley, one of the Languedoc's most sought-after wines."
+    },
+    {
+     "name": "Mas de Daumas Gassac",
+     "kind": "house",
+     "town": "Aniane",
+     "role": "Tasting",
+     "note": "The 'grand cru of the Languedoc' in the Gassac valley, which sparked the region's fine-wine revival."
+    },
+    {
+     "name": "Saint-Guilhem-le-Désert",
+     "kind": "town",
+     "town": "Saint-Guilhem-le-Désert",
+     "role": "Finish",
+     "note": "UNESCO-listed medieval village with its abbey, beside the Hérault gorge and the Pont du Diable."
+    }
+   ]
+  }
+ ],
+ "jura": [
+  {
+   "name": "Route des Vins du Jura",
+   "subtitle": "Vin jaune country from Salins to Lons",
+   "lengthKm": 70,
+   "driveTime": "Full day",
+   "bestSeason": "May to October; harvest in September (Percée du Vin Jaune festival in winter)",
+   "summary": "The classic Jura wine road threads the narrow vignoble below the first plateau, linking Arbois, the perched village of Château-Chalon and L'Étoile. It is the homeland of oxidative vin jaune and Savagnin, with Comté cheese and Pasteur's Arbois along the way.",
+   "highlights": [
+    "Arbois",
+    "Château-Chalon",
+    "L'Étoile",
+    "Vin jaune",
+    "Pupillin"
+   ],
+   "stops": [
+    {
+     "name": "Salins-les-Bains",
+     "kind": "town",
+     "town": "Salins-les-Bains",
+     "role": "Start",
+     "note": "Historic salt and spa town at the northern gateway to the Jura vineyard."
+    },
+    {
+     "name": "Domaine André et Mireille Tissot (Stéphane Tissot)",
+     "kind": "house",
+     "town": "Arbois",
+     "role": "Tasting",
+     "note": "Biodynamic Arbois reference for Savagnin, Trousseau and terroir vin jaune."
+    },
+    {
+     "name": "Pupillin",
+     "kind": "town",
+     "town": "Pupillin",
+     "role": "Village",
+     "note": "Self-styled world capital of Ploussard, a hamlet just above Arbois."
+    },
+    {
+     "name": "Poligny",
+     "kind": "town",
+     "town": "Poligny",
+     "role": "Lunch",
+     "note": "Capital of Comté cheese, a good midpoint stop for AOC Comté and Jura whites."
+    },
+    {
+     "name": "Domaine Jean Macle",
+     "kind": "house",
+     "town": "Château-Chalon",
+     "role": "Tasting",
+     "note": "Benchmark estate for Château-Chalon vin jaune in the hilltop village."
+    },
+    {
+     "name": "Domaine de Montbourgeau",
+     "kind": "house",
+     "town": "L'Étoile",
+     "role": "Tasting",
+     "note": "Leading grower of the tiny L'Étoile white appellation south of Château-Chalon."
+    },
+    {
+     "name": "Lons-le-Saunier",
+     "kind": "town",
+     "town": "Lons-le-Saunier",
+     "role": "Finish",
+     "note": "Jura's prefecture and southern end of the wine road."
+    }
+   ]
+  }
+ ],
+ "savoie": [
+  {
+   "name": "Route des Vins de Savoie",
+   "subtitle": "The Combe de Savoie below the Alps",
+   "lengthKm": 35,
+   "driveTime": "Half day",
+   "bestSeason": "May to October; autumn for vine colours under Mont Granier",
+   "summary": "This Alpine route runs from Chambéry through the steep crus of the Combe de Savoie below the cliffs of Mont Granier and the Bauges. It showcases Jacquère whites of Apremont and Abymes, Chignin-Bergeron from Roussanne, and Mondeuse reds from Arbin.",
+   "highlights": [
+    "Apremont",
+    "Chignin",
+    "Mont Granier",
+    "Combe de Savoie",
+    "Mondeuse"
+   ],
+   "stops": [
+    {
+     "name": "Chambéry",
+     "kind": "town",
+     "town": "Chambéry",
+     "role": "Start",
+     "note": "Former capital of Savoy and gateway to the vineyards on its southern edge."
+    },
+    {
+     "name": "Domaine Giachino",
+     "kind": "house",
+     "town": "Apremont",
+     "role": "Tasting",
+     "note": "Natural-leaning Jacquère and Persan from the Apremont scree slopes."
+    },
+    {
+     "name": "Les Abymes",
+     "kind": "town",
+     "town": "Les Marches",
+     "role": "Village",
+     "note": "Vines grow over the 1248 Mont Granier landslide debris that names the cru."
+    },
+    {
+     "name": "Montmélian",
+     "kind": "town",
+     "town": "Montmélian",
+     "role": "Lunch",
+     "note": "Old fortified town and hub of the Combe de Savoie vineyard."
+    },
+    {
+     "name": "Domaine André et Michel Quénard",
+     "kind": "house",
+     "town": "Chignin",
+     "role": "Tasting",
+     "note": "Chignin-Bergeron specialist on the sunny slopes above Tormery."
+    },
+    {
+     "name": "Domaine Louis Magnin",
+     "kind": "house",
+     "town": "Arbin",
+     "role": "Tasting",
+     "note": "Celebrated grower of age-worthy Arbin Mondeuse."
+    },
+    {
+     "name": "Cave de Cruet",
+     "kind": "house",
+     "town": "Cruet",
+     "role": "Finish",
+     "note": "Combe de Savoie cooperative at the upper end of the route."
+    }
+   ]
+  }
+ ],
+ "corse": [
+  {
+   "name": "Route des Vins de Patrimonio et du Cap Corse",
+   "subtitle": "Nielluccio and Muscat around the Golfe de Saint-Florent",
+   "lengthKm": 45,
+   "driveTime": "Half day",
+   "bestSeason": "April to October; spring and autumn avoid the summer heat",
+   "summary": "Corsica's most celebrated route circles the Golfe de Saint-Florent through Patrimonio, the island's first AOC, on limestone hills planted to Nielluccio and Vermentinu. It climbs the Col de Teghime and runs up Cap Corse to the Muscat vineyards above the sea.",
+   "highlights": [
+    "Patrimonio",
+    "Saint-Florent",
+    "Col de Teghime",
+    "Cap Corse",
+    "Muscat du Cap Corse"
+   ],
+   "stops": [
+    {
+     "name": "Saint-Florent",
+     "kind": "town",
+     "town": "Saint-Florent",
+     "role": "Start",
+     "note": "Yacht harbour at the head of its gulf and base for the Patrimonio vineyard."
+    },
+    {
+     "name": "Domaine Gentile",
+     "kind": "house",
+     "town": "Saint-Florent",
+     "role": "Tasting",
+     "note": "Long-established Patrimonio estate at Olzo on the Saint-Florent plain."
+    },
+    {
+     "name": "Patrimonio",
+     "kind": "town",
+     "town": "Patrimonio",
+     "role": "Village",
+     "note": "Hillside village around the Saint-Martin church, heart of Corsica's first AOC."
+    },
+    {
+     "name": "Domaine Antoine Arena",
+     "kind": "house",
+     "town": "Patrimonio",
+     "role": "Tasting",
+     "note": "Iconic Patrimonio grower for Nielluccio reds and pure Vermentinu whites."
+    },
+    {
+     "name": "Domaine Giudicelli",
+     "kind": "house",
+     "town": "Patrimonio",
+     "role": "Tasting",
+     "note": "Small biodynamic estate making Patrimonio and Cap Corse Muscat."
+    },
+    {
+     "name": "Col de Teghime",
+     "kind": "landmark",
+     "town": "Barbaggio",
+     "role": "Viewpoint",
+     "note": "Pass with a panorama over both coasts before turning up Cap Corse."
+    },
+    {
+     "name": "Domaine Pieretti",
+     "kind": "house",
+     "town": "Santa-Severa",
+     "role": "Finish",
+     "note": "East-coast Cap Corse estate near Luri known for dry reds and sweet Muscat."
+    }
+   ]
+  },
+  {
+   "name": "Route des Vins d'Ajaccio à Sartène",
+   "subtitle": "Sciaccarellu country down the south-west coast",
+   "lengthKm": 90,
+   "driveTime": "Full day",
+   "bestSeason": "April to October; spring and autumn for the cooler hills",
+   "summary": "The southern route descends from the granite hills of the Ajaccio AOC through the Taravo valley to the Golfe du Valinco and Sartène. It is the land of the spicy Sciaccarellu grape, ending in the Ortolo valley near Corsica's most traditional wine town.",
+   "highlights": [
+    "Ajaccio",
+    "Sciaccarellu",
+    "Propriano",
+    "Sartène",
+    "Vallée de l'Ortolo"
+   ],
+   "stops": [
+    {
+     "name": "Clos d'Alzeto",
+     "kind": "house",
+     "town": "Sari-d'Orcino",
+     "role": "Start",
+     "note": "Family estate high in the Cinarca hills, among Corsica's highest vineyards."
+    },
+    {
+     "name": "Ajaccio",
+     "kind": "town",
+     "town": "Ajaccio",
+     "role": "Village",
+     "note": "Gulf-side capital and Napoleon's birthplace, centre of the Ajaccio AOC."
+    },
+    {
+     "name": "Domaine Vaccelli",
+     "kind": "house",
+     "town": "Ajaccio",
+     "role": "Tasting",
+     "note": "Granite-grown Sciaccarellu reds in the Taravo valley south of the gulf."
+    },
+    {
+     "name": "Domaine Comte Abbatucci",
+     "kind": "house",
+     "town": "Casalabriva",
+     "role": "Tasting",
+     "note": "Biodynamic estate reviving old Corsican varieties in the Taravo."
+    },
+    {
+     "name": "Propriano",
+     "kind": "town",
+     "town": "Propriano",
+     "role": "Lunch",
+     "note": "Harbour town on the Golfe du Valinco between Ajaccio and Sartène."
+    },
+    {
+     "name": "Sartène",
+     "kind": "town",
+     "town": "Sartène",
+     "role": "Village",
+     "note": "Granite hill town often called the most Corsican of towns."
+    },
+    {
+     "name": "Domaine Saparale",
+     "kind": "house",
+     "town": "Sartène",
+     "role": "Finish",
+     "note": "Restored estate in the Ortolo valley, a benchmark for AOC Sartène."
+    }
+   ]
+  }
+ ]
+}
