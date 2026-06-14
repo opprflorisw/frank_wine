@@ -12,7 +12,10 @@ type House = {
   types?: string[]; grapes?: string[]; flagship?: string; x?: number; y?: number;
   address?: string; town?: string;
 };
+type Tab = "overview" | "houses" | "terroir";
 const clamp = (x: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, x));
+const isMobile = () => typeof window !== "undefined" && window.matchMedia("(max-width:860px)").matches;
+const TYPE_ORDER = ["Red", "White", "Rosé", "Sparkling", "Sweet", "Fortified"];
 
 export default function MapPage() {
   const data = useQuery(api.wine.mapData);
@@ -21,9 +24,12 @@ export default function MapPage() {
   const [vis, setVis] = useState({ wineRoutes: true, autoroutes: true, cities: true, villages: true, houses: true, neighbours: true });
   const [layersOpen, setLayersOpen] = useState(false);
   const [house, setHouse] = useState<House | null>(null);   // selected wine house (pin / row)
-  const [introOpen, setIntroOpen] = useState(true);          // collapsible region intro
+  const [tab, setTab] = useState<Tab>("overview");           // detail tab
+  const [typeFilter, setTypeFilter] = useState<string | null>(null); // filter houses/pins by wine family
   const [sheetMin, setSheetMin] = useState(false);           // minimise sheet to see the map (mobile)
+  const [sheetFull, setSheetFull] = useState(false);         // expand sheet to full height (mobile)
   const svgRef = useRef<SVGSVGElement>(null);
+  const sheetRef = useRef<HTMLDivElement>(null);
   const anim = useRef<number | null>(null);
 
   const FULL: View = useMemo(() => {
@@ -44,7 +50,7 @@ export default function MapPage() {
   const detail = useQuery(api.wine.getRegion, selected ? { slug: selected } : "skip");
 
   // reset sub-state whenever the region changes
-  useEffect(() => { setHouse(null); setSheetMin(false); setIntroOpen(true); }, [selected]);
+  useEffect(() => { setHouse(null); setSheetMin(false); setSheetFull(false); setTab("overview"); setTypeFilter(null); }, [selected]);
 
   function setRegionParam(slug: string | null) {
     setParams((prev) => {
@@ -54,15 +60,48 @@ export default function MapPage() {
     });
   }
 
+  // ---------- camera framing (focuses the selected area in the *visible* band) ----------
+  function bboxToView(bb: number[], pad = 0.16): View {
+    let [x, y, w, h] = bb;
+    const ar = FULL.w / FULL.h, px = w * pad, py = h * pad;
+    x -= px; y -= py; w += 2 * px; h += 2 * py;
+    if (w / h < ar) { const nw = h * ar; x -= (nw - w) / 2; w = nw; } else { const nh = w / ar; y -= (nh - h) / 2; h = nh; }
+    return { x, y, w, h };
+  }
+  // On phones the bottom-sheet hides the lower part of the map, so frame the region
+  // into the visible top band instead of the geometric centre.
+  function focusView(bb: number[], visibleFrac: number): View {
+    const ar = FULL.w / FULL.h, pad = 0.18;
+    let [x, y, w, h] = bb;
+    const px = w * pad, py = h * pad;
+    x -= px; y -= py; w += 2 * px; h += 2 * py;
+    let viewH = Math.max(h / visibleFrac, w / ar);
+    let viewW = viewH * ar;
+    if (viewW < w) { viewW = w; viewH = viewW / ar; }
+    const cx = x + w / 2, cy = y + h / 2;
+    return { x: cx - viewW / 2, y: cy - (visibleFrac * 0.5) * viewH, w: viewW, h: viewH };
+  }
+  function frameRegion(bb: number[]) {
+    if (isMobile() && !sheetMin) return focusView(bb, sheetFull ? 0.16 : 0.34);
+    return bboxToView(bb);
+  }
+
   const prevSel = useRef<string | null | undefined>(undefined);
   useEffect(() => {
     if (!data) return;
     if (prevSel.current === selected) return;
     prevSel.current = selected;
-    if (selected) { const r = data.regions.find((x) => x.slug === selected); if (r) animateTo(bboxToView(r.bbox)); }
+    if (selected) { const r = data.regions.find((x) => x.slug === selected); if (r) animateTo(frameRegion(r.bbox)); }
     else animateTo(FULL);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected, data]);
+
+  // re-frame when the sheet is minimised / restored / expanded so the region stays visible
+  useEffect(() => {
+    if (!selected || !sel || house) return;
+    animateTo(frameRegion(sel.bbox), 360);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sheetMin, sheetFull]);
 
   function animateTo(target: View, ms = 560) {
     if (anim.current) cancelAnimationFrame(anim.current);
@@ -74,18 +113,15 @@ export default function MapPage() {
     };
     anim.current = requestAnimationFrame(step);
   }
-  function bboxToView(bb: number[], pad = 0.16): View {
-    let [x, y, w, h] = bb;
-    const ar = FULL.w / FULL.h, px = w * pad, py = h * pad;
-    x -= px; y -= py; w += 2 * px; h += 2 * py;
-    if (w / h < ar) { const nw = h * ar; x -= (nw - w) / 2; w = nw; } else { const nh = w / ar; y -= (nh - h) / 2; h = nh; }
-    return { x, y, w, h };
-  }
   function selectRegion(slug: string) { setRegionParam(slug); }
   function reset() { setRegionParam(null); }
   function selectHouse(h: House) {
     setHouse(h); setSheetMin(false);
-    if (h.x != null && h.y != null) animateTo({ x: h.x - FULL.w * 0.07, y: h.y - FULL.h * 0.07, w: FULL.w * 0.14, h: FULL.h * 0.14 }, 420);
+    if (h.x != null && h.y != null) {
+      // on phones bias the framing upward so the pin sits above the sheet
+      const yBias = isMobile() ? 0.022 : 0.07;
+      animateTo({ x: h.x - FULL.w * 0.07, y: h.y - FULL.h * yBias, w: FULL.w * 0.14, h: FULL.h * 0.14 }, 420);
+    }
   }
 
   // ---------- pointer pan + pinch zoom ----------
@@ -171,6 +207,30 @@ export default function MapPage() {
     if (house) setHouse(null); else if (selected) reset();
   }
 
+  // ---------- draggable bottom sheet (mobile) ----------
+  const dragRef = useRef<{ y0: number; h: number } | null>(null);
+  const [dragY, setDragY] = useState(0);
+  function sheetDown(e: React.PointerEvent) {
+    if (!isMobile()) return;
+    dragRef.current = { y0: e.clientY, h: sheetRef.current?.offsetHeight || window.innerHeight * 0.7 };
+    (e.target as Element).setPointerCapture?.(e.pointerId);
+  }
+  function sheetMove(e: React.PointerEvent) {
+    if (!dragRef.current) return;
+    let d = e.clientY - dragRef.current.y0;
+    if (d < -140) d = -140;
+    setDragY(d);
+  }
+  function sheetUp() {
+    const g = dragRef.current; const d = dragY;
+    dragRef.current = null; setDragY(0);
+    if (!g) return;
+    if (d > g.h * 0.32) { reset(); }                                   // dragged well down → close
+    else if (d > 64) { setSheetMin(true); setSheetFull(false); }       // a nudge down → minimise to map
+    else if (d < -56) { setSheetFull(true); }                          // dragged up → full height
+    // else snap back
+  }
+
   if (!data || !data.context) return <div className="maplayout nodetail"><div className="stage"><div className="empty">Loading the atlas…</div></div></div>;
 
   const ctx = data.context;
@@ -178,15 +238,48 @@ export default function MapPage() {
   const f = clamp(k, 0.32, 1);
   const cities = (ctx.cities as any[]).slice().sort((a, b) => b.pop - a.pop);
   const cityN = Math.round(clamp(7 / k, 7, 46));
-  const houses: House[] = (detail?.houses ?? []) as any;
-  const pill = (x: number, y: number, text: string, fs: number, anchor: "start" | "middle") => {
+  const allHouses: House[] = (detail?.houses ?? []) as any;
+  const htSet = new Set<string>();
+  for (const h of allHouses) for (const t of h.types || []) htSet.add(t);
+  const houseTypes = TYPE_ORDER.filter((t) => htSet.has(t));
+  const houses = typeFilter ? allHouses.filter((h) => (h.types || []).includes(typeFilter)) : allHouses;
+
+  // ---------- label-collision engine: keep the map readable, never an overlapping mush ----------
+  const labelBox = (x: number, y: number, text: string, fs: number, anchor: "start" | "middle") => {
     const w = text.length * fs * 0.55, px = fs * 0.45, py = fs * 0.3;
-    const bx = anchor === "middle" ? x - w / 2 : x;
-    return <rect className="pill" x={bx - px} y={y - fs * 0.85 - py} width={w + 2 * px} height={fs + 2 * py} rx={(fs + 2 * py) / 2} />;
+    const bx = (anchor === "middle" ? x - w / 2 : x) - px;
+    return { bx, by: y - fs * 0.85 - py, bw: w + 2 * px, bh: fs + 2 * py };
   };
+  const placed: { bx: number; by: number; bw: number; bh: number }[] = [];
+  const fit = (b: { bx: number; by: number; bw: number; bh: number }) => {
+    for (const p of placed) if (b.bx < p.bx + p.bw && b.bx + b.bw > p.bx && b.by < p.by + p.bh && b.by + b.bh > p.by) return false;
+    placed.push(b); return true;
+  };
+  const showHouseLbl = new Set<string>();
+  const showVillage = new Set<string>();
+  const showCity = new Set<number>();
+  const showRegion = new Set<string>();
+  // 1. selected house label is forced (highest priority)
+  if (house && house.x != null && house.y != null) { placed.push(labelBox(house.x + 4, house.y - 5, house.name, 9 * f, "start")); showHouseLbl.add(house._id); }
+  // 2. region names (when zoomed out these orient the user)
+  for (const r of data.regions) { if (selected === r.slug) continue; if (fit(labelBox(r.centroid[0], r.centroid[1], r.name, 13 * f, "middle"))) showRegion.add(r.slug); }
+  // 3. cities
+  const cityList = cities.slice(0, cityN);
+  if (vis.cities) cityList.forEach((c, i) => { const fs = (c.name === "Paris" ? 10 : 8.6) * f; if (fit(labelBox(c.x + 3.2, c.y + 0.8, c.name, fs, "start"))) showCity.add(i); });
+  // 4. villages / crus of the selected region
+  if (selected && vis.villages) for (const t of (detail?.villages ?? [])) { if (fit(labelBox(t.x + 3, t.y + 1, t.name, 8.2 * f, "start"))) showVillage.add(t._id); }
+  // 5. wine houses (lowest priority — only labelled when there's genuinely room)
+  if (selected && vis.houses) for (const h of houses) { if (h.x == null || h.y == null || showHouseLbl.has(h._id)) continue; if (fit(labelBox(h.x + 4, h.y - 5, h.name, 9 * f, "start"))) showHouseLbl.add(h._id); }
+
+  const pill = (b: { bx: number; by: number; bw: number; bh: number }, cls = "pill") =>
+    <rect className={cls} x={b.bx} y={b.by} width={b.bw} height={b.bh} rx={b.bh / 2} />;
+  // house marker: a little teardrop pin so houses read differently from villages/cities
+  const pinPath = (x: number, y: number, s: number) => `M${x} ${y}L${x - s} ${y - 2.4 * s}A${s} ${s} 0 1 1 ${x + s} ${y - 2.4 * s}Z`;
+
+  const tabsFor = (n: number): [Tab, string][] => [["overview", "Overview"], ["houses", `Houses · ${n}`], ["terroir", "Terroir"]];
 
   return (
-    <div className={`maplayout ${selected ? "" : "nodetail"} ${sheetMin ? "sheetmin" : ""}`}>
+    <div className={`maplayout ${selected ? "" : "nodetail"} ${sheetMin ? "sheetmin" : ""} ${sheetFull ? "sheetfull" : ""}`}>
       <main className="stage">
         <div className="breadcrumb">
           <div className="crumb btn" onClick={reset}><Icon name="map" size={13} /> France</div>
@@ -196,11 +289,11 @@ export default function MapPage() {
 
         <div className={`layers ui ${layersOpen ? "open" : ""}`}>
           <button className="layers-toggle" onClick={() => setLayersOpen((o) => !o)} aria-expanded={layersOpen} aria-label="Map layers">
-            <Icon name="map" size={15} /><span className="lt-label">Layers</span>
+            <Icon name="layers" size={15} /><span className="lt-label">Layers</span>
           </button>
           <div className="layers-body">
-            <div className="lh"><Icon name="map" size={13} />Map layers</div>
-            {([["wineRoutes", "Wine routes"], ["autoroutes", "Autoroutes"], ["cities", "Cities"], ["villages", "Villages"], ["houses", "Wine houses"], ["neighbours", "Neighbours"]] as const).map(([key, label]) => (
+            <div className="lh"><Icon name="layers" size={13} />Map layers</div>
+            {([["wineRoutes", "Wine routes"], ["autoroutes", "Main roads"], ["cities", "Cities"], ["villages", "Villages & crus"], ["houses", "Wine houses"], ["neighbours", "Neighbours"]] as const).map(([key, label]) => (
               <label key={key}><input type="checkbox" checked={(vis as any)[key]} onChange={(e) => setVis({ ...vis, [key]: e.target.checked })} /> {label}</label>
             ))}
           </div>
@@ -223,34 +316,44 @@ export default function MapPage() {
           {selected && vis.wineRoutes && (ctx.wineRoutes as any)[selected]?.length > 1 && (
             <path className="wroute" d={`M${(ctx.wineRoutes as any)[selected].map((p: number[]) => p.join(",")).join("L")}`} stroke={sel!.color} />
           )}
+          {/* villages / crus — open rings in the region colour */}
           {selected && vis.villages && (detail?.villages ?? []).map((t) => (
-            <g key={t._id}>
+            <g key={t._id} className="village">
               <circle className="town" cx={t.x} cy={t.y} r={1.9 * f} stroke={sel!.color} strokeWidth={1.4 * f} />
-              {pill(t.x + 3, t.y + 1, t.name, 8.2 * f, "start")}
-              <text className="tlabel" x={t.x + 3} y={t.y + 1} fontSize={8.2 * f}>{t.name}</text>
+              {showVillage.has(t._id) && (<>{pill(labelBox(t.x + 3, t.y + 1, t.name, 8.2 * f, "start"), "pill vpill")}<text className="tlabel" x={t.x + 3} y={t.y + 1} fontSize={8.2 * f}>{t.name}</text></>)}
             </g>
           ))}
-          {/* wine-house pins — click a pin to open that exact house */}
+          {/* wine-house pins — teardrop markers, click for that exact house */}
           {selected && vis.houses && houses.filter((h) => h.x != null && h.y != null).map((h) => (
             <g key={h._id} className={`house-pin ${house?._id === h._id ? "on" : ""}`}
               onClick={(e) => { e.stopPropagation(); if (!movedRef.current) selectHouse(h); }}>
-              <circle className="hhit" cx={h.x} cy={h.y} r={3.6 * f} />
-              <circle className="hdot" cx={h.x} cy={h.y} r={(house?._id === h._id ? 2.4 : 1.7) * f} stroke={sel!.color} strokeWidth={1.2 * f} />
-              {house?._id === h._id && (<>{pill(h.x! + 3, h.y! - 2, h.name, 9 * f, "start")}<text className="hlabel" x={h.x! + 3} y={h.y! - 2} fontSize={9 * f}>{h.name}</text></>)}
+              <circle className="hhit" cx={h.x} cy={h.y} r={4.4 * f} />
+              <path className="hpin" d={pinPath(h.x!, h.y!, (house?._id === h._id ? 2.5 : 1.9) * f)} fill={house?._id === h._id ? undefined : sel!.color} strokeWidth={1 * f} />
+              <circle className="hpin-dot" cx={h.x} cy={h.y! - 4.3 * (house?._id === h._id ? 2.5 : 1.9) * f / 2.4} r={(house?._id === h._id ? 0.9 : 0.7) * f} />
+              {showHouseLbl.has(h._id) && (<>{pill(labelBox(h.x! + 4, h.y! - 5, h.name, 9 * f, "start"), "pill hpill")}<text className="hlabel" x={h.x! + 4} y={h.y! - 5} fontSize={9 * f}>{h.name}</text></>)}
             </g>
           ))}
+          {/* region name labels */}
           {data.regions.map((r) => {
-            if (selected === r.slug) return null;
+            if (selected === r.slug || !showRegion.has(r.slug)) return null;
             const fs = 13 * f;
-            return (<g key={r.slug + "l"}>{pill(r.centroid[0], r.centroid[1], r.name, fs, "middle")}<text className="rlabel" x={r.centroid[0]} y={r.centroid[1]} fontSize={fs}>{r.name}</text></g>);
+            return (<g key={r.slug + "l"}>{pill(labelBox(r.centroid[0], r.centroid[1], r.name, fs, "middle"), "pill rpill")}<text className="rlabel" x={r.centroid[0]} y={r.centroid[1]} fontSize={fs}>{r.name}</text></g>);
           })}
-          {vis.cities && cities.slice(0, cityN).map((c, i) => {
-            const fs = (c.name === "Paris" ? 10 : 8.6) * f;
-            return (<g key={i}><circle className={`city ${c.name === "Paris" ? "cap" : ""}`} cx={c.x} cy={c.y} r={(c.name === "Paris" ? 3 : 2.2) * f} />{pill(c.x + 3.2, c.y + 0.8, c.name, fs, "start")}<text className="clabel" x={c.x + 3.2} y={c.y + 0.8} fontSize={fs}>{c.name}</text></g>);
+          {/* cities */}
+          {vis.cities && cityList.map((c, i) => {
+            const fs = (c.name === "Paris" ? 10 : 8.6) * f, cap = c.name === "Paris";
+            return (<g key={i}>
+              <circle className={`city ${cap ? "cap" : ""}`} cx={c.x} cy={c.y} r={(cap ? 3 : 2.2) * f} />
+              {showCity.has(i) && (<>{pill(labelBox(c.x + 3.2, c.y + 0.8, c.name, fs, "start"), "pill cpill")}<text className="clabel" x={c.x + 3.2} y={c.y + 0.8} fontSize={fs}>{c.name}</text></>)}
+            </g>);
           })}
         </svg>
 
-        <div className="legend ui">{selected ? "Pinch / scroll to zoom · drag to pan · tap a 🍷 pin for a house." : "Tap a region to explore its houses. Pinch or scroll to zoom."}</div>
+        <div className="maptypes">
+          <span className="mt-item"><i className="mt-city" /> City</span>
+          <span className="mt-item"><i className="mt-vill" style={{ borderColor: sel?.color || "#9c7" }} /> Village / cru</span>
+          <span className="mt-item"><i className="mt-house" style={{ background: sel?.color || "var(--wine)" }} /> Wine house</span>
+        </div>
         <div className="zoomctl ui">
           <button onClick={() => zoomBtn(0.7)} aria-label="Zoom in">+</button>
           <button onClick={() => zoomBtn(1 / 0.7)} aria-label="Zoom out">−</button>
@@ -259,15 +362,18 @@ export default function MapPage() {
       </main>
 
       {sel && (
-        <section className={`detail ${house ? "ishouse" : ""}`}>
+        <section ref={sheetRef} className={`detail ${house ? "ishouse" : ""}`}
+          style={dragY ? { transform: `translateY(${Math.max(0, dragY)}px)`, transition: "none" } : undefined}>
           <div className="dinner">
+            {/* drag handle — drag down to minimise/close, up to expand (mobile) */}
+            <div className="sheet-grip" onPointerDown={sheetDown} onPointerMove={sheetMove} onPointerUp={sheetUp} onPointerCancel={sheetUp}>
+              <div className="sheet-handle" />
+            </div>
             {/* peek bar shown only when the sheet is minimised (mobile) */}
             <button className="sheet-peek" onClick={() => setSheetMin(false)}>
               <Icon name={house ? "bottle" : "pin"} size={15} /> <b>{house ? house.name : sel.name}</b>
               <span className="peek-hint">Tap for details</span><span className="peek-caret">▴</span>
             </button>
-
-            <button className="sheet-handle" onClick={() => setSheetMin((m) => !m)} aria-label="Minimise" />
 
             {house ? (
               <>
@@ -294,7 +400,6 @@ export default function MapPage() {
                 <div className="dactions ui">
                   <button className="btn primary" onClick={() => openChat(`Tell me about ${house.name}${house.appellation ? ` in ${house.appellation}` : ""} — its wines, style and whether I can visit.`)}><Icon name="chat" size={14} /> Ask Franky</button>
                   {house.appellation && <Link className="btn" to={`/houses?region=${sel.slug}&appellation=${encodeURIComponent(house.appellation)}`}><Icon name="bottle" size={14} /> {house.appellation}</Link>}
-                  <button className="btn" onClick={() => setHouse(null)}><Icon name="map" size={14} /> Back to region</button>
                 </div>
               </>
             ) : (
@@ -310,44 +415,79 @@ export default function MapPage() {
                   <div className="bar" style={{ background: sel.color }} />
                   <div className="k">Wine region · France</div>
                   <h2 style={{ color: sel.color }}>{sel.name}</h2>
-                  <button className="intro-toggle" onClick={() => setIntroOpen((o) => !o)} aria-expanded={introOpen}>
-                    Overview <span className={`chev ${introOpen ? "up" : ""}`}>▾</span>
-                  </button>
-                  <div className={`intro ${introOpen ? "open" : ""}`}>
-                    <p>{sel.summary}</p>
-                    <div className="types">{sel.types.map((t) => <TypeBadge key={t} t={t} />)}</div>
+                  <div className="dtabs" role="tablist">
+                    {tabsFor(allHouses.length).map(([id, label]) => (
+                      <button key={id} role="tab" aria-selected={tab === id} className={`dtab ${tab === id ? "on" : ""}`}
+                        onClick={() => setTab(id)} style={tab === id ? { borderColor: sel.color, color: sel.color } : undefined}>{label}</button>
+                    ))}
                   </div>
                 </div>
-                <div className="dbody">
-                  {sel.terroirScore != null && (
-                    <div className="dscore">
-                      <div className="sb"><div className="l">Terroir &amp; climate</div><div className="v">{sel.terroirScore.toFixed(1)}<small>/10</small></div></div>
-                      <div className="sb"><div className="l">Visit experience</div><div className="v">{(sel.visitScore ?? 0).toFixed(1)}<small>/10</small></div></div>
+
+                {/* ===== OVERVIEW ===== */}
+                {tab === "overview" && (
+                  <div className="dbody">
+                    <p className="dlede">{sel.summary}</p>
+                    <div className="types">{sel.types.map((t) => <TypeBadge key={t} t={t} />)}</div>
+                    {sel.terroirScore != null && (
+                      <div className="dscore">
+                        <div className="sb"><div className="l">Terroir &amp; climate</div><div className="v">{sel.terroirScore.toFixed(1)}<small>/10</small></div></div>
+                        <div className="sb"><div className="l">Visit experience</div><div className="v">{(sel.visitScore ?? 0).toFixed(1)}<small>/10</small></div></div>
+                      </div>
+                    )}
+                    <div className="block"><h3><Icon name="star" size={14} />Classification</h3><div className="classbox">{sel.classification}</div></div>
+                    <div className="block"><h3><Icon name="info" size={14} />At a glance</h3>
+                      <div className="glance">
+                        <div className="gl"><b>{allHouses.length}</b><span>Wine houses</span></div>
+                        <div className="gl"><b>{(detail?.villages ?? []).length || sel.villageCount}</b><span>Villages</span></div>
+                        <div className="gl"><b>{sel.subAppellations.length}</b><span>Appellations</span></div>
+                        <div className="gl"><b>{sel.tripCount}</b><span>Wine trips</span></div>
+                      </div>
                     </div>
-                  )}
-                  <div className="block"><h3><Icon name="star" size={14} />Classification</h3><div className="classbox">{sel.classification}</div></div>
-                  <div className="block"><h3><Icon name="grape" size={14} />Principal grapes</h3><div className="apps">{sel.grapes.slice(0, 12).map((g) => (
-                    <GrapePill key={g} name={g} onClick={() => navigate(`/houses?region=${sel.slug}&grape=${encodeURIComponent(g)}`)} />
-                  ))}</div></div>
-                  <div className="block"><h3><Icon name="pin" size={14} />Key appellations &amp; crus</h3><div className="apps">{sel.subAppellations.map((a) => (
-                    <span key={a} className="app app-click" role="button" tabIndex={0} title={`See houses in ${a}`}
-                      onClick={() => navigate(`/houses?region=${sel.slug}&appellation=${encodeURIComponent(a)}`)}
-                      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); navigate(`/houses?region=${sel.slug}&appellation=${encodeURIComponent(a)}`); } }}>{a}</span>
-                  ))}</div></div>
-                  <div className="block">
-                    <h3><Icon name="bottle" size={14} />Major wine houses · {houses.length || "…"}</h3>
+                  </div>
+                )}
+
+                {/* ===== HOUSES (with family filter) ===== */}
+                {tab === "houses" && (
+                  <div className="dbody">
+                    {houseTypes.length > 1 && (
+                      <div className="hfilter">
+                        <span className="hf-label"><Icon name="filter" size={12} /> Family</span>
+                        <button className={`fchip ${!typeFilter ? "on" : ""}`} onClick={() => setTypeFilter(null)}>All</button>
+                        {houseTypes.map((t) => (
+                          <button key={t} className={`fchip ${typeFilter === t ? "on" : ""}`} onClick={() => setTypeFilter((p) => p === t ? null : t)}>
+                            <TypeDot t={t} />{t}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                    <div className="hcount">{houses.length} house{houses.length !== 1 ? "s" : ""}{typeFilter ? ` · ${typeFilter}` : ""}</div>
                     {houses.map((h) => (
                       <div key={h._id} className={`prod prod-click ${house && (house as House)._id === h._id ? "on" : ""}`} role="button" tabIndex={0} title={`Open ${h.name}`}
                         onClick={() => selectHouse(h)}
                         onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selectHouse(h); } }}>
                         <div className="pn">{h.name}<Badge cls={h.classification} /></div>
                         <div className="pa">{h.appellation}{h.town ? ` · ${h.town}` : ""}</div>
-                        <div className="pg">{(h.types || []).map((t) => <span key={t}><TypeDot t={t} />{t} </span>)} {h.grapes?.length ? "· " + h.grapes.join(", ") : ""}</div>
-                        {h.note && <div className="pnote">{h.note}</div>}
+                        <div className="pg">{(h.types || []).map((t) => <span key={t}><TypeDot t={t} />{t} </span>)}{h.grapes?.length ? "· " + h.grapes.slice(0, 4).join(", ") : ""}</div>
                       </div>
                     ))}
+                    {!houses.length && <div className="empty mini">No {typeFilter} houses listed here.</div>}
                   </div>
-                </div>
+                )}
+
+                {/* ===== TERROIR (grapes + appellations) ===== */}
+                {tab === "terroir" && (
+                  <div className="dbody">
+                    <div className="block"><h3><Icon name="grape" size={14} />Principal grapes</h3><div className="apps">{sel.grapes.slice(0, 14).map((g) => (
+                      <GrapePill key={g} name={g} onClick={() => navigate(`/houses?region=${sel.slug}&grape=${encodeURIComponent(g)}`)} />
+                    ))}</div></div>
+                    <div className="block"><h3><Icon name="pin" size={14} />Key appellations &amp; crus</h3><div className="apps">{sel.subAppellations.map((a) => (
+                      <span key={a} className="app app-click" role="button" tabIndex={0} title={`See houses in ${a}`}
+                        onClick={() => navigate(`/houses?region=${sel.slug}&appellation=${encodeURIComponent(a)}`)}
+                        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); navigate(`/houses?region=${sel.slug}&appellation=${encodeURIComponent(a)}`); } }}>{a}</span>
+                    ))}</div></div>
+                  </div>
+                )}
+
                 <div className="dactions ui">
                   {sel.tripCount > 0 && <Link className="btn primary" to={`/trips?region=${sel.slug}`}><Icon name="route" size={14} /> {sel.tripCount} wine trip{sel.tripCount > 1 ? "s" : ""}</Link>}
                   <Link className="btn" to={`/houses?region=${sel.slug}`}><Icon name="bottle" size={14} /> All houses</Link>

@@ -13,11 +13,16 @@ svg#map.grabbing{cursor:grabbing}
 .rlabel{fill:#3a2417;font-weight:600;text-anchor:middle;pointer-events:none;font-family:var(--sans)}
 .aroute{fill:none;stroke:#9aa0a6;stroke-width:1.1;opacity:.7}
 .wroute{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
-.city{fill:#2b211c}.city.cap{fill:var(--wine)}
-.clabel{font-family:var(--sans);fill:#2b211c;pointer-events:none;font-weight:600}
+.city{fill:#2b211c;stroke:#fff;stroke-width:.5}.city.cap{fill:var(--wine);stroke:#fff;stroke-width:.7}
+.clabel{font-family:var(--sans);fill:#2b211c;pointer-events:none;font-weight:700}
 .town{fill:#fff}
-.tlabel{font-family:var(--sans);fill:#2b211c;pointer-events:none}
-.pill{fill:#fcf8ef;stroke:#cdbfa6;stroke-width:1;opacity:.93;pointer-events:none;vector-effect:non-scaling-stroke}
+.tlabel{font-family:var(--sans);fill:#42301f;pointer-events:none;font-weight:600}
+.pill{fill:#fcf8ef;stroke:#cdbfa6;stroke-width:1;opacity:.94;pointer-events:none;vector-effect:non-scaling-stroke}
+/* per-type label chips for clear visual hierarchy */
+.pill.cpill{fill:#fff;stroke:#b9ad93}
+.pill.vpill{fill:#fbf6ec;stroke:#d8c7a4}
+.pill.hpill{fill:#fff;stroke:#e2c79a}
+.pill.rpill{fill:rgba(252,248,239,.78);stroke:#cdbfa6}
 
 .breadcrumb{position:absolute;top:13px;left:13px;display:flex;gap:7px;z-index:6}
 .crumb{font-family:var(--sans);background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:17px;padding:7px 13px;font-size:13px;box-shadow:0 1px 6px var(--shadow);display:flex;align-items:center;gap:6px}
@@ -29,12 +34,25 @@ svg#map.grabbing{cursor:grabbing}
 .layers .lh{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-soft);margin-bottom:6px;display:flex;align-items:center;gap:6px}
 .layers label{display:flex;align-items:center;gap:8px;padding:3px 0;cursor:pointer}
 .layers input{accent-color:var(--wine);width:16px;height:16px}
-/* wine-house pins */
+/* wine-house pins — teardrop markers */
 .house-pin{cursor:pointer}
 .house-pin .hhit{fill:transparent}
-.house-pin .hdot{fill:#fff;transition:fill .12s}
-.house-pin:hover .hdot,.house-pin.on .hdot{fill:var(--gold)}
-.hlabel{font-family:var(--sans);fill:#2b211c;pointer-events:none;font-weight:600}
+.house-pin .hpin{stroke:#fff;transition:fill .12s,transform .12s;filter:drop-shadow(0 1px 1px rgba(0,0,0,.25))}
+.house-pin .hpin-dot{fill:#fff;pointer-events:none}
+.house-pin:hover .hpin,.house-pin.on .hpin{fill:var(--gold)}
+.house-pin.on .hpin{stroke:#5a1622}
+.hlabel{font-family:var(--sans);fill:#5a1622;pointer-events:none;font-weight:700}
+.village .town{transition:r .12s}
+
+/* small legend of marker types, bottom-left of the map */
+.maptypes{position:absolute;left:13px;bottom:13px;z-index:6;display:flex;gap:13px;flex-wrap:wrap;
+  background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:11px;padding:7px 12px;
+  font-family:var(--sans);font-size:11px;color:var(--ink-soft);box-shadow:0 1px 6px var(--shadow)}
+.maptypes .mt-item{display:flex;align-items:center;gap:6px}
+.maptypes i{width:11px;height:11px;flex:none;display:inline-block}
+.maptypes .mt-city{background:#2b211c;border-radius:50%;width:9px;height:9px;box-shadow:0 0 0 1.5px #fff}
+.maptypes .mt-vill{background:#fff;border:2px solid #9c7;border-radius:50%;width:10px;height:10px}
+.maptypes .mt-house{background:var(--wine);border-radius:50% 50% 50% 0;transform:rotate(45deg);box-shadow:inset 0 0 0 1px #fff}
 
 /* detail header controls (region + house modes) */
 .dhead-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
@@ -84,6 +102,31 @@ svg#map.grabbing{cursor:grabbing}
 .prod .pg{font-family:var(--sans);font-size:11px;color:var(--ink-faint);margin-top:2px}
 .prod .pnote{font-size:12.5px;color:var(--ink-soft);margin-top:3px;line-height:1.45}
 .dactions{padding:12px 20px;border-top:1px solid var(--line);display:flex;gap:8px;flex-wrap:wrap}
+
+/* ---- detail tabs ---- */
+.dtabs{display:flex;gap:4px;margin-top:12px;border-bottom:1px solid var(--line);margin-bottom:-1px}
+.dtab{font-family:var(--sans);font-size:12.5px;font-weight:600;color:var(--ink-soft);background:none;border:none;
+  border-bottom:2.5px solid transparent;padding:8px 11px 9px;cursor:pointer;white-space:nowrap;transition:.12s}
+.dtab:hover{color:var(--ink)}
+.dtab.on{color:var(--wine);border-bottom-color:var(--wine)}
+.dlede{font-size:13.5px;line-height:1.6;color:var(--ink-soft);margin:14px 0 10px}
+/* at-a-glance stat grid */
+.glance{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.glance .gl{background:#f3ebda;border:1px solid var(--line);border-radius:9px;padding:9px 6px;text-align:center}
+.glance .gl b{display:block;font-size:18px;color:var(--wine);font-weight:700;line-height:1}
+.glance .gl span{font-family:var(--sans);font-size:9.5px;letter-spacing:.4px;text-transform:uppercase;color:var(--ink-soft);margin-top:3px;display:block}
+/* houses-tab family filter */
+.hfilter{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:12px 0 6px;position:sticky;top:0;background:var(--card);padding:6px 0;z-index:2}
+.hf-label{font-family:var(--sans);font-size:10px;letter-spacing:.6px;text-transform:uppercase;color:var(--gold);font-weight:700;display:flex;align-items:center;gap:5px}
+.fchip{font-family:var(--sans);font-size:12px;background:#f3ebda;border:1px solid var(--line);border-radius:14px;padding:5px 11px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;color:var(--ink);transition:.12s;min-height:32px}
+.fchip:hover{border-color:var(--gold)}
+.fchip.on{background:var(--wine);border-color:var(--wine);color:#fff}
+.fchip.on .gdot{box-shadow:0 0 0 1px rgba(255,255,255,.5) inset}
+.hcount{font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);margin:4px 0 6px}
+.empty.mini{padding:24px 8px;text-align:center;color:var(--ink-soft);font-size:13px}
+
+/* ---- draggable sheet grip (mobile only; desktop hides it) ---- */
+.sheet-grip{display:none}
 
 /* ===== Clickable interactivity (grapes / appellations / houses) ===== */
 .gdot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:0;box-shadow:0 0 0 1px rgba(0,0,0,.12) inset;flex:none}

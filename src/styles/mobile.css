@@ -28,8 +28,8 @@ html, body { max-width: 100%; overflow-x: hidden; }
    ============================================================ */
 @media (max-width: 860px) {
   .nav {
-    gap: 12px;
-    padding: 0 14px;
+    gap: 8px;
+    padding: 0 12px;
     position: sticky; /* keep sticky; dropdown is positioned relative to it */
   }
   .nav .logo { font-size: 18px; }
@@ -37,19 +37,27 @@ html, body { max-width: 100%; overflow-x: hidden; }
   /* Hide the stats on small screens */
   .nav .count { display: none; }
 
-  /* Show the hamburger, right-aligned (after .spacer) */
+  /* Search collapses to a tidy icon button so the top bar isn't crowded */
+  .nav-search { padding: 0; width: 40px; height: 40px; justify-content: center; border-radius: 10px; gap: 0; }
+  .nav-search .ns-label, .nav-search kbd { display: none; }
+
+  /* Search + menu sit together as a neat pair, not jammed at the edge */
+  .nav-search, .nav-burger { margin-left: 0; }
+  .nav .spacer { margin-left: auto; }
+
+  /* Hamburger — matched size, slight inset from the edge */
   .nav-burger {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     flex: none;
     border: 1px solid rgba(231, 201, 142, .45);
     border-radius: 10px;
     background: rgba(255, 255, 255, .08);
     color: #f7ecd9;
-    font-size: 20px;
+    font-size: 19px;
     line-height: 1;
   }
   .nav-burger:hover { background: rgba(255, 255, 255, .16); }
@@ -119,24 +127,32 @@ html, body { max-width: 100%; overflow-x: hidden; }
     position: absolute;
     left: 0; right: 0; bottom: 0; top: auto;
     width: 100%; max-width: 100%;
-    height: 66dvh; max-height: 66dvh;
+    height: 64dvh; max-height: 64dvh;
     border-left: none;
     border-top: 1px solid var(--line);
     border-radius: 18px 18px 0 0;
     box-shadow: 0 -10px 34px rgba(40, 20, 15, .32);
     z-index: 25;
     animation: sheet-up .26s cubic-bezier(.22, .61, .36, 1);
+    transition: height .26s cubic-bezier(.22, .61, .36, 1), transform .24s cubic-bezier(.22, .61, .36, 1);
     overflow: hidden;
+    touch-action: none;       /* the grip drives a custom drag gesture */
   }
+  .maplayout.sheetfull .detail { height: 92dvh; max-height: 92dvh; }
   @keyframes sheet-up { from { transform: translateY(100%); } to { transform: none; } }
-  .detail .dinner { height: 100%; }
-  .detail .dbody { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .detail .dinner { height: 100%; display: flex; flex-direction: column; }
+  .detail .dbody { overflow-y: auto; -webkit-overflow-scrolling: touch; flex: 1; min-height: 0; }
 
-  /* Grab handle + a real Back button at the top of the sheet */
+  /* Big drag area at the top of the sheet (drag down = minimise/close, up = expand) */
+  .sheet-grip {
+    display: block; width: 100%; padding: 9px 0 4px; cursor: grab;
+    touch-action: none; flex: none;
+  }
+  .sheet-grip:active { cursor: grabbing; }
   .sheet-handle {
     display: block;
-    width: 42px; height: 5px; border-radius: 3px;
-    background: #d8ccb4; margin: 8px auto 2px; cursor: pointer;
+    width: 46px; height: 5px; border-radius: 3px;
+    background: #cdbf9f; margin: 0 auto;
     flex: none;
   }
   .dback {
@@ -176,13 +192,29 @@ html, body { max-width: 100%; overflow-x: hidden; }
      the sheet when a region is open so they stay reachable. */
   .zoomctl { right: 10px; gap: 9px; z-index: 8; }
   .maplayout.nodetail .zoomctl { bottom: 86px; }            /* above chat FAB */
-  .maplayout:not(.nodetail) .zoomctl { bottom: calc(66dvh + 12px); } /* above the sheet */
+  .maplayout:not(.nodetail) .zoomctl { bottom: calc(64dvh + 12px); } /* above the sheet */
+  .maplayout.sheetfull .zoomctl { bottom: calc(92dvh + 12px); }
   .zoomctl button { width: 44px; height: 44px; font-size: 20px; }
+
+  /* marker legend is noise on a phone */
+  .maptypes { display: none; }
+
+  /* compact header so the tabs + content get the height */
+  .dhead { padding: 6px 16px 0; border-bottom: none; }
+  .dhead .bar { width: 5px; }
+  .dhead-top { margin-bottom: 4px; }
+  /* tabs: full-width, scrollable if cramped, big tap targets */
+  .dtabs { margin-top: 8px; gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .dtabs::-webkit-scrollbar { display: none; }
+  .dtab { flex: 1 1 auto; text-align: center; padding: 11px 8px 12px; font-size: 13px; min-height: 44px; }
+  .dlede { margin: 12px 0 10px; font-size: 14px; }
+  .glance { gap: 7px; }
 }
 
 @media (max-width: 560px) {
-  .detail { height: 70dvh; max-height: 70dvh; }
-  .maplayout:not(.nodetail) .zoomctl { bottom: calc(70dvh + 12px); }
+  .detail { height: 66dvh; max-height: 66dvh; }
+  .maplayout:not(.nodetail) .zoomctl { bottom: calc(66dvh + 12px); }
+  .maplayout.sheetfull .zoomctl { bottom: calc(92dvh + 12px); }
   .dhead h2 { font-size: 22px; }
   .dbody { padding: 4px 16px 20px; }
   .dactions { padding: 12px 16px; padding-right: 76px; }
